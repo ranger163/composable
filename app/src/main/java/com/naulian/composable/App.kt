@@ -1,4 +1,4 @@
-package com.naulian.compose
+package com.naulian.composable
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

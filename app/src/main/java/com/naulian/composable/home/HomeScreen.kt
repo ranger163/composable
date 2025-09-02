@@ -1,12 +1,12 @@
-package com.naulian.compose.home
+package com.naulian.composable.home
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.naulian.compose.LocalNavController
-import com.naulian.compose.Screen
+import com.naulian.composable.LocalNavController
+import com.naulian.composable.Screen
 
 @Composable
 fun HomeScreen() {
@@ -27,6 +27,7 @@ fun HomeScreen() {
     HomeScreenUI(uiState = state) {
         when (it) {
             HomeUIEvent.Back -> navController.navigateUp()
+            HomeUIEvent.Neumorphic -> navController.navigate(Screen.Neumorphic)
         }
     }
 }

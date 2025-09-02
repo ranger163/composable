@@ -1,4 +1,4 @@
-package com.naulian.compose
+package com.naulian.composable
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -8,7 +8,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.naulian.compose.home.HomeScreen
+import com.naulian.composable.home.HomeScreen
+import com.naulian.composable.screens.neumorphic.NeumorphicScreen
 
 val LocalNavController = compositionLocalOf<NavController> {
     error("NavController not present")
@@ -27,6 +28,11 @@ fun AppNavHost() {
             composable<Screen.Home> {
                 HomeScreen()
             }
+
+            composable<Screen.Neumorphic> {
+                NeumorphicScreen()
+            }
+
             composable<Screen.Second> {
                 SecondScreen()
             }

@@ -1,4 +1,4 @@
-package com.naulian.compose.theme
+package com.naulian.composable.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

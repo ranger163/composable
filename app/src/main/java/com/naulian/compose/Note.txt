@@ -1,4 +1,0 @@
-Change name in settings.gradle.kts and in string.xml
-Change packageName in build.gradle.kts(app) and sync
-Refactor packageName from App
-Delete this and Enjoy

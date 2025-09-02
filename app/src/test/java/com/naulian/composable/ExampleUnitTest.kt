@@ -1,4 +1,4 @@
-package com.naulian.compose
+package com.naulian.composable
 
 import org.junit.Test
 

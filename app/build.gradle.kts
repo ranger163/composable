@@ -9,7 +9,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
 }
 
-val packageName = "com.naulian.compose"
+val packageName = "com.naulian.composable"
 
 android {
     namespace = packageName
@@ -92,6 +92,8 @@ dependencies {
     //naulian
     implementation(libs.naulian.anhance)
     implementation(libs.naulian.modify)
+    //implementation("com.naulian:glow:1.8.0")
+    implementation("com.naulian:composer:0.1.3")
 
     implementation(libs.kotlinx.serialization.json)
 

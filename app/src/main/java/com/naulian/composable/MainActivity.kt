@@ -1,4 +1,4 @@
-package com.naulian.compose
+package com.naulian.composable
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,13 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.naulian.compose.theme.ComposeTheme
+import com.naulian.composable.theme.ComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.serialization.Serializable
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {

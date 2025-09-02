@@ -1,4 +1,4 @@
-package com.naulian.compose.home
+package com.naulian.composable.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
