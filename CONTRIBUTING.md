@@ -51,7 +51,7 @@ This project is meant to be a fun and valuable resource for the Android communit
 
 ### 6. Submit a Pull Request
 
-* Open a pull request against the `main` branch
+* Open a pull request against the `develop` branch
 * Clearly describe your changes and (if possible) include screenshots or screen recordings
 
 ---
