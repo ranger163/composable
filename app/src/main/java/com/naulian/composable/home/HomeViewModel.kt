@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 data class HomeUIState(
-    val title : String = "Home"
+    val title : String = "Composable"
 )
 
 sealed interface HomeEvent{

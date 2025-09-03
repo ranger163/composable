@@ -85,10 +85,9 @@ dependencies {
     debugImplementation(libs.androidx.compose.test.manifest)
 
     //naulian
-    implementation(libs.naulian.anhance)
-    implementation(libs.naulian.modify)
-    //implementation("com.naulian:glow:1.8.0")
-    implementation("com.naulian:composer:0.1.3")
+    implementation(libs.naulian.anhance) //android kt extension
+    implementation(libs.naulian.modify) //compose  utils and extension
+    implementation(libs.naulian.glow) //code highlighter
 
     implementation(libs.kotlinx.serialization.json)
 
