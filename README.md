@@ -2,6 +2,9 @@
 
 **An open-source Android app showcasing Jetpack Compose UI components and interactions for learning and inspiration.**
 
+<img src="screenshots/image1.webp" alt="screenshot" width="240"></img>
+<img src="screenshots/image2.webp" alt="screenshot" width="240"></img>
+
 ---
 
 ### Description
