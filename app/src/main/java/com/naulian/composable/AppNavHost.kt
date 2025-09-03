@@ -9,6 +9,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.naulian.composable.home.HomeScreen
+import com.naulian.composable.screens.background.GridBackgroundScreen
 import com.naulian.composable.screens.neumorphic.NeumorphicScreen
 
 val LocalNavController = compositionLocalOf<NavController> {
@@ -31,6 +32,10 @@ fun AppNavHost() {
 
             composable<Screen.Neumorphic> {
                 NeumorphicScreen()
+            }
+
+            composable<Screen.GridBackground> {
+                GridBackgroundScreen()
             }
 
             composable<Screen.Second> {

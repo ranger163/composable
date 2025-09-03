@@ -11,5 +11,8 @@ sealed interface Screen {
     data object Neumorphic : Screen
 
     @Serializable
+    data object GridBackground : Screen
+
+    @Serializable
     data object Second : Screen
 }
