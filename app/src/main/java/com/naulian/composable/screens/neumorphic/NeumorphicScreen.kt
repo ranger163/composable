@@ -34,74 +34,79 @@ fun NeumorphicScreen() {
 
     val code = remember {
         """
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(scaffoldPadding)
-                    .background(Color(0xFFEEEEEE))
-                    .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(48.dp)
+            @Composable
+            internal fun NeumorphicBox(
+                modifier: Modifier = Modifier,
+                shape: Shape = RoundedCornerShape(20),
+                contentPadding: Dp = 20.dp,
+                firstColor: Color = Color.White,
+                secondColor: Color = Color.LightGray,
+                contentAlignment: Alignment = Alignment.TopStart,
+                content: @Composable BoxScope.() -> Unit,
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    NeuMorphicUP(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .aspectRatio(1f),
-                        contentAlignment = Alignment.Center
-                    )
-    
-                    NeuMorphicDown(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .aspectRatio(1f),
-                        contentAlignment = Alignment.Center
-                    )
-                }
-    
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    NeuMorphicUP(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .aspectRatio(1f),
-                        shape = CircleShape,
-                        contentAlignment = Alignment.Center
-                    )
-    
-                    NeuMorphicDown(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .aspectRatio(1f),
-                        shape = CircleShape,
-                        contentAlignment = Alignment.Center
-                    )
-                }
-    
-                NeuMorphicUP(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(40.dp),
-                    shape = CircleShape,
-                    contentPadding = 8.dp,
-                    contentAlignment = Alignment.Center
+                Box(
+                    modifier = modifier
+                        .background(Transparent, shape)
+                        .innerShadow(
+                            shape = shape,
+                            shadow = Shadow(
+                                radius = contentPadding,
+                                color = firstColor,
+                                offset = DpOffset(x = contentPadding, y = contentPadding)
+                            )
+                        )
+                        .innerShadow(
+                            shape = shape,
+                            shadow = Shadow(
+                                radius = contentPadding,
+                                color = secondColor,
+                                offset = DpOffset(x = -contentPadding, y = -contentPadding)
+                            )
+                        ),
+                    content = content,
+                    contentAlignment = contentAlignment
                 )
-    
-                NeuMorphicDown(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(40.dp),
-                    shape = CircleShape,
-                    contentPadding = 8.dp,
-                    contentAlignment = Alignment.Center
+            }
+
+            @Composable
+            fun NeuMorphicUP(
+                modifier: Modifier = Modifier,
+                shape: Shape = RoundedCornerShape(20),
+                contentPadding: Dp = 20.dp,
+                lightColor: Color = Color.White,
+                shadowColor: Color = Color.LightGray,
+                contentAlignment: Alignment = Alignment.TopStart,
+                content: @Composable BoxScope.() -> Unit = {},
+            ) {
+                NeumorphicBox(
+                    modifier = modifier,
+                    shape = shape,
+                    contentPadding = contentPadding,
+                    firstColor = lightColor,
+                    secondColor = shadowColor,
+                    contentAlignment = contentAlignment,
+                    content = content
+                )
+            }
+
+            @Composable
+            fun NeuMorphicDown(
+                modifier: Modifier = Modifier,
+                shape: Shape = RoundedCornerShape(20),
+                contentPadding: Dp = 20.dp,
+                contentAlignment: Alignment = Alignment.TopStart,
+                lightColor: Color = Color.White,
+                shadowColor: Color = Color.LightGray,
+                content: @Composable BoxScope.() -> Unit = {},
+            ) {
+                NeumorphicBox(
+                    modifier = modifier,
+                    shape = shape,
+                    contentPadding = contentPadding,
+                    firstColor = shadowColor,
+                    secondColor = lightColor,
+                    contentAlignment = contentAlignment,
+                    content = content
                 )
             }
         """.trimIndent()
