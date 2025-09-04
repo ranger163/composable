@@ -26,9 +26,9 @@ fun HomeScreen() {
 
     HomeScreenUI(uiState = state) {
         when (it) {
-            HomeUIEvent.Back -> navController.navigateUp()
             HomeUIEvent.Neumorphic -> navController.navigate(Screen.Neumorphic)
             HomeUIEvent.GridBackground -> navController.navigate(Screen.GridBackground)
+            HomeUIEvent.CorneredBox -> navController.navigate(Screen.CorneredBox)
         }
     }
 }

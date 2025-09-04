@@ -14,5 +14,8 @@ sealed interface Screen {
     data object GridBackground : Screen
 
     @Serializable
+    data object CorneredBox : Screen
+
+    @Serializable
     data object Second : Screen
 }

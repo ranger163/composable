@@ -19,21 +19,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.naulian.anhance.copyString
 import com.naulian.composable.component.CodeBlock
 import com.naulian.composable.theme.ComposeTheme
 import com.naulian.modify.ExperimentalModifyApi
-import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
 
 @OptIn(ExperimentalModifyApi::class)
 @Composable
 fun NeumorphicScreen() {
-    val context = LocalContext.current
-
     val code = remember {
         """
             @Composable
@@ -199,9 +194,7 @@ fun NeumorphicScreen() {
 
                 CodeBlock(
                     source = code,
-                    language = "kotlin",
-                    actionIcon = HugeIcons.Copy,
-                    onClickAction = { context.copyString(code) }
+                    language = "kotlin"
                 )
 
                 Text(text = "Bonus")

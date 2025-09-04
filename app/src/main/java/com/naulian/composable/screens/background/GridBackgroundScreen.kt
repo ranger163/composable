@@ -14,24 +14,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.naulian.anhance.Lorem
-import com.naulian.anhance.copyString
 import com.naulian.composable.component.CodeBlock
 import com.naulian.composable.theme.ComposeTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.Gray
-import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
 
 @OptIn(ExperimentalModifyApi::class)
 @Composable
 fun GridBackgroundScreen() {
-    val context = LocalContext.current
-
     val code = remember {
         """
             fun Modifier.gridBackground(
@@ -104,9 +99,7 @@ fun GridBackgroundScreen() {
 
                 CodeBlock(
                     source = code,
-                    language = "kotlin",
-                    actionIcon = HugeIcons.Copy,
-                    onClickAction = { context.copyString(code) }
+                    language = "kotlin"
                 )
             }
         }

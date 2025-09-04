@@ -3,7 +3,7 @@ package com.naulian.composable.home
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,14 +19,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.screens.background.gridBackground
+import com.naulian.composable.screens.box.CorneredBox
 import com.naulian.composable.screens.neumorphic.NeuMorphicDown
 import com.naulian.composable.screens.neumorphic.NeuMorphicUP
 import com.naulian.modify.ExperimentalModifyApi
+import com.naulian.modify.Gray
 
 sealed interface HomeUIEvent {
     data object Neumorphic : HomeUIEvent
     data object GridBackground : HomeUIEvent
-    data object Back : HomeUIEvent
+    data object CorneredBox : HomeUIEvent
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -99,23 +101,41 @@ fun HomeScreenUI(
                     ListItemText(title = "Grid Background", createdBy = "Naulian")
                 }
             }
+
+            item {
+                CorneredBox(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth(),
+                    cornerColor = Gray,
+                    contentPadding = PaddingValues(12.dp),
+                    onClick = {
+                        uiEvent(HomeUIEvent.CorneredBox)
+                    }
+                ) {
+                    ListItemText(title = "Cornered Box", createdBy = "Naulian")
+                }
+            }
         }
     }
 }
 
 @Composable
-fun ColumnScope.ListItemText(
+fun ListItemText(
     title: String,
     createdBy: String,
+    modifier: Modifier = Modifier
 ) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.headlineMedium,
-        color = MaterialTheme.colorScheme.onBackground
-    )
-    Text(
-        text = "Created by $createdBy",
-        style = MaterialTheme.typography.bodyLarge,
-        color = MaterialTheme.colorScheme.onBackground
-    )
+    Column(modifier) {
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+        Text(
+            text = "Created by $createdBy",
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground
+        )
+    }
 }

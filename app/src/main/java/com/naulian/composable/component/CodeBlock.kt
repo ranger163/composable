@@ -24,6 +24,7 @@ import com.naulian.anhance.copyString
 import com.naulian.glow.Code
 import com.naulian.glow.theme.GlowTheme
 import com.naulian.glow.theme.Theme
+import com.naulian.modify.HugeIcons
 
 @Composable
 fun CodeBlock(
@@ -32,8 +33,6 @@ fun CodeBlock(
     language: String = "txt",
     codeName: String = "",
     codeTheme: Theme = if (isSystemInDarkTheme()) GlowTheme.defaultDark else GlowTheme.defaultLight,
-    actionIcon: Int? = null,
-    onClickAction: (() -> Unit)? = null
 ) {
 
     val context = LocalContext.current
@@ -64,19 +63,14 @@ fun CodeBlock(
             }
 
             IconButton(
-                onClick = {
-                    onClickAction?.invoke() ?: context.copyString(source)
-                },
                 modifier = Modifier.constrainAs(action) {
                     end.linkTo(parent.end)
                     top.linkTo(name.top)
                     bottom.linkTo(name.bottom)
-                }
+                },
+                onClick = { context.copyString(source) }
             ) {
-
-                actionIcon?.let {
-                    Icon(painter = painterResource(id = it), contentDescription = null)
-                }
+                Icon(painter = painterResource(id = HugeIcons.Copy), contentDescription = null)
             }
 
             SelectionContainer(
