@@ -1,7 +1,9 @@
 package com.naulian.composable.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -15,20 +17,30 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import com.naulian.composable.R
 import com.naulian.composable.screens.background.gridBackground
 import com.naulian.composable.screens.box.CorneredBox
 import com.naulian.composable.screens.neumorphic.NeuMorphicDown
 import com.naulian.composable.screens.neumorphic.NeuMorphicUP
+import com.naulian.composable.screens.rating.RatingStars
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.Gray
+import com.naulian.modify.White
+import com.naulian.modify.columnItem
 
 sealed interface HomeUIEvent {
     data object Neumorphic : HomeUIEvent
     data object GridBackground : HomeUIEvent
     data object CorneredBox : HomeUIEvent
+    data object RatingStars : HomeUIEvent
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -47,46 +59,45 @@ fun HomeScreenUI(
         LazyColumn(
             modifier = Modifier.padding(screenPadding)
         ) {
-            item {
-                Column(
-                    modifier = Modifier
-                        .clickable {
-                            uiEvent(HomeUIEvent.Neumorphic)
-                        }
-                        .padding(20.dp)
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(12.dp)
-                    ) {
-                        NeuMorphicUP(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxWidth()
-                                .aspectRatio(1f),
-                            contentAlignment = Alignment.Center,
-                            lightColor = MaterialTheme.colorScheme.surfaceBright,
-                            shadowColor = MaterialTheme.colorScheme.surfaceDim
-                        )
-
-                        NeuMorphicDown(
-                            modifier = Modifier
-                                .weight(1f)
-                                .fillMaxWidth()
-                                .aspectRatio(1f),
-                            contentAlignment = Alignment.Center,
-                            lightColor = MaterialTheme.colorScheme.surfaceBright,
-                            shadowColor = MaterialTheme.colorScheme.surfaceDim
-                        )
+            columnItem(
+                modifier = Modifier
+                    .clickable {
+                        uiEvent(HomeUIEvent.Neumorphic)
                     }
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(12.dp)
+                ) {
+                    NeuMorphicUP(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxWidth()
+                            .aspectRatio(1f),
+                        contentAlignment = Alignment.Center,
+                        lightColor = MaterialTheme.colorScheme.surfaceBright,
+                        shadowColor = MaterialTheme.colorScheme.surfaceDim
+                    )
 
-                    ListItemText(title = "Neumorphism", createdBy = "Naulian")
+                    NeuMorphicDown(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxWidth()
+                            .aspectRatio(1f),
+                        contentAlignment = Alignment.Center,
+                        lightColor = MaterialTheme.colorScheme.surfaceBright,
+                        shadowColor = MaterialTheme.colorScheme.surfaceDim
+                    )
                 }
+
+                ListItemText(title = "Neumorphism", createdBy = "Naulian")
             }
 
             item {
-                Column(
+                Box(
                     modifier = Modifier
                         .fillMaxWidth()
                         .gridBackground(
@@ -96,7 +107,7 @@ fun HomeScreenUI(
                         .clickable {
                             uiEvent(HomeUIEvent.GridBackground)
                         }
-                        .padding(20.dp)
+                        .padding(20.dp),
                 ) {
                     ListItemText(title = "Grid Background", createdBy = "Naulian")
                 }
@@ -105,6 +116,7 @@ fun HomeScreenUI(
             item {
                 CorneredBox(
                     modifier = Modifier
+                        .background(MaterialTheme.colorScheme.surface)
                         .padding(20.dp)
                         .fillMaxWidth(),
                     cornerColor = Gray,
@@ -115,6 +127,30 @@ fun HomeScreenUI(
                 ) {
                     ListItemText(title = "Cornered Box", createdBy = "Naulian")
                 }
+            }
+
+            columnItem(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clickable{
+                        uiEvent(HomeUIEvent.RatingStars)
+                    }
+                    .padding(20.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                var ratingValue by remember { mutableIntStateOf(2) }
+
+                RatingStars(
+                    rating = ratingValue,
+                    ratedStarIcon = painterResource(R.drawable.ic_star_filled),
+                    unRatedStarIcon = painterResource(R.drawable.ic_star_outlined),
+                    onRatingChange = {
+                        ratingValue = it
+                    },
+                    iconSize = 48.dp
+                )
+
+                ListItemText(title = "Rating Stars", createdBy = "Naulian")
             }
         }
     }

@@ -17,5 +17,8 @@ sealed interface Screen {
     data object CorneredBox : Screen
 
     @Serializable
+    data object RatingStars : Screen
+
+    @Serializable
     data object Second : Screen
 }

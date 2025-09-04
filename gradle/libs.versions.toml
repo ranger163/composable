@@ -22,6 +22,7 @@ kotlin = "2.2.10"
 agp = "8.13.0"
 ksp = "2.2.10-2.0.2"
 hilt = "2.57.1"
+uiGraphics = "1.9.0"
 
 
 [libraries]
@@ -54,6 +55,7 @@ naulian-anhance = { module = "com.naulian:anhance", version.ref = "anhance" }
 naulian-modify = { module = "com.naulian:modify", version.ref = "modify" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilCompose" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics", version.ref = "uiGraphics" }
 
 
 [plugins]

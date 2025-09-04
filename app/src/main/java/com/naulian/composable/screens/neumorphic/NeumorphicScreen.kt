@@ -32,7 +32,7 @@ fun NeumorphicScreen() {
     val code = remember {
         """
             @Composable
-            internal fun NeumorphicBox(
+            fun NeumorphicBox(
                 modifier: Modifier = Modifier,
                 shape: Shape = RoundedCornerShape(20),
                 contentPadding: Dp = 20.dp,

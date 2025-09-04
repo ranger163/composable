@@ -12,6 +12,7 @@ import com.naulian.composable.home.HomeScreen
 import com.naulian.composable.screens.background.GridBackgroundScreen
 import com.naulian.composable.screens.box.CorneredBoxScreen
 import com.naulian.composable.screens.neumorphic.NeumorphicScreen
+import com.naulian.composable.screens.rating.RatingStarsScreen
 
 val LocalNavController = compositionLocalOf<NavController> {
     error("NavController not present")
@@ -41,6 +42,10 @@ fun AppNavHost() {
 
             composable<Screen.CorneredBox> {
                 CorneredBoxScreen()
+            }
+
+            composable<Screen.RatingStars> {
+                RatingStarsScreen()
             }
 
             composable<Screen.Second> {
