@@ -89,6 +89,7 @@ dependencies {
     implementation(libs.naulian.anhance) //android kt extension
     implementation(libs.naulian.modify) //compose  utils and extension
     implementation(libs.naulian.glow) //code highlighter
+    implementation(libs.naulian.motion) //animation util
 
     implementation(libs.kotlinx.serialization.json)
 

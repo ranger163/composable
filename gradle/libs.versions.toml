@@ -7,6 +7,7 @@ constraintlayout = "1.1.1"
 coilCompose = "3.3.0"
 coreKtx = "1.17.0"
 glow = "1.8.1"
+motion = "0.1.1"
 splashscreen = "1.0.1"
 espressoCore = "3.7.0"
 hiltNavigation = "1.2.0"
@@ -44,6 +45,7 @@ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-com
 androidx-junit = { module = "androidx.test.ext:junit", version.ref = "junitVersion" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation" }
 
+naulian-motion = { module = "com.naulian:motion", version.ref = "motion" }
 naulian-glow = { module = "com.naulian:glow", version.ref = "glow" }
 google-hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 google-hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
