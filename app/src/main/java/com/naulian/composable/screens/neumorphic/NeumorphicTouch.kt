@@ -1,7 +1,7 @@
 package com.naulian.composable.screens.neumorphic
 
 import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
@@ -42,9 +42,7 @@ fun NeumorphicTouch(
     var touch by remember { mutableStateOf(false) }
     val shadowPadding by animateDpAsState(
         targetValue = if (touch) 4.dp else contentPadding,
-        animationSpec = tween(
-            durationMillis = 500
-        )
+        animationSpec = spring()
     )
 
     Box(
@@ -88,7 +86,7 @@ private fun NeumorphicTouchPreview() {
         Box(
             modifier = Modifier
                 .background(Color(0xFFEEEEEE))
-                .padding(20.dp),
+                .padding(100.dp),
         ) {
             var touch by remember { mutableStateOf(false) }
             NeumorphicTouch(
