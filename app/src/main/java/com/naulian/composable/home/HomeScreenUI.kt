@@ -11,11 +11,15 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -24,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.R
 import com.naulian.composable.screens.background.gridBackground
@@ -31,9 +36,9 @@ import com.naulian.composable.screens.box.CorneredBox
 import com.naulian.composable.screens.neumorphic.NeuMorphicDown
 import com.naulian.composable.screens.neumorphic.NeuMorphicUP
 import com.naulian.composable.screens.rating.RatingStars
+import com.naulian.composable.theme.ComposeTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.Gray
-import com.naulian.modify.White
 import com.naulian.modify.columnItem
 
 sealed interface HomeUIEvent {
@@ -53,6 +58,9 @@ fun HomeScreenUI(
         topBar = {
             TopAppBar(
                 title = { Text(text = uiState.title) },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.background
+                )
             )
         }
     ) { screenPadding ->
@@ -61,11 +69,17 @@ fun HomeScreenUI(
         ) {
             columnItem(
                 modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(2f / 1f)
                     .clickable {
                         uiEvent(HomeUIEvent.Neumorphic)
                     }
                     .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp)
+                verticalArrangement = Arrangement.spacedBy(
+                    space = 10.dp,
+                    alignment = Alignment.CenterVertically
+                ),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Row(
                     modifier = Modifier
@@ -78,6 +92,7 @@ fun HomeScreenUI(
                             .fillMaxWidth()
                             .aspectRatio(1f),
                         contentAlignment = Alignment.Center,
+                        contentPadding = 10.dp,
                         lightColor = MaterialTheme.colorScheme.surfaceBright,
                         shadowColor = MaterialTheme.colorScheme.surfaceDim
                     )
@@ -87,6 +102,31 @@ fun HomeScreenUI(
                             .weight(1f)
                             .fillMaxWidth()
                             .aspectRatio(1f),
+                        contentPadding = 10.dp,
+                        contentAlignment = Alignment.Center,
+                        lightColor = MaterialTheme.colorScheme.surfaceBright,
+                        shadowColor = MaterialTheme.colorScheme.surfaceDim
+                    )
+
+                    NeuMorphicUP(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxWidth()
+                            .aspectRatio(1f),
+                        contentPadding = 10.dp,
+                        shape = CircleShape,
+                        contentAlignment = Alignment.Center,
+                        lightColor = MaterialTheme.colorScheme.surfaceBright,
+                        shadowColor = MaterialTheme.colorScheme.surfaceDim
+                    )
+
+                    NeuMorphicDown(
+                        modifier = Modifier
+                            .weight(1f)
+                            .fillMaxWidth()
+                            .aspectRatio(1f),
+                        contentPadding = 10.dp,
+                        shape = CircleShape,
                         contentAlignment = Alignment.Center,
                         lightColor = MaterialTheme.colorScheme.surfaceBright,
                         shadowColor = MaterialTheme.colorScheme.surfaceDim
@@ -95,19 +135,25 @@ fun HomeScreenUI(
 
                 ListItemText(title = "Neumorphism", createdBy = "Naulian")
             }
-
+            item {
+                HorizontalDivider()
+            }
             item {
                 Box(
                     modifier = Modifier
+                        .padding(20.dp)
                         .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
                         .gridBackground(
                             color = MaterialTheme.colorScheme.tertiary,
-                            lineColor = MaterialTheme.colorScheme.surfaceDim
+                            lineColor = MaterialTheme.colorScheme.surfaceDim,
+                            shape = RoundedCornerShape(20.dp)
                         )
                         .clickable {
                             uiEvent(HomeUIEvent.GridBackground)
                         }
                         .padding(20.dp),
+                    contentAlignment = Alignment.Center
                 ) {
                     ListItemText(title = "Grid Background", createdBy = "Naulian")
                 }
@@ -117,13 +163,16 @@ fun HomeScreenUI(
                 CorneredBox(
                     modifier = Modifier
                         .background(MaterialTheme.colorScheme.surface)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
                         .padding(20.dp)
                         .fillMaxWidth(),
                     cornerColor = Gray,
                     contentPadding = PaddingValues(12.dp),
                     onClick = {
                         uiEvent(HomeUIEvent.CorneredBox)
-                    }
+                    },
+                    contentAlignment = Alignment.Center
                 ) {
                     ListItemText(title = "Cornered Box", createdBy = "Naulian")
                 }
@@ -132,11 +181,16 @@ fun HomeScreenUI(
             columnItem(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable{
+                    .aspectRatio(2f/1f)
+                    .clickable {
                         uiEvent(HomeUIEvent.RatingStars)
                     }
                     .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(
+                    space = 10.dp,
+                    alignment = Alignment.CenterVertically
+                ),
             ) {
                 var ratingValue by remember { mutableIntStateOf(2) }
 
@@ -173,5 +227,13 @@ fun ListItemText(
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground
         )
+    }
+}
+
+@Preview
+@Composable
+private fun HomeScreenPreview() {
+    ComposeTheme {
+        HomeScreenUI { }
     }
 }

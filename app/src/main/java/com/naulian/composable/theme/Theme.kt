@@ -25,6 +25,7 @@ private val DarkColorScheme = darkColorScheme(
     secondary = PurpleGrey80,
     tertiary = DarkGray,
 
+    surface = DarkGray,
     surfaceBright = Color(0xFF4B4B4B),
     surfaceDim = Color(0xFF000000)
 )
@@ -39,6 +40,7 @@ private val LightColorScheme = lightColorScheme(
     secondary = PurpleGrey40,
     tertiary = White,
 
+    surface = White,
     surfaceBright = White,
     surfaceDim = LightGray
 )
