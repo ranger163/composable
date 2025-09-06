@@ -1,5 +1,10 @@
 package com.naulian.composable
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
@@ -26,7 +31,21 @@ fun AppNavHost() {
         val navController = LocalNavController.current as NavHostController
         NavHost(
             navController = navController,
-            startDestination = Screen.Home
+            startDestination = Screen.Home,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it },
+                    animationSpec = tween(400)
+                )
+            },
+            exitTransition = { ExitTransition.None },
+            popEnterTransition = { EnterTransition.None },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it },
+                    animationSpec = tween(400)
+                )
+            },
         ) {
             composable<Screen.Home> {
                 HomeScreen()

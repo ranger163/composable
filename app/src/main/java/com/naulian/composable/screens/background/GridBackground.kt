@@ -74,3 +74,50 @@ private fun GridBackgroundPreview() {
         )
     }
 }
+
+val gridBackgroundCode by lazy {
+    """
+        fun Modifier.gridBackground(
+            color: Color,
+            lineColor: Color = Color(0xFFEFEFEF),
+            spacing: Dp = 10.dp,
+            shape: Shape = RectangleShape
+        ) = background(color, shape).drawBehind {
+            val spacingPx = spacing.toPx()
+            val width = size.width
+            val height = size.height
+
+            val lineCountX = width / spacingPx
+            val lineCountY = width / spacingPx
+
+            val outline = shape.createOutline(size, layoutDirection, this)
+            val path = when (outline) {
+                is Outline.Rectangle -> Path().apply { addRect(outline.rect) }
+                is Outline.Rounded -> Path().apply { addRoundRect(outline.roundRect) }
+                is Outline.Generic -> outline.path
+            }
+
+            clipPath(path) {
+                //draw vertical lines
+                for (i in 1..lineCountX.toInt() - 1) {
+                    drawLine(
+                        color = lineColor,
+                        start = Offset(i * spacingPx, 0f),
+                        end = Offset(i * spacingPx, height),
+                        strokeWidth = 1f
+                    )
+                }
+
+                //draw horizonal lines
+                for (i in 1..lineCountY.toInt() - 1) {
+                    drawLine(
+                        color = lineColor,
+                        start = Offset(0f, i * spacingPx),
+                        end = Offset(width, i * spacingPx),
+                        strokeWidth = 1f
+                    )
+                }
+            }
+        }
+    """.trimIndent()
+}
