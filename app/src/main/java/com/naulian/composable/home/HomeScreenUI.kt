@@ -46,6 +46,7 @@ sealed interface HomeUIEvent {
     data object GridBackground : HomeUIEvent
     data object CorneredBox : HomeUIEvent
     data object RatingStars : HomeUIEvent
+    data object ParallaxCardStack : HomeUIEvent
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -205,6 +206,26 @@ fun HomeScreenUI(
                 )
 
                 ListItemText(title = "Rating Stars", createdBy = "Naulian")
+            }
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            uiEvent(HomeUIEvent.ParallaxCardStack)
+                        }
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ListItemText(title = "Parallax Card Stack", createdBy = "Naulian")
+                }
             }
         }
     }
