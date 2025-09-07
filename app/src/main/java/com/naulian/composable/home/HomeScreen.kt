@@ -29,6 +29,7 @@ fun HomeScreen() {
             HomeUIEvent.Neumorphic -> navController.navigate(Screen.Neumorphic)
             HomeUIEvent.GridBackground -> navController.navigate(Screen.GridBackground)
             HomeUIEvent.CorneredBox -> navController.navigate(Screen.CorneredBox)
+            HomeUIEvent.ParallaxCardStack -> navController.navigate(Screen.ParallaxCardStack)
             HomeUIEvent.RatingStars -> navController.navigate(Screen.RatingStars)
         }
     }
