@@ -47,6 +47,7 @@ sealed interface HomeUIEvent {
     data object CorneredBox : HomeUIEvent
     data object RatingStars : HomeUIEvent
     data object ParallaxCardStack : HomeUIEvent
+    data object CarouselCard: HomeUIEvent
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -225,6 +226,26 @@ fun HomeScreenUI(
                     contentAlignment = Alignment.Center
                 ) {
                     ListItemText(title = "Parallax Card Stack", createdBy = "Aryan Jaiswal")
+                }
+            }
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            uiEvent(HomeUIEvent.CarouselCard)
+                        }
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ListItemText(title = "Carousel Card", createdBy = "Aryan Jaiswal")
                 }
             }
         }

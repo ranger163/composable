@@ -1,4 +1,4 @@
-package com.naulian.composable.screens.parallelCards
+package com.naulian.composable.screens.parallaxCards
 
 
 import androidx.compose.foundation.layout.Arrangement

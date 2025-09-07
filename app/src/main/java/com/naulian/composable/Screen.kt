@@ -24,4 +24,7 @@ sealed interface Screen {
 
     @Serializable
     data object ParallaxCardStack : Screen
+
+    @Serializable
+    data object Carousel3DStack : Screen
 }
