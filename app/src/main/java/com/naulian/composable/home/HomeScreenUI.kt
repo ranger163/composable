@@ -224,7 +224,7 @@ fun HomeScreenUI(
                         .padding(20.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    ListItemText(title = "Parallax Card Stack", createdBy = "Naulian")
+                    ListItemText(title = "Parallax Card Stack", createdBy = "Aryan Jaiswal")
                 }
             }
         }
