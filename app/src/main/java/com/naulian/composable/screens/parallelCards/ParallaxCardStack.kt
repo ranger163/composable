@@ -1,4 +1,4 @@
-package com.naulian.composable.screens.parallax
+package com.naulian.composable.screens.parallelCards
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -25,15 +25,10 @@ import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.boundsInParent
-import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.R
-import com.naulian.composable.theme.ComposeTheme
-import com.naulian.modify.Gray
 
 data class ParallaxCard(
     val title: String,
@@ -76,10 +71,7 @@ fun ParallaxCardStack(
         )
     }
 
-    // This is the core logic for the parallax effect.
-    // It finds the first visible item and uses its scroll progress
-    // to determine the scale and offset of the items below it.
-    val firstVisibleItemIndex by remember {
+     val firstVisibleItemIndex by remember {
         derivedStateOf { scrollState.firstVisibleItemIndex }
     }
 
@@ -89,7 +81,6 @@ fun ParallaxCardStack(
                 derivedStateOf { index == firstVisibleItemIndex }
             }
 
-            // Calculate the parallax offset and scale
             val offset by remember {
                 derivedStateOf {
                     if (isCurrentItem) {
@@ -103,7 +94,7 @@ fun ParallaxCardStack(
                 derivedStateOf {
                     val progress = scrollState.layoutInfo.visibleItemsInfo.firstOrNull()?.size?.toFloat()?.let {
                         offset / it
-                    } ?: 0f // Use 0f if progress is null
+                    } ?: 0f
 
                     if (isCurrentItem) {
                         1f - (progress * 0.1f)
