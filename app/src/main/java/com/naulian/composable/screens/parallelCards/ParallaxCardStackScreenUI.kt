@@ -2,8 +2,8 @@ package com.naulian.composable.screens.parallelCards
 
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -25,7 +25,6 @@ import com.naulian.composable.component.CodeBlock
 import com.naulian.composable.theme.ComposeTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
-import com.naulian.modify.columnItem
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
 @Composable
@@ -56,15 +55,13 @@ fun ParallaxCardStackScreenUI(onBack: () -> Unit = {}) {
                 .fillMaxSize()
                 .padding(scaffoldPadding),
             state = scrollState,
-            verticalArrangement = Arrangement.spacedBy((-100).dp)
+            verticalArrangement = Arrangement.spacedBy((-52).dp),
+            contentPadding = PaddingValues(20.dp)
         ) {
-            columnItem(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(48.dp)
-            ) {
-                ParallaxCardStack(scrollState = scrollState)
+
+            ParallaxCardStack(cardItems = dummyCards, state = scrollState)
+
+            item {
                 CodeBlock(
                     source = code,
                     language = "kotlin"
