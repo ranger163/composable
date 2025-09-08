@@ -17,7 +17,7 @@ import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.theme.ComposeTheme
+import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.White
 
 fun Modifier.gridBackground(
@@ -66,7 +66,7 @@ fun Modifier.gridBackground(
 @Preview
 @Composable
 private fun GridBackgroundPreview() {
-    ComposeTheme {
+    ComposableTheme {
         Box(
             modifier = Modifier
                 .size(200.dp)

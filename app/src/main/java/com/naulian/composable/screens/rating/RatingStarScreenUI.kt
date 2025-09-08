@@ -24,7 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.R
 import com.naulian.composable.component.CodeBlock
-import com.naulian.composable.theme.ComposeTheme
+import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
@@ -87,7 +87,7 @@ fun RatingStarScreenUI(onBack: () -> Unit = {}) {
 @Preview
 @Composable
 private fun RatingStarScreenUIPreview() {
-    ComposeTheme {
+    ComposableTheme {
         RatingStarScreenUI()
     }
 }

@@ -2,6 +2,7 @@ package com.naulian.composable.neumorphism.component
 
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.draw.innerShadow
@@ -14,11 +15,12 @@ import com.naulian.modify.LightGray
 import com.naulian.modify.White
 
 
+@Composable
 fun Modifier.neumorphicUp2(
     shape: Shape,
     shadowPadding: Dp,
-    light: Color = NeumorphicLight,
-    shadow: Color = NeumorphicDark
+    light: Color = MaterialTheme.colorScheme.surfaceBright,
+    shadow: Color = MaterialTheme.colorScheme.surfaceDim
 ) = innerShadow(
     shape = shape,
     shadow = Shadow(
@@ -35,11 +37,12 @@ fun Modifier.neumorphicUp2(
     )
 )
 
+@Composable
 fun Modifier.neumorphicDown(
     shape: Shape,
     shadowPadding: Dp,
-    light: Color = NeumorphicLight,
-    shadow: Color = NeumorphicDark
+    light: Color = MaterialTheme.colorScheme.surfaceBright,
+    shadow: Color = MaterialTheme.colorScheme.surfaceDim
 ) = innerShadow(
     shape = shape,
     shadow = Shadow(
@@ -56,12 +59,13 @@ fun Modifier.neumorphicDown(
     )
 )
 
+@Composable
 fun Modifier.neumorphicUp(
     shape: Shape,
     shadowPadding: Dp,
-    light: Color = NeumorphicLight,
-    shadow: Color = NeumorphicDark,
-    backgroundColor: Color = NeumorphicContainer,
+    light: Color = MaterialTheme.colorScheme.surfaceBright,
+    shadow: Color = MaterialTheme.colorScheme.surfaceDim,
+    backgroundColor: Color = MaterialTheme.colorScheme.background,
 ) = dropShadow(
     shape = shape,
     shadow = Shadow(

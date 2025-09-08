@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.naulian.composable.neumorphism.component.neumorphicDown
 import com.naulian.composable.neumorphism.component.neumorphicUp
 import com.naulian.composable.neumorphism.component.neumorphicUp2
-import com.naulian.composable.theme.ComposeTheme
+import com.naulian.composable.theme.ComposableTheme
 
 
 @Composable
@@ -95,7 +95,7 @@ fun NeuMorphicDown(
 @Preview
 @Composable
 private fun NeumorphicBoxPreview() {
-    ComposeTheme {
+    ComposableTheme {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

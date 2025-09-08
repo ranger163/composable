@@ -37,7 +37,7 @@ import com.naulian.composable.screens.neumorphic.NeuMorphicDown
 import com.naulian.composable.screens.neumorphic.NeuMorphicUP
 import com.naulian.composable.screens.neumorphic.NeuMorphicUP2
 import com.naulian.composable.screens.rating.RatingStars
-import com.naulian.composable.theme.ComposeTheme
+import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.Gray
 import com.naulian.modify.columnItem
@@ -276,7 +276,7 @@ fun ListItemText(
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    ComposeTheme {
+    ComposableTheme {
         HomeScreenUI { }
     }
 }

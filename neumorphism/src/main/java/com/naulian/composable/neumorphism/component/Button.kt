@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.noRippleClick
 
 
@@ -62,7 +63,10 @@ fun Button(
                 minWidth = 58.dp,
                 minHeight = 40.dp
             )
-            .background(NeumorphicContainer, shape)
+            .background(
+                color = MaterialTheme.colorScheme.surfaceContainer,
+                shape = shape
+            )
             .clip(shape)
             .pointerInput(Unit) {
                 awaitPointerEventScope {
@@ -84,12 +88,12 @@ fun Button(
 @Preview
 @Composable
 private fun ButtonPreview() {
-    MaterialTheme {
+    ComposableTheme {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .aspectRatio(1f)
-                .background(NeumorphicBg),
+                .background(color = MaterialTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
         ) {

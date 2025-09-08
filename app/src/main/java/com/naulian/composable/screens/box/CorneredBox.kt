@@ -26,7 +26,7 @@ import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.theme.ComposeTheme
+import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.DarkGray
 import com.naulian.modify.Gray
 import com.naulian.modify.Yellow
@@ -148,7 +148,7 @@ fun CorneredBox(
 @Preview
 @Composable
 private fun CorneredBoxPreview() {
-    ComposeTheme {
+    ComposableTheme {
         Box(
             modifier = Modifier
                 .fillMaxSize()

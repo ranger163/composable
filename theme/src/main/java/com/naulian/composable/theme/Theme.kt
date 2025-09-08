@@ -7,46 +7,42 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.naulian.modify.Black
 import com.naulian.modify.DarkGray
-import com.naulian.modify.LightGray
 import com.naulian.modify.White
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
     onPrimaryContainer = White,
 
-    background = Color(0xFF232323),
+    background = DarkBackground,
     onBackground = White,
 
-    secondary = PurpleGrey80,
     tertiary = DarkGray,
 
     surface = DarkGray,
-    surfaceBright = Color(0xFF4B4B4B),
-    surfaceDim = Color(0xFF000000)
+    surfaceContainer = DarkContainer,
+    surfaceBright = DarkLight,
+    surfaceDim = Black
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
     onPrimaryContainer = Black,
 
-    background = Color(0xFFEEEEEE),
+    background = LightBackground,
     onBackground = DarkGray,
 
-    secondary = PurpleGrey40,
     tertiary = White,
 
     surface = White,
+    surfaceContainer = LightContainer,
     surfaceBright = White,
-    surfaceDim = LightGray
+    surfaceDim = LightShadow,
 )
 
 @Composable
-fun ComposeTheme(
+fun ComposableTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

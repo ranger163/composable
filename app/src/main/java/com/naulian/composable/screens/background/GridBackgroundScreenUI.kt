@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.naulian.anhance.Lorem
 import com.naulian.composable.component.CodeBlock
-import com.naulian.composable.theme.ComposeTheme
+import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.Gray
 import com.naulian.modify.HugeIcons
@@ -89,7 +89,7 @@ fun GridBackgroundScreenUI(onBack: () -> Unit = {}) {
 @Preview
 @Composable
 private fun GridBackgroundScreenUIPreview() {
-    ComposeTheme {
+    ComposableTheme {
         GridBackgroundScreenUI()
     }
 }

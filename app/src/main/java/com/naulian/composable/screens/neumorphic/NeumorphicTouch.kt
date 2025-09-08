@@ -25,7 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.theme.ComposeTheme
+import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.Transparent
 
 @Composable
@@ -82,7 +82,7 @@ fun NeumorphicTouch(
 @Preview
 @Composable
 private fun NeumorphicTouchPreview() {
-    ComposeTheme {
+    ComposableTheme {
         Box(
             modifier = Modifier
                 .background(Color(0xFFEEEEEE))
