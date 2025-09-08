@@ -1,28 +1,20 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.ksp)
-    alias(libs.plugins.google.hilt)
     alias(libs.plugins.compose)
-    alias(libs.plugins.kotlin.serialization)
 }
 
-val packageName = "com.naulian.composable"
-
 android {
-    namespace = packageName
+    namespace = "com.naulian.composable.theme"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = packageName
         minSdk = 28
-        targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -60,8 +52,6 @@ dependencies {
     //core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.google.material)
-    implementation(libs.androidx.core.splashscreen)
 
     //compose
     implementation(platform(libs.androidx.compose.bom))
@@ -78,6 +68,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
@@ -86,20 +77,5 @@ dependencies {
 
     //naulian
     implementation(libs.naulian.anhance) //android kt extension
-    implementation(libs.naulian.modify) //compose  utils and extension
-    implementation(libs.naulian.glow) //code highlighter
-
-    implementation(libs.kotlinx.serialization.json)
-
-    //hilt
-    implementation(libs.google.hilt.android)
-    ksp(libs.google.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
-
-    //coil
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
-
-    implementation(project(":theme"))
-    implementation(project(":neumorphism"))
+    implementation(libs.naulian.modify) //compose utils and extension
 }

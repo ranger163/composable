@@ -51,7 +51,7 @@ kotlin {
 }
 
 dependencies {
-//core
+    //core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
 
@@ -80,6 +80,8 @@ dependencies {
     //naulian
     implementation(libs.naulian.anhance) //android kt extension
     implementation(libs.naulian.modify) //compose utils and extension
+
+    implementation(project(":theme"))
 }
 
 mavenPublishing {
