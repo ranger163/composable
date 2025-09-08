@@ -1,28 +1,21 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-    alias(libs.plugins.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.google.ksp)
-    alias(libs.plugins.google.hilt)
     alias(libs.plugins.compose)
-    alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.vanniktech.maven)
 }
 
-val packageName = "com.naulian.composable"
-
 android {
-    namespace = packageName
+    namespace = "com.naulian.composable.neumorphism"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = packageName
         minSdk = 28
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -34,6 +27,7 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -57,11 +51,9 @@ kotlin {
 }
 
 dependencies {
-    //core
+//core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.google.material)
-    implementation(libs.androidx.core.splashscreen)
 
     //compose
     implementation(platform(libs.androidx.compose.bom))
@@ -78,6 +70,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling.preview)
@@ -86,19 +79,45 @@ dependencies {
 
     //naulian
     implementation(libs.naulian.anhance) //android kt extension
-    implementation(libs.naulian.modify) //compose  utils and extension
-    implementation(libs.naulian.glow) //code highlighter
+    implementation(libs.naulian.modify) //compose utils and extension
+}
 
-    implementation(libs.kotlinx.serialization.json)
+mavenPublishing {
+    publishToMavenCentral(automaticRelease = true)
 
-    //hilt
-    implementation(libs.google.hilt.android)
-    ksp(libs.google.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    signAllPublications()
 
-    //coil
-    implementation(libs.coil.compose)
-    implementation(libs.coil.network.okhttp)
+    coordinates(
+        groupId = "com.naulian.composable",
+        artifactId = "neumorphism",
+        version = "0.1.0"
+    )
+    //./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
 
-    implementation(project(":neumorphism"))
+    pom {
+        name.set("Neumorphism")
+        description.set("a neumorphism component library for compose")
+        inceptionYear.set("2025")
+        url.set("https://github.com/cinkhangin/composable/")
+        licenses {
+            license {
+                name.set("The MIT License")
+                url.set("https://opensource.org/licenses/MIT")
+                distribution.set("https://opensource.org/licenses/MIT")
+            }
+        }
+
+        developers {
+            developer {
+                id.set("naulian")
+                name.set("Naulian")
+                url.set("https://github.com/cinkhangin/")
+            }
+        }
+        scm {
+            url.set("https://github.com/cinkhangin/composable/")
+            connection.set("scm:git:git://github.com/cinkhangin/composable.git")
+            developerConnection.set("scm:git:ssh://git@github.com/cinkhangin/composable.git")
+        }
+    }
 }

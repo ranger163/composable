@@ -1,4 +1,4 @@
-package com.naulian.composable.screens.neumorphic.component
+package com.naulian.composable.neumorphism.component
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -12,7 +12,9 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -27,11 +29,14 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.theme.ComposeTheme
+import com.naulian.modify.noRippleClick
+
 
 @Composable
-fun Down(
+fun Button(
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    enabled: Boolean = true,
     contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 8.dp),
     shape: Shape = ButtonDefaults.shape,
     content: @Composable RowScope.() -> Unit
@@ -39,50 +44,7 @@ fun Down(
 
     var touch by remember { mutableStateOf(false) }
     val shadowPadding by animateDpAsState(
-        targetValue = if (touch) 4.dp else 6.dp,
-        animationSpec = tween(
-            durationMillis = 500
-        )
-    )
-
-    Row(
-        modifier = modifier
-            .neumorphicDown(
-                shape = shape,
-                shadowPadding = shadowPadding,
-            )
-            .defaultMinSize(
-                minWidth = 58.dp,
-                minHeight = 40.dp
-            )
-            .clip(shape)
-            .pointerInput(Unit) {
-                awaitPointerEventScope {
-                    while (true) {
-                        val event = awaitPointerEvent()
-                        val change = event.changes.first()
-                        touch = change.pressed
-                    }
-                }
-            }
-            .padding(contentPadding),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically,
-        content = content,
-    )
-}
-
-@Composable
-fun Up(
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 24.dp, vertical = 8.dp),
-    shape: Shape = ButtonDefaults.shape,
-    content: @Composable RowScope.() -> Unit
-) {
-
-    var touch by remember { mutableStateOf(false) }
-    val shadowPadding by animateDpAsState(
-        targetValue = if (touch) 2.dp else 6.dp,
+        targetValue = if (touch) 4.dp else contentPadding.calculateTopPadding(),
         animationSpec = tween(
             durationMillis = 500
         )
@@ -93,6 +55,8 @@ fun Up(
             .neumorphicUp(
                 shape = shape,
                 shadowPadding = shadowPadding,
+                light = Color.White,
+                shadow = Color.LightGray
             )
             .defaultMinSize(
                 minWidth = 58.dp,
@@ -109,6 +73,7 @@ fun Up(
                     }
                 }
             }
+            .noRippleClick(enabled) { onClick() }
             .padding(contentPadding),
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
@@ -119,7 +84,7 @@ fun Up(
 @Preview
 @Composable
 private fun ButtonPreview() {
-    ComposeTheme {
+    MaterialTheme {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -128,12 +93,12 @@ private fun ButtonPreview() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
         ) {
-            Up{
-                Text(text = "Neumorphic Up")
+            Button(onClick = {}) {
+                Text(text = "Neumorphic Button")
             }
 
-            Down {
-                Text(text = "Neumorphic Down")
+            Button(onClick = {}, shape = RoundedCornerShape(20)) {
+                Text(text = "Neumorphic Button")
             }
         }
     }

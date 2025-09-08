@@ -1,4 +1,4 @@
-package com.naulian.composable.screens.neumorphic.component
+package com.naulian.composable.neumorphism.component
 
 import androidx.compose.ui.graphics.Color
 

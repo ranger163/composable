@@ -62,10 +62,10 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                 .padding(20.dp)
         ) {
             columnItem(
-                verticalArrangement = Arrangement.spacedBy(48.dp)
+                verticalArrangement = Arrangement.spacedBy(20.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.padding(top = 20.dp).fillMaxWidth(),
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     NeuMorphicUP(
@@ -83,16 +83,12 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                             .weight(1f)
                             .fillMaxWidth()
                             .aspectRatio(1f),
+                        contentPadding = 10.dp,
                         contentAlignment = Alignment.Center,
                         lightColor = MaterialTheme.colorScheme.surfaceBright,
                         shadowColor = MaterialTheme.colorScheme.surfaceDim
                     )
-                }
 
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
                     NeuMorphicUP(
                         modifier = Modifier
                             .weight(1f)
@@ -110,6 +106,7 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                             .fillMaxWidth()
                             .aspectRatio(1f),
                         shape = CircleShape,
+                        contentPadding = 10.dp,
                         contentAlignment = Alignment.Center,
                         lightColor = MaterialTheme.colorScheme.surfaceBright,
                         shadowColor = MaterialTheme.colorScheme.surfaceDim
@@ -119,9 +116,18 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                 NeuMorphicUP(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(40.dp),
+                        .height(56.dp),
                     shape = CircleShape,
-                    contentPadding = 8.dp,
+                    contentAlignment = Alignment.Center,
+                    lightColor = MaterialTheme.colorScheme.surfaceBright,
+                    shadowColor = MaterialTheme.colorScheme.surfaceDim
+                )
+
+                NeuMorphicUP2(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(56.dp),
+                    shape = CircleShape,
                     contentAlignment = Alignment.Center,
                     lightColor = MaterialTheme.colorScheme.surfaceBright,
                     shadowColor = MaterialTheme.colorScheme.surfaceDim
@@ -130,7 +136,7 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                 NeuMorphicDown(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(40.dp),
+                        .height(56.dp),
                     shape = CircleShape,
                     contentPadding = 8.dp,
                     contentAlignment = Alignment.Center,

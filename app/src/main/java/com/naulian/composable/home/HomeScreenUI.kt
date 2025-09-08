@@ -35,6 +35,7 @@ import com.naulian.composable.screens.background.gridBackground
 import com.naulian.composable.screens.box.CorneredBox
 import com.naulian.composable.screens.neumorphic.NeuMorphicDown
 import com.naulian.composable.screens.neumorphic.NeuMorphicUP
+import com.naulian.composable.screens.neumorphic.NeuMorphicUP2
 import com.naulian.composable.screens.rating.RatingStars
 import com.naulian.composable.theme.ComposeTheme
 import com.naulian.modify.ExperimentalModifyApi
@@ -94,7 +95,7 @@ fun HomeScreenUI(
                             .fillMaxWidth()
                             .aspectRatio(1f),
                         contentAlignment = Alignment.Center,
-                        contentPadding = 10.dp,
+                        contentPadding = 6.dp,
                         lightColor = MaterialTheme.colorScheme.surfaceBright,
                         shadowColor = MaterialTheme.colorScheme.surfaceDim
                     )
@@ -110,12 +111,12 @@ fun HomeScreenUI(
                         shadowColor = MaterialTheme.colorScheme.surfaceDim
                     )
 
-                    NeuMorphicUP(
+                    NeuMorphicUP2(
                         modifier = Modifier
                             .weight(1f)
                             .fillMaxWidth()
                             .aspectRatio(1f),
-                        contentPadding = 10.dp,
+                        contentPadding = 6.dp,
                         shape = CircleShape,
                         contentAlignment = Alignment.Center,
                         lightColor = MaterialTheme.colorScheme.surfaceBright,
