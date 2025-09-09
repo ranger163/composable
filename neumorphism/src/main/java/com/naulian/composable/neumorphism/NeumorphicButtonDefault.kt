@@ -1,4 +1,4 @@
-package com.naulian.composable.neumorphism.component
+package com.naulian.composable.neumorphism
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape

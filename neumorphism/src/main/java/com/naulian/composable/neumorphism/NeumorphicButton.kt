@@ -1,17 +1,14 @@
-package com.naulian.composable.neumorphism.component
+package com.naulian.composable.neumorphism
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.defaultMinSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonColors
@@ -35,7 +32,6 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.theme.ComposableTheme
 
 
 @Composable
@@ -52,7 +48,7 @@ fun NeumorphicButton(
     var touch by remember { mutableStateOf(false) }
     val shadowPadding by animateDpAsState(
         targetValue = when {
-            enabled -> if(touch) 4.dp else 6.dp
+            enabled -> if (touch) 4.dp else 6.dp
             else -> 4.dp
         },
         animationSpec = tween(
@@ -104,22 +100,13 @@ fun NeumorphicButton(
 @Preview
 @Composable
 private fun ButtonPreview() {
-    ComposableTheme {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1f)
-                .background(color = MaterialTheme.colorScheme.background),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically)
-        ) {
-            NeumorphicButton(onClick = {}) {
-                Text(text = "Neumorphic Button")
-            }
+    NeumorphicPreview {
+        NeumorphicButton(onClick = {}) {
+            Text(text = "Neumorphic Button")
+        }
 
-            NeumorphicButton(enabled = false, onClick = {}, shape = RoundedCornerShape(20)) {
-                Text(text = "Disabled Neumorphic Button")
-            }
+        NeumorphicButton(enabled = false, onClick = {}, shape = RoundedCornerShape(20)) {
+            Text(text = "Disabled Neumorphic Button")
         }
     }
 }

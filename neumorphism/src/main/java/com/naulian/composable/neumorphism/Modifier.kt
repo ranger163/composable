@@ -1,4 +1,4 @@
-package com.naulian.composable.neumorphism.component
+package com.naulian.composable.neumorphism
 
 import androidx.compose.foundation.background
 import androidx.compose.material3.MaterialTheme
@@ -11,8 +11,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
-import com.naulian.modify.LightGray
-import com.naulian.modify.White
 
 
 @Composable

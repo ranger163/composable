@@ -1,4 +1,4 @@
-package com.naulian.composable.neumorphism.component
+package com.naulian.composable.neumorphism
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
