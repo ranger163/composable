@@ -41,11 +41,11 @@ fun NeumorphicIconButton(
     enabled: Boolean = true,
     containerSize: Dp = 40.dp,
     shape: Shape = CircleShape,
-    colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
     interactionSource: MutableInteractionSource? = null,
     content: @Composable () -> Unit
 ) {
-    val contentColor = if (enabled) colors.contentColor else colors.disabledContentColor
+    val contentColor = if (enabled) MaterialTheme.colorScheme.onSurface
+    else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
     var touch by remember { mutableStateOf(false) }
     val shadowPadding by animateDpAsState(
         targetValue = when {
@@ -97,11 +97,12 @@ fun NeumorphicIconButton2(
     enabled: Boolean = true,
     containerSize: Dp = 40.dp,
     shape: Shape = CircleShape,
-    colors: IconButtonColors = IconButtonDefaults.iconButtonColors(),
     interactionSource: MutableInteractionSource? = null,
     content: @Composable () -> Unit
 ) {
-    val contentColor = if (enabled) colors.contentColor else colors.disabledContentColor
+    val contentColor =
+        if (enabled) MaterialTheme.colorScheme.onSurface
+        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
     var touch by remember { mutableStateOf(false) }
     val shadowPadding by animateDpAsState(
         targetValue = when {

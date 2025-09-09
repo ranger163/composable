@@ -41,7 +41,6 @@ fun NeumorphicLinearProgressIndicator(
         targetValue = coercedProgress(),
     )
 
-
     Box(
         modifier = modifier
             .onGloballyPositioned {

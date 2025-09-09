@@ -17,20 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.theme.ComposableTheme
 
-@Composable
-fun NeumorphicPreviewColumn(
-    modifier: Modifier = Modifier,
-    content: @Composable ColumnScope.() -> Unit
-) {
-    NeumorphicPreview {
-        Column(
-            modifier = modifier,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
-            content = content
-        )
-    }
-}
 
 @Composable
 internal fun NeumorphicPreviewSquare(
@@ -54,9 +40,11 @@ internal fun NeumorphicPreviewSquare(
 @Composable
 internal fun NeumorphicPreviewScreen(
     modifier: Modifier = Modifier,
+    dark : Boolean = false,
     content: @Composable BoxScope.() -> Unit
 ) {
     NeumorphicPreview(
+        dark = dark,
         modifier = modifier.fillMaxSize(),
         content = content
     )
@@ -65,10 +53,11 @@ internal fun NeumorphicPreviewScreen(
 @Composable
 private fun NeumorphicPreview(
     modifier: Modifier = Modifier,
+    dark: Boolean = false,
     contentAlignment: Alignment = Alignment.TopStart,
     content: @Composable BoxScope.() -> Unit
 ) {
-    ComposableTheme {
+    ComposableTheme(darkTheme = dark) {
         Box(
             modifier = modifier
                 .background(color = MaterialTheme.colorScheme.background)
