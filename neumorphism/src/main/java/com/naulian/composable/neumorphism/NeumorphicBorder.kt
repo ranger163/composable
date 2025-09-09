@@ -2,6 +2,7 @@ package com.naulian.composable.neumorphism
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,8 +15,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun NeumorphicBorder(
     modifier: Modifier = Modifier,
-    cornerRadiusDp : Dp = 40.dp,
+    cornerRadiusDp: Dp = 40.dp,
     borderThickness: Dp = 10.dp,
+    contentPadding: PaddingValues = PaddingValues(12.dp),
     content: @Composable BoxScope.() -> Unit
 ) {
     Box(
@@ -27,10 +29,12 @@ fun NeumorphicBorder(
             .padding(borderThickness)
     ) {
         Box(
-            modifier = modifier.neumorphicDown(
-                shape = RoundedCornerShape(cornerRadiusDp - borderThickness),
-                shadowPadding = 2.dp
-            ),
+            modifier = modifier
+                .neumorphicDown(
+                    shape = RoundedCornerShape(cornerRadiusDp - borderThickness),
+                    shadowPadding = 2.dp
+                )
+                .padding(contentPadding),
             content = content
         )
     }
@@ -39,7 +43,7 @@ fun NeumorphicBorder(
 @Preview
 @Composable
 private fun NeumorphicBorderPreview() {
-    NeumorphicPreview {
+    NeumorphicPreviewSquare {
         NeumorphicBorder(
             modifier = Modifier.size(300.dp)
         ) {

@@ -48,8 +48,8 @@ fun NeumorphicButton(
     var touch by remember { mutableStateOf(false) }
     val shadowPadding by animateDpAsState(
         targetValue = when {
-            enabled -> if (touch) 4.dp else 6.dp
-            else -> 4.dp
+            enabled -> if (touch) 2.dp else 4.dp
+            else -> 2.dp
         },
         animationSpec = tween(
             durationMillis = 400
@@ -100,7 +100,7 @@ fun NeumorphicButton(
 @Preview
 @Composable
 private fun NeumorphicButtonPreview() {
-    NeumorphicPreview {
+    NeumorphicPreviewSquare {
         NeumorphicButton(onClick = {}) {
             Text(text = "Neumorphic Button")
         }

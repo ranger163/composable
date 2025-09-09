@@ -151,7 +151,7 @@ fun NeumorphicIconButton2(
 @Preview
 @Composable
 private fun NeumorphicIconButtonPreview() {
-    NeumorphicPreview {
+    NeumorphicPreviewSquare {
         Row(
             horizontalArrangement = Arrangement.spacedBy(20.dp)
         ) {

@@ -62,7 +62,7 @@ fun NeumorphicTextField(
                 modifier = Modifier
                     .neumorphicDown(
                         shape = shape,
-                        shadowPadding = 6.dp,
+                        shadowPadding = 4.dp,
                     )
                     .heightIn(min = 56.dp)
                     .If(onFocus) {
@@ -93,7 +93,7 @@ fun NeumorphicTextField(
 @Preview
 @Composable
 private fun NeumorphicTextFieldPreview() {
-    NeumorphicPreview {
+    NeumorphicPreviewSquare {
         NeumorphicTextField(
             modifier = Modifier,
             state = TextFieldState()
