@@ -99,7 +99,7 @@ fun NeumorphicButton(
 
 @Preview
 @Composable
-private fun ButtonPreview() {
+private fun NeumorphicButtonPreview() {
     NeumorphicPreview {
         NeumorphicButton(onClick = {}) {
             Text(text = "Neumorphic Button")
