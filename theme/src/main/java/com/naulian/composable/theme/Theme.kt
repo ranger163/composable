@@ -11,6 +11,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import com.naulian.modify.Black
 import com.naulian.modify.DarkGray
+import com.naulian.modify.LightGray
 import com.naulian.modify.White
 
 private val DarkColorScheme = darkColorScheme(
@@ -22,6 +23,7 @@ private val DarkColorScheme = darkColorScheme(
     tertiary = DarkGray,
 
     surface = DarkGray,
+    onSurface = LightGray,
     surfaceContainer = DarkContainer,
     surfaceBright = DarkLight,
     surfaceDim = Black
@@ -36,6 +38,7 @@ private val LightColorScheme = lightColorScheme(
     tertiary = White,
 
     surface = White,
+    onSurface = DarkGray, //update
     surfaceContainer = LightContainer,
     surfaceBright = White,
     surfaceDim = LightShadow,
