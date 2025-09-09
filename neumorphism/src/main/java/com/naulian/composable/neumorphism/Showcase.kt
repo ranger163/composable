@@ -16,8 +16,10 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.foundation.text.input.placeCursorAtEnd
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SliderState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -33,8 +35,8 @@ import androidx.compose.ui.unit.dp
 import com.naulian.modify.HugeIcons
 import com.naulian.modify.field.setText
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun Showcase() {
 
@@ -176,10 +178,24 @@ private fun Showcase() {
             )
         )
 
-        Text("Linear Progress Indicator at 0.5", color = MaterialTheme.colorScheme.onBackground)
+        Text("Linear Progress Indicator at ${(progress * 100).toInt()}%", color = MaterialTheme.colorScheme.onBackground)
         NeumorphicLinearProgressIndicator(
             modifier = Modifier.fillMaxWidth(),
             progress = { progress }
+        )
+
+        val sliderState = remember {
+            SliderState(
+                valueRange = 0f..1f,
+                onValueChangeFinished = {},
+                steps = 10
+            )
+        }
+
+        Text("Slider ${(sliderState.value * 100).toInt()}", color = MaterialTheme.colorScheme.onBackground)
+        NeumorphicSlider(
+            modifier = Modifier.fillMaxWidth(),
+            state = sliderState
         )
     }
 }
