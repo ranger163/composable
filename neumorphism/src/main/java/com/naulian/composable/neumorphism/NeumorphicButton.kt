@@ -2,7 +2,6 @@ package com.naulian.composable.neumorphism
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -49,7 +48,7 @@ fun NeumorphicButton(
     val shadowPadding by animateDpAsState(
         targetValue = when {
             enabled -> if (touch) 2.dp else 4.dp
-            else -> 2.dp
+            else -> 1.dp
         },
         animationSpec = tween(
             durationMillis = 400
@@ -57,7 +56,6 @@ fun NeumorphicButton(
     )
 
     val contentColor = if (enabled) colors.contentColor else colors.disabledContentColor
-    val containerColor = if (enabled) colors.containerColor else colors.disabledContainerColor
 
     val mergedStyle = LocalTextStyle.current.merge(MaterialTheme.typography.labelLarge)
     CompositionLocalProvider(
@@ -77,7 +75,6 @@ fun NeumorphicButton(
                     minWidth = NeumorphicButtonDefaults.MinWidth,
                     minHeight = NeumorphicButtonDefaults.MinHeight
                 )
-                .background(color = containerColor, shape = shape)
                 .pointerInput(Unit) {
                     awaitPointerEventScope {
                         while (true) {

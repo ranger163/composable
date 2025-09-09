@@ -2,7 +2,6 @@ package com.naulian.composable.neumorphism
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -50,7 +49,7 @@ fun NeumorphicIconButton(
     var touch by remember { mutableStateOf(false) }
     val shadowPadding by animateDpAsState(
         targetValue = when {
-            enabled -> if (touch) 2.dp else 4.dp
+            enabled -> if (touch) 2.dp else 3.dp
             else -> 2.dp
         },
         animationSpec = tween(
@@ -70,7 +69,6 @@ fun NeumorphicIconButton(
                     shadow = MaterialTheme.colorScheme.surfaceDim
                 )
                 .clip(shape)
-                .background(color = MaterialTheme.colorScheme.surfaceContainer, shape)
                 .pointerInput(Unit) {
                     awaitPointerEventScope {
                         while (true) {

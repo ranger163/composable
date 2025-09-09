@@ -22,7 +22,7 @@ fun NeumorphicBorder(
 ) {
     Box(
         modifier = Modifier
-            .neumorphicUp2(
+            .neumorphicUp(
                 shape = RoundedCornerShape(cornerRadiusDp),
                 shadowPadding = 2.dp
             )

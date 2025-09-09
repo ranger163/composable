@@ -20,9 +20,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.neumorphism.component.neumorphicDown
-import com.naulian.composable.neumorphism.component.neumorphicUp
-import com.naulian.composable.neumorphism.component.neumorphicUp2
+import com.naulian.composable.neumorphism.neumorphicDown
+import com.naulian.composable.neumorphism.neumorphicUp
+import com.naulian.composable.neumorphism.neumorphicUp2
 import com.naulian.composable.theme.ComposableTheme
 
 

@@ -90,7 +90,7 @@ fun Up(
 
     Row(
         modifier = modifier
-            .neumorphicUp(
+            .neumorphicUp2(
                 shape = shape,
                 shadowPadding = shadowPadding,
             )

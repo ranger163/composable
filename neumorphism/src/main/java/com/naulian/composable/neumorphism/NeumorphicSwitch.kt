@@ -7,12 +7,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.SwitchColors
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
@@ -34,8 +34,8 @@ fun NeumorphicSwitch(
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
-    colors: SwitchColors = SwitchDefaults.colors(),
     interactionSource: MutableInteractionSource? = null,
+    thumbPadding : Dp = 0.dp
 ) {
     val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
 
@@ -72,11 +72,11 @@ fun NeumorphicSwitch(
             .neumorphicDown(
                 shape = CircleShape,
                 shadowPadding = 4.dp,
-            )//.padding(4.dp)
+            ).padding(thumbPadding)
     ) {
         Box(
             modifier = Modifier
-                .size(32.dp)
+                .size(32.dp - (thumbPadding * 2))
                 .offset {
                     IntOffset(x = thumbOffset.toPx().toInt(), y = 0)
                 }

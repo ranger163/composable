@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.DpOffset
 
 
 @Composable
-fun Modifier.neumorphicUp2(
+fun Modifier.neumorphicUp(
     shape: Shape,
     shadowPadding: Dp,
     light: Color = MaterialTheme.colorScheme.surfaceBright,
@@ -58,12 +58,12 @@ fun Modifier.neumorphicDown(
 )
 
 @Composable
-fun Modifier.neumorphicUp(
+fun Modifier.neumorphicUp2(
     shape: Shape,
     shadowPadding: Dp,
     light: Color = MaterialTheme.colorScheme.surfaceBright,
     shadow: Color = MaterialTheme.colorScheme.surfaceDim,
-    backgroundColor: Color = MaterialTheme.colorScheme.background,
+    backgroundColor: Color = MaterialTheme.colorScheme.surfaceContainer,
 ) = dropShadow(
     shape = shape,
     shadow = Shadow(
