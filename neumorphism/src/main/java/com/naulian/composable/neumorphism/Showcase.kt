@@ -197,6 +197,18 @@ private fun Showcase() {
             modifier = Modifier.fillMaxWidth(),
             state = sliderState
         )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text("Check Boxes", color = MaterialTheme.colorScheme.onBackground)
+
+            NeumorphicCheckBox(checked = !checked, onCheckedChange = { checked = !it })
+            NeumorphicCheckBox(checked = checked, onCheckedChange = { checked = it })
+        }
+
     }
 }
 
