@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
  *
  * @param totalSteps total number of steps
  * @param currentStep currently active step (1-based index)
+ * @param stepLabels list of labels for each step
  * @param modifier Modifier for custom styling
  * @param activeStartColor start color for active gradient
  * @param activeEndColor end color for active gradient
@@ -36,6 +37,7 @@ import androidx.compose.ui.unit.dp
 fun ProgressTick(
     totalSteps: Int,
     currentStep: Int,
+    stepLabels: List<String>,
     modifier: Modifier = Modifier,
     activeStartColor: Color = Color(0xFF6dd5ed), // Bhopal Breeze - light blue
     activeEndColor: Color = Color(0xFF2193b0),   // Bhopal Breeze - darker blue
@@ -45,7 +47,7 @@ fun ProgressTick(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 8.dp), // Added padding to the row
+            .padding(horizontal = 16.dp, vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
@@ -53,7 +55,6 @@ fun ProgressTick(
             val step = index + 1
             val isActive = step <= currentStep
 
-            // Animated colors and size
             val animatedBackgroundColor by animateColorAsState(
                 targetValue = if (isActive) activeStartColor else inactiveColor,
                 animationSpec = tween(durationMillis = 300)
@@ -63,21 +64,20 @@ fun ProgressTick(
                 animationSpec = tween(durationMillis = 300)
             )
             val animatedElevation by animateDpAsState(
-                targetValue = if (step == currentStep) 8.dp else 0.dp, // Elevate current step
+                targetValue = if (step == currentStep) 8.dp else 0.dp,
                 animationSpec = tween(durationMillis = 300)
             )
             val animatedSize by animateDpAsState(
-                targetValue = if (step == currentStep) 40.dp else 36.dp, // Slightly larger current step
+                targetValue = if (step == currentStep) 40.dp else 36.dp,
                 animationSpec = tween(durationMillis = 300)
             )
 
-            // Circle tick
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier
                     .size(animatedSize)
                     .clip(CircleShape)
-                    .shadow(animatedElevation, CircleShape) // Apply shadow for elevation
+                    .shadow(animatedElevation, CircleShape)
                     .background(
                         brush = if (isActive) {
                             Brush.linearGradient(colors = listOf(activeStartColor, activeEndColor))
@@ -88,21 +88,20 @@ fun ProgressTick(
                     .clickable { onStepClick(step) }
             ) {
                 Text(
-                    text = "✓".takeIf { isActive } ?: step.toString(),
+                    text = "✓".takeIf { isActive } ?: stepLabels.getOrNull(index) ?: step.toString(),
                     color = animatedTextColor,
-                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold) // Bolder text
+                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold)
                 )
             }
 
-            // Connector line (except last)
             if (step != totalSteps) {
                 val animatedLineColor by animateColorAsState(
-                    targetValue = if (isActive) activeEndColor else inactiveColor, // Line color matches end of active gradient
+                    targetValue = if (isActive) activeEndColor else inactiveColor,
                     animationSpec = tween(durationMillis = 300)
                 )
                 Box(
                     modifier = Modifier
-                        .height(3.dp) // Slightly thicker line
+                        .height(3.dp)
                         .weight(1f)
                         .background(animatedLineColor)
                 )
@@ -111,9 +110,6 @@ fun ProgressTick(
     }
 }
 
-/**
- * Example demo preview (you can remove in production).
- */
 @Composable
 fun ProgressTickDemo() {
     var currentStep by remember { mutableStateOf(2) }
@@ -121,7 +117,7 @@ fun ProgressTickDemo() {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF5F5F5)) // Light background for contrast
+            .background(Color(0xFFF5F5F5))
             .padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -136,10 +132,11 @@ fun ProgressTickDemo() {
         ProgressTick(
             totalSteps = 5,
             currentStep = currentStep,
+            stepLabels = listOf("Start", "Setup", "Config", "Review", "Done"),
             onStepClick = { step -> currentStep = step }
         )
 
-        Spacer(modifier = Modifier.height(32.dp)) // Increased spacing
+        Spacer(modifier = Modifier.height(32.dp))
         Text(
             text = "Current Progress: Step $currentStep",
             style = MaterialTheme.typography.titleMedium,

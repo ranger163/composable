@@ -1,39 +1,61 @@
-package com.naulian.composable.screens.Progress
+package com.naulian.composable.screens.progress
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.naulian.composable.screens.Progress.ProgressTick
 
 @Composable
-fun ProgressScreen() {
-    var currentStep by remember { mutableStateOf(1) }
+fun ProgressScreen(navController: NavHostController) {
+    var currentStep by remember { mutableIntStateOf(1) }
     val totalSteps = 5
 
-    // A list of example content for each step
+    // Professional step content with better descriptions
     val stepContent = remember {
         listOf(
-            "Welcome! This is the first step of your journey.",
-            "Great job! You've completed step one. Let's move on to the next task.",
-            "You're halfway there! This step involves some important decisions.",
-            "Final stretch! You're almost at the end.",
-            "Congratulations! You have successfully completed all steps."
+            "Welcome to your journey! Let's get started with the onboarding process.",
+            "Perfect! Now let's set up your preferences and configure the basic settings.",
+            "Great progress! Time to review your configuration and make any adjustments.",
+            "Almost there! Please review all your settings before we finalize everything.",
+            "Congratulations! You have successfully completed the entire setup process."
+        )
+    }
+
+    val stepTitles = remember {
+        listOf(
+            "Getting Started",
+            "Configuration",
+            "Customization",
+            "Final Review",
+            "All Done!"
         )
     }
 
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background // Using Material Theme background
+        color = MaterialTheme.colorScheme.background
     ) {
         Column(
             modifier = Modifier
@@ -41,58 +63,172 @@ fun ProgressScreen() {
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Header
-            Text(
-                text = "Multi-Step Process",
-                style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier.padding(top = 16.dp, bottom = 48.dp)
-            )
+            // Professional Header with gradient background
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(
+                        brush = Brush.horizontalGradient(
+                            colors = listOf(
+                                Color(0xFF4CAF50).copy(alpha = 0.1f),
+                                Color(0xFF2196F3).copy(alpha = 0.1f)
+                            )
+                        ),
+                        shape = RoundedCornerShape(16.dp)
+                    )
+                    .padding(24.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "Setup Progress",
+                        style = MaterialTheme.typography.headlineMedium.copy(
+                            fontWeight = FontWeight.Bold
+                        ),
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                    Text(
+                        text = "Step $currentStep of $totalSteps",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
+                        modifier = Modifier.padding(top = 4.dp)
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(32.dp))
 
             // Progress bar with ticks
             ProgressTick(
                 totalSteps = totalSteps,
                 currentStep = currentStep,
+                stepLabels = listOf("Start", "Setup", "Configure", "Review", "Complete"),
                 onStepClick = { step ->
                     currentStep = step
                 }
             )
 
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(40.dp))
 
-            // Animated content based on the current step
-            Crossfade(targetState = currentStep, animationSpec = tween(500)) { targetStep ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(200.dp), // Fixed height for consistent layout
-                    contentAlignment = Alignment.Center
-                ) {
-                    // Display different content for each step
-                    Text(
-                        text = stepContent.getOrElse(targetStep - 1) { "" },
-                        style = MaterialTheme.typography.bodyLarge,
-                        modifier = Modifier.padding(16.dp),
-                        color = MaterialTheme.colorScheme.onSurface
-                    )
+            // Professional content card
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .shadow(
+                        elevation = 8.dp,
+                        shape = RoundedCornerShape(20.dp),
+                        ambientColor = Color(0xFF4CAF50).copy(alpha = 0.1f),
+                        spotColor = Color(0xFF4CAF50).copy(alpha = 0.1f)
+                    ),
+                shape = RoundedCornerShape(20.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                ),
+                elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
+            ) {
+                Crossfade(
+                    targetState = currentStep,
+                    animationSpec = tween(500),
+                    label = "step_transition"
+                ) { targetStep ->
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(32.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        // Step title
+                        Text(
+                            text = stepTitles.getOrElse(targetStep - 1) { "Step $targetStep" },
+                            style = MaterialTheme.typography.headlineSmall.copy(
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 24.sp
+                            ),
+                            color = MaterialTheme.colorScheme.primary,
+                            textAlign = TextAlign.Center
+                        )
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        // Step content
+                        Text(
+                            text = stepContent.getOrElse(targetStep - 1) { "" },
+                            style = MaterialTheme.typography.bodyLarge.copy(
+                                lineHeight = 24.sp
+                            ),
+                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f),
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                    }
                 }
             }
 
-            Spacer(modifier = Modifier.weight(1f)) // Pushes button to the bottom
+            Spacer(modifier = Modifier.weight(1f))
 
-            // Navigation button
+            // Professional gradient button
             Button(
                 onClick = {
                     if (currentStep < totalSteps) {
                         currentStep++
                     } else {
-                        // Reset to the start or show a completion message
                         currentStep = 1
                     }
                 },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .shadow(
+                        elevation = 12.dp,
+                        shape = RoundedCornerShape(16.dp),
+                        ambientColor = Color(0xFF4CAF50).copy(alpha = 0.3f),
+                        spotColor = Color(0xFF4CAF50).copy(alpha = 0.3f)
+                    ),
+                shape = RoundedCornerShape(16.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF4CAF50)
+                ),
+                elevation = ButtonDefaults.buttonElevation(
+                    defaultElevation = 0.dp,
+                    pressedElevation = 0.dp
+                )
             ) {
-                Text(text = if (currentStep < totalSteps) "Next Step" else "Start Over")
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text(
+                        text = if (currentStep < totalSteps) "Continue to Next Step" else "Start Over",
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 16.sp
+                        ),
+                        color = Color.White
+                    )
+
+                    if (currentStep < totalSteps) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "→",
+                            style = MaterialTheme.typography.headlineSmall,
+                            color = Color.White
+                        )
+                    }
+                }
             }
+
+            // Helper text
+            Text(
+                text = if (currentStep < totalSteps) {
+                    "Tap any step above to jump directly to it"
+                } else {
+                    "You've completed all steps! 🎉"
+                },
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.padding(top = 16.dp)
+            )
         }
     }
 }
@@ -100,5 +236,7 @@ fun ProgressScreen() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewProgressScreen() {
-    ProgressScreen()
+    ProgressScreen(navController = rememberNavController())
 }
+
+

@@ -261,12 +261,12 @@ fun HomeScreenUI(
                             shape = RoundedCornerShape(20.dp)
                         )
                         .clickable {
-                            uiEvent(HomeUIEvent.CarouselCard)
+                            uiEvent(HomeUIEvent.Progress)
                         }
                         .padding(20.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    ListItemText(title = "Carousel Card", createdBy = "Aryan Singh")
+                    ListItemText(title = "Progress", createdBy = "Aryan Singh")
                 }
             }
         }
