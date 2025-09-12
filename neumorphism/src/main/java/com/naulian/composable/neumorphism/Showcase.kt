@@ -145,24 +145,16 @@ private fun Showcase() {
             }
         }
 
+        NeumorphicHorizontalDivider()
+
         Row(
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text("Switch Unchecked", color = MaterialTheme.colorScheme.onBackground)
+            Text("Switch", color = MaterialTheme.colorScheme.onBackground)
 
             NeumorphicSwitch(checked = checked, onCheckedChange = { checked = it })
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            Text("Switch Checked", color = MaterialTheme.colorScheme.onBackground)
-
-            NeumorphicSwitch(checked = !checked, onCheckedChange = { checked = !it })
         }
 
         val infiniteTransition = rememberInfiniteTransition()
@@ -207,6 +199,17 @@ private fun Showcase() {
 
             NeumorphicCheckBox(checked = !checked, onCheckedChange = { checked = !it })
             NeumorphicCheckBox(checked = checked, onCheckedChange = { checked = it })
+        }
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            Text("Radio Button", color = MaterialTheme.colorScheme.onBackground)
+
+            NeumorphicRadioButton(checked = !checked, onCheckedChange = { checked = !it })
+            NeumorphicRadioButton(checked = checked, onCheckedChange = { checked = it })
         }
 
     }

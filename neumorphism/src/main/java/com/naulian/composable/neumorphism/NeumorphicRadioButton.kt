@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -27,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.naulian.modify.HugeIcons
 
 @Composable
-fun NeumorphicCheckBox(
+fun NeumorphicRadioButton(
     checked: Boolean,
     onCheckedChange: ((Boolean) -> Unit)?,
     modifier: Modifier = Modifier,
@@ -68,7 +69,7 @@ fun NeumorphicCheckBox(
             .then(toggleableModifier)
             .size(32.dp)
             .neumorphicDown(
-                shape = RoundedCornerShape(20),
+                shape = CircleShape,
                 shadowPadding = 4.dp,
             )
             .padding(thumbPadding)
@@ -77,32 +78,29 @@ fun NeumorphicCheckBox(
             Box(
                 modifier = Modifier
                     .size(32.dp - (thumbPadding * 2))
-                    .background(MaterialTheme.colorScheme.background, RoundedCornerShape(20))
                     .neumorphicUp(
-                        shape = RoundedCornerShape(20),
+                        shape = CircleShape,
                         shadowPadding = shadowPadding
                     ),
                 contentAlignment = Alignment.Center
-            ) {
-                Icon(painter = painterResource(HugeIcons.Done), contentDescription = "Check Icon")
-            }
+            ) {}
         }
     }
 }
 
 @Preview
 @Composable
-private fun NeumorphicCheckBoxPreview() {
+private fun NeumorphicRadioButtonPreview() {
     NeumorphicPreviewSquare {
 
         var checked by remember { mutableStateOf(false) }
 
-        NeumorphicCheckBox(
+        NeumorphicRadioButton(
             checked = checked,
             onCheckedChange = { checked = it }
         )
 
-        NeumorphicCheckBox(
+        NeumorphicRadioButton(
             checked = !checked,
             onCheckedChange = { checked = !it }
         )

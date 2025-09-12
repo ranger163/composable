@@ -49,7 +49,12 @@ sealed interface HomeUIEvent {
     data object RatingStars : HomeUIEvent
     data object ParallaxCardStack : HomeUIEvent
     data object CarouselCard: HomeUIEvent
+ main
     data object Progress: HomeUIEvent
+
+    data object BottomBar: HomeUIEvent
+    data object CalenderTopBar: HomeUIEvent
+ main
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -261,12 +266,39 @@ fun HomeScreenUI(
                             shape = RoundedCornerShape(20.dp)
                         )
                         .clickable {
+ main
                             uiEvent(HomeUIEvent.Progress)
+
+                            uiEvent(HomeUIEvent.BottomBar)
+ main
                         }
                         .padding(20.dp),
                     contentAlignment = Alignment.Center
                 ) {
+ main
                     ListItemText(title = "Progress", createdBy = "Aryan Singh")
+
+                    ListItemText(title = "Bottom Navigation Bar", createdBy = "Zain ul Abdin")
+                }
+            }
+            item {
+                Box(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            uiEvent(HomeUIEvent.CalenderTopBar)
+                        }
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ListItemText(title = "Calender Top Bar", createdBy = "Zain ul Abdin")
+ main
                 }
             }
         }
