@@ -34,6 +34,8 @@ fun HomeScreen() {
             HomeUIEvent.CarouselCard -> navController.navigate(Screen.Carousel3DStack)
             HomeUIEvent.BottomBar -> navController.navigate(Screen.BottomBar)
             HomeUIEvent.CalenderTopBar -> navController.navigate(Screen.CalenderTopBar)
+            HomeUIEvent.AnimatedInteractionScreen -> navController.navigate(Screen.AnimatedInteractionScreen)
+            HomeUIEvent.GlassDashboardScreen -> navController.navigate(Screen.GlassDashboardScreen)
 
         }
     }

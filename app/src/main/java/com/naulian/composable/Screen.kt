@@ -33,4 +33,10 @@ sealed interface Screen {
 
     @Serializable
     data object CalenderTopBar : Screen
+
+    @Serializable
+    data object AnimatedInteractionScreen : Screen
+
+    @Serializable
+    data object GlassDashboardScreen : Screen
 }

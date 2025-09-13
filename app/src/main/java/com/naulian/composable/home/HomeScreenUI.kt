@@ -51,6 +51,8 @@ sealed interface HomeUIEvent {
     data object CarouselCard: HomeUIEvent
     data object BottomBar: HomeUIEvent
     data object CalenderTopBar: HomeUIEvent
+    data object AnimatedInteractionScreen: HomeUIEvent
+    data object GlassDashboardScreen: HomeUIEvent
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -289,6 +291,54 @@ fun HomeScreenUI(
                     ListItemText(title = "Calender Top Bar", createdBy = "Zain ul Abdin")
                 }
             }
+            item {
+                Box(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            uiEvent(HomeUIEvent.AnimatedInteractionScreen)
+                        }
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ListItemText(
+                        title = "Animations & Interactions",
+                        createdBy = "Shree Bhargav R K"
+                    )
+                }
+            }
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            uiEvent(HomeUIEvent.GlassDashboardScreen)
+                        }
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ListItemText(
+                        title = "Dashboard",
+                        createdBy = "Shree Bhargav R K"
+                    )
+                }
+            }
+
+
+
         }
     }
 }

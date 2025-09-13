@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.constraintlayout.compose)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.protolite.well.known.types)
 
     //test
     testImplementation(libs.junit)
@@ -105,4 +106,6 @@ dependencies {
 
     implementation(project(":theme"))
     implementation(project(":neumorphism"))
+
+    implementation("androidx.compose.material:material-icons-extended:1.7.7")
 }
