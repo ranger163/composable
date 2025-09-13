@@ -49,6 +49,8 @@ sealed interface HomeUIEvent {
     data object RatingStars : HomeUIEvent
     data object ParallaxCardStack : HomeUIEvent
     data object CarouselCard: HomeUIEvent
+    data object Progress: HomeUIEvent
+
     data object BottomBar: HomeUIEvent
     data object CalenderTopBar: HomeUIEvent
     data object AnimatedInteractionScreen: HomeUIEvent
@@ -264,11 +266,15 @@ fun HomeScreenUI(
                             shape = RoundedCornerShape(20.dp)
                         )
                         .clickable {
+                            uiEvent(HomeUIEvent.Progress)
+
                             uiEvent(HomeUIEvent.BottomBar)
                         }
                         .padding(20.dp),
                     contentAlignment = Alignment.Center
                 ) {
+                    ListItemText(title = "Progress", createdBy = "Aryan Singh")
+
                     ListItemText(title = "Bottom Navigation Bar", createdBy = "Zain ul Abdin")
                 }
             }

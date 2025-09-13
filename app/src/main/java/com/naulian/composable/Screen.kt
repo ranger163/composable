@@ -29,6 +29,9 @@ sealed interface Screen {
     data object Carousel3DStack : Screen
 
     @Serializable
+    data object Progress : Screen
+
+    @Serializable
     data object BottomBar : Screen
 
     @Serializable
