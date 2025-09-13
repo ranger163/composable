@@ -83,15 +83,17 @@ fun AppNavHost() {
             }
 
             composable<Screen.Carousel3DStack> {
-                CarouselCard3DScreen(navController)
+                CarouselCard3DScreen()
             }
 
-            composable<Screen.Progress>{
-                ProgressScreen(navController)
+            composable<Screen.Progress> {
+                ProgressScreen()
+            }
 
             composable<Screen.BottomBar> {
                 BottomBarScreen()
             }
+
             composable<Screen.CalenderTopBar> {
                 CalenderTopBarScreen()
             }
@@ -100,7 +102,6 @@ fun AppNavHost() {
             composable<Screen.AnimatedInteractionScreen> {
                 AnimationsInteractionsScreenUI()
             }
-
 
             composable<Screen.GlassDashboardScreen> {
                 GlassDashboardScreen()

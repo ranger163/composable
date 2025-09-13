@@ -18,8 +18,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.naulian.composable.LocalNavController
 import com.naulian.composable.R
 import com.naulian.composable.component.CodeBlock
@@ -27,9 +25,10 @@ import com.naulian.modify.HugeIcons
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CarouselCard3DScreen(navController: NavController = rememberNavController()) {
+fun CarouselCard3DScreen() {
     val code = remember { carouselCardCode }
 
+    val navController = LocalNavController.current
     Scaffold(
         topBar = {
             TopAppBar(
