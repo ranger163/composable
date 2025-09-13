@@ -14,12 +14,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.naulian.composable.home.HomeScreen
+import com.naulian.composable.screens.animations.AnimationsInteractionsScreenUI
 import com.naulian.composable.screens.progress.ProgressScreen
 import com.naulian.composable.screens.background.GridBackgroundScreen
 import com.naulian.composable.screens.bottomBar.BottomBarScreen
 import com.naulian.composable.screens.box.CorneredBoxScreen
 import com.naulian.composable.screens.calenderTopBar.CalenderTopBarScreen
 import com.naulian.composable.screens.cardCrousel.CarouselCard3DScreen
+import com.naulian.composable.screens.dashboard.GlassDashboardScreen
 import com.naulian.composable.screens.neumorphic.NeumorphicScreen
 import com.naulian.composable.screens.parallaxCards.ParallaxCardStackScreen
 import com.naulian.composable.screens.rating.RatingStarsScreen
@@ -84,7 +86,6 @@ fun AppNavHost() {
                 CarouselCard3DScreen(navController)
             }
 
- main
             composable<Screen.Progress>{
                 ProgressScreen(navController)
 
@@ -93,7 +94,16 @@ fun AppNavHost() {
             }
             composable<Screen.CalenderTopBar> {
                 CalenderTopBarScreen()
-main
+            }
+
+
+            composable<Screen.AnimatedInteractionScreen> {
+                AnimationsInteractionsScreenUI()
+            }
+
+
+            composable<Screen.GlassDashboardScreen> {
+                GlassDashboardScreen()
             }
         }
     }

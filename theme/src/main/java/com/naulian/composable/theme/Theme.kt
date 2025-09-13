@@ -38,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
     tertiary = White,
 
     surface = White,
-    onSurface = DarkGray, //update
+    onSurface = DarkGray,
     surfaceContainer = LightContainer,
     surfaceBright = White,
     surfaceDim = LightShadow,

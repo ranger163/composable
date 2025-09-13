@@ -49,12 +49,12 @@ sealed interface HomeUIEvent {
     data object RatingStars : HomeUIEvent
     data object ParallaxCardStack : HomeUIEvent
     data object CarouselCard: HomeUIEvent
- main
     data object Progress: HomeUIEvent
 
     data object BottomBar: HomeUIEvent
     data object CalenderTopBar: HomeUIEvent
- main
+    data object AnimatedInteractionScreen: HomeUIEvent
+    data object GlassDashboardScreen: HomeUIEvent
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -266,16 +266,13 @@ fun HomeScreenUI(
                             shape = RoundedCornerShape(20.dp)
                         )
                         .clickable {
- main
                             uiEvent(HomeUIEvent.Progress)
 
                             uiEvent(HomeUIEvent.BottomBar)
- main
                         }
                         .padding(20.dp),
                     contentAlignment = Alignment.Center
                 ) {
- main
                     ListItemText(title = "Progress", createdBy = "Aryan Singh")
 
                     ListItemText(title = "Bottom Navigation Bar", createdBy = "Zain ul Abdin")
@@ -298,9 +295,56 @@ fun HomeScreenUI(
                     contentAlignment = Alignment.Center
                 ) {
                     ListItemText(title = "Calender Top Bar", createdBy = "Zain ul Abdin")
- main
                 }
             }
+            item {
+                Box(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            uiEvent(HomeUIEvent.AnimatedInteractionScreen)
+                        }
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ListItemText(
+                        title = "Animations & Interactions",
+                        createdBy = "Shree Bhargav R K"
+                    )
+                }
+            }
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            uiEvent(HomeUIEvent.GlassDashboardScreen)
+                        }
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ListItemText(
+                        title = "Dashboard",
+                        createdBy = "Shree Bhargav R K"
+                    )
+                }
+            }
+
+
+
         }
     }
 }

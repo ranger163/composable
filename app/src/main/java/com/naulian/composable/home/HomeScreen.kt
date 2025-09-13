@@ -32,12 +32,11 @@ fun HomeScreen() {
             HomeUIEvent.ParallaxCardStack -> navController.navigate(Screen.ParallaxCardStack)
             HomeUIEvent.RatingStars -> navController.navigate(Screen.RatingStars)
             HomeUIEvent.CarouselCard -> navController.navigate(Screen.Carousel3DStack)
-main
             HomeUIEvent.Progress->navController.navigate(Screen.Progress)
-
             HomeUIEvent.BottomBar -> navController.navigate(Screen.BottomBar)
             HomeUIEvent.CalenderTopBar -> navController.navigate(Screen.CalenderTopBar)
-main
+            HomeUIEvent.AnimatedInteractionScreen -> navController.navigate(Screen.AnimatedInteractionScreen)
+            HomeUIEvent.GlassDashboardScreen -> navController.navigate(Screen.GlassDashboardScreen)
 
         }
     }
