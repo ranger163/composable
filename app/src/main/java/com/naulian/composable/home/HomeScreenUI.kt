@@ -48,15 +48,14 @@ sealed interface HomeUIEvent {
     data object CorneredBox : HomeUIEvent
     data object RatingStars : HomeUIEvent
     data object ParallaxCardStack : HomeUIEvent
-    data object CarouselCard : HomeUIEvent
-    data object Progress : HomeUIEvent
-    data object BottomBar : HomeUIEvent
-    data object CalenderTopBar : HomeUIEvent
-    data object AnimatedInteractionScreen : HomeUIEvent
-    data object GlassDashboardScreen : HomeUIEvent
-    data object CardsScreen : HomeUIEvent
-}
+    data object CarouselCard: HomeUIEvent
+    data object Progress: HomeUIEvent
 
+    data object BottomBar: HomeUIEvent
+    data object CalenderTopBar: HomeUIEvent
+    data object AnimatedInteractionScreen: HomeUIEvent
+    data object GlassDashboardScreen: HomeUIEvent
+}
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
 @Composable
@@ -340,29 +339,6 @@ fun HomeScreenUI(
                     ListItemText(
                         title = "Dashboard",
                         createdBy = "Shree Bhargav R K"
-                    )
-                }
-            }
-
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .background(
-                            color = MaterialTheme.colorScheme.surface,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.CardsScreen)
-                        }
-                        .padding(20.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    ListItemText(
-                        title = "Neumorphic Cards ",
-                        createdBy = "Aryan Jaiswal"
                     )
                 }
             }
