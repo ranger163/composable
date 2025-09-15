@@ -184,25 +184,6 @@ fun SwipeableNeumorphicCardsScreen() {
                     )
                 }
             }
-
-            Row(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                repeat(3) { index ->
-                    Box(
-                        modifier = Modifier
-                            .size(8.dp)
-                            .background(
-                                color = if (pagerState.currentPage == index)
-                                    theme.textColor else theme.textColor.copy(alpha = 0.3f),
-                                shape = CircleShape
-                            )
-                    )
-                }
-            }
         }
     }
 }
@@ -229,7 +210,30 @@ private fun SocialCardPage(
                 theme = theme
             )
         }
-
+        item {
+            // Page Indicator
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(3) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(
+                                color = if (index == 0)
+                                    theme.textColor else theme.textColor.copy(alpha = 0.3f),
+                                shape = CircleShape
+                            )
+                    )
+                    if (index < 2) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+                }
+            }
+        }
         item {
             CodeBlock(
                 source = socialCardGenericCode,
@@ -261,7 +265,30 @@ private fun MusicCardPage(
                 theme = theme
             )
         }
-
+        item {
+            // Page Indicator
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(3) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(
+                                color = if (index == 1)
+                                    theme.textColor else theme.textColor.copy(alpha = 0.3f),
+                                shape = CircleShape
+                            )
+                    )
+                    if (index < 2) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+                }
+            }
+        }
         item {
             CodeBlock(
                 source = musicCardGenericCode,
@@ -299,6 +326,7 @@ private fun SettingsCardPage(
         verticalArrangement = Arrangement.spacedBy(16.dp),
         contentPadding = PaddingValues(16.dp)
     ) {
+        // Settings Cards
         items(settingsItems.size) { index ->
             val item = settingsItems[index]
             NeumorphicSettingsCard(
@@ -318,8 +346,33 @@ private fun SettingsCardPage(
             )
         }
 
+        // Page Indicator - positioned after settings cards but before code
         item {
-            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 24.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(3) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(
+                                color = if (index == 2)
+                                    theme.textColor else theme.textColor.copy(alpha = 0.3f),
+                                shape = CircleShape
+                            )
+                    )
+                    if (index < 2) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+                }
+            }
+        }
+
+        // Code Block
+        item {
             CodeBlock(
                 source = settingsCardGenericCode,
                 language = "kotlin"

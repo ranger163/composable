@@ -65,52 +65,30 @@ fun SwipeableCardsScreenUI(onBack: () -> Unit = {}) {
             )
         }
     ) { paddingValues ->
-        Box(
+        // Removed the Box wrapper and global page indicators
+        HorizontalPager(
+            state = pagerState,
             modifier = Modifier
                 .fillMaxSize()
                 .background(theme.background)
                 .padding(paddingValues)
-        ) {
-            HorizontalPager(
-                state = pagerState,
-                modifier = Modifier.fillMaxSize()
-            ) { page ->
-                when (page) {
-                    0 -> SocialCardPage(theme = theme)
-                    1 -> MusicCardPage(theme = theme)
-                    2 -> SettingsCardPage(
-                        theme = theme,
-                        isDarkMode = isDarkMode,
-                        onDarkModeToggle = { isDarkMode = it }
-                    )
-                }
-            }
-
-            // Page indicators
-            Row(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                repeat(3) { index ->
-                    Box(
-                        modifier = Modifier
-                            .size(8.dp)
-                            .background(
-                                color = if (pagerState.currentPage == index)
-                                    theme.textColor else theme.textColor.copy(alpha = 0.3f),
-                                shape = CircleShape
-                            )
-                    )
-                }
+        ) { page ->
+            when (page) {
+                0 -> SocialCardPage(theme = theme, currentPage = page)
+                1 -> MusicCardPage(theme = theme, currentPage = page)
+                2 -> SettingsCardPage(
+                    theme = theme,
+                    isDarkMode = isDarkMode,
+                    onDarkModeToggle = { isDarkMode = it },
+                    currentPage = page
+                )
             }
         }
     }
 }
 
 @Composable
-private fun SocialCardPage(theme: NeumorphicTheme) {
+private fun SocialCardPage(theme: NeumorphicTheme, currentPage: Int) {
     val scrollState = rememberLazyListState()
 
     LazyColumn(
@@ -131,6 +109,31 @@ private fun SocialCardPage(theme: NeumorphicTheme) {
             )
         }
 
+        // Page indicator between card and code
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(3) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(
+                                color = if (index == currentPage)
+                                    theme.textColor else theme.textColor.copy(alpha = 0.3f),
+                                shape = CircleShape
+                            )
+                    )
+                    if (index < 2) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+                }
+            }
+        }
+
         item {
             CodeBlock(
                 source = socialCardGenericCode,
@@ -141,7 +144,7 @@ private fun SocialCardPage(theme: NeumorphicTheme) {
 }
 
 @Composable
-private fun MusicCardPage(theme: NeumorphicTheme) {
+private fun MusicCardPage(theme: NeumorphicTheme, currentPage: Int) {
     val scrollState = rememberLazyListState()
 
     LazyColumn(
@@ -162,6 +165,31 @@ private fun MusicCardPage(theme: NeumorphicTheme) {
             )
         }
 
+        // Page indicator between card and code
+        item {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(3) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(
+                                color = if (index == currentPage)
+                                    theme.textColor else theme.textColor.copy(alpha = 0.3f),
+                                shape = CircleShape
+                            )
+                    )
+                    if (index < 2) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+                }
+            }
+        }
+
         item {
             CodeBlock(
                 source = musicCardGenericCode,
@@ -175,7 +203,8 @@ private fun MusicCardPage(theme: NeumorphicTheme) {
 private fun SettingsCardPage(
     theme: NeumorphicTheme,
     isDarkMode: Boolean,
-    onDarkModeToggle: (Boolean) -> Unit
+    onDarkModeToggle: (Boolean) -> Unit,
+    currentPage: Int
 ) {
     val scrollState = rememberLazyListState()
     var settingsItems by remember {
@@ -221,8 +250,32 @@ private fun SettingsCardPage(
             )
         }
 
+        // Page indicator between cards and code
         item {
-            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 16.dp),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                repeat(3) { index ->
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .background(
+                                color = if (index == currentPage)
+                                    theme.textColor else theme.textColor.copy(alpha = 0.3f),
+                                shape = CircleShape
+                            )
+                    )
+                    if (index < 2) {
+                        Spacer(modifier = Modifier.width(8.dp))
+                    }
+                }
+            }
+        }
+
+        item {
             CodeBlock(
                 source = settingsCardGenericCode,
                 language = "kotlin"
