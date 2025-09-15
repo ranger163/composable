@@ -266,18 +266,35 @@ fun HomeScreenUI(
                             shape = RoundedCornerShape(20.dp)
                         )
                         .clickable {
-                            uiEvent(HomeUIEvent.Progress)
-
                             uiEvent(HomeUIEvent.BottomBar)
                         }
                         .padding(20.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    ListItemText(title = "Progress", createdBy = "Aryan Singh")
-
                     ListItemText(title = "Bottom Navigation Bar", createdBy = "Zain ul Abdin")
                 }
             }
+
+            item {
+                Box(
+                    modifier = Modifier
+                        .padding(20.dp)
+                        .fillMaxWidth()
+                        .aspectRatio(2f / 1f)
+                        .background(
+                            color = MaterialTheme.colorScheme.surface,
+                            shape = RoundedCornerShape(20.dp)
+                        )
+                        .clickable {
+                            uiEvent(HomeUIEvent.Progress)
+                        }
+                        .padding(20.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    ListItemText(title = "Progress", createdBy = "Aryan Singh")
+                }
+            }
+
             item {
                 Box(
                     modifier = Modifier
