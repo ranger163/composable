@@ -3,9 +3,14 @@ package com.naulian.composable.screens.parallaxCards
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -59,7 +64,16 @@ fun ParallaxCardStackScreenUI(onBack: () -> Unit = {}) {
             contentPadding = PaddingValues(20.dp)
         ) {
 
-            ParallaxCardStack(cardItems = dummyCards, state = scrollState)
+            itemsIndexed(dummyCards){ index, item ->
+                ParallaxCardItem(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1.5f)
+                        .stackingEffect(scrollState, index),
+                    card = item
+                )
+                Spacer(modifier = Modifier.height(10.dp))
+            }
 
             item {
                 CodeBlock(

@@ -2,14 +2,9 @@ package com.naulian.composable.screens.parallaxCards
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -56,60 +51,52 @@ val dummyCards by lazy {
     )
 }
 
-fun LazyListScope.ParallaxCardStack(
-    cardItems: List<ParallaxCard>,
-    state: LazyListState
-) {
-    itemsIndexed(cardItems) { index, card ->
-        val isCurrentItem by remember {
-            derivedStateOf { index == state.firstVisibleItemIndex }
-        }
+@Composable
+fun Modifier.stackingEffect(
+    state: LazyListState,
+    index: Int,
+): Modifier {
+    val isCurrentItem by remember {
+        derivedStateOf { index == state.firstVisibleItemIndex }
+    }
 
-        val isUnderStack by remember {
-            derivedStateOf { index < state.firstVisibleItemIndex }
-        }
+    val isUnderStack by remember {
+        derivedStateOf { index < state.firstVisibleItemIndex }
+    }
 
-        val offset by remember {
-            derivedStateOf {
-                if (isCurrentItem) {
-                    state.firstVisibleItemScrollOffset.toFloat()
-                } else {
-                    0f
-                }
+    val offset by remember {
+        derivedStateOf {
+            if (isCurrentItem) {
+                state.firstVisibleItemScrollOffset.toFloat()
+            } else {
+                0f
             }
         }
+    }
 
-        val scale by remember {
-            derivedStateOf {
-                val progress = state.layoutInfo.visibleItemsInfo.firstOrNull()?.let {
-                    offset / it.size.toFloat()
-                } ?: 0f
+    val scale by remember {
+        derivedStateOf {
+            val progress = state.layoutInfo.visibleItemsInfo.firstOrNull()?.let {
+                offset / it.size.toFloat()
+            } ?: 0f
 
-                when {
-                    isUnderStack -> 0f
-                    isCurrentItem -> 1f - (progress * 0.1f)
-                    else -> 1f
-                }
+            when {
+                isUnderStack -> 0f
+                isCurrentItem -> 1f - (progress * 0.1f)
+                else -> 1f
             }
         }
+    }
 
-        ParallaxCardItem(
-            modifier = Modifier
-                .fillMaxWidth()
-                .aspectRatio(1.5f)
-                .graphicsLayer {
-                    translationY = offset
-                    scaleX = scale
-                    scaleY = scale
-                },
-            card = card
-        )
-        Spacer(modifier = Modifier.height(10.dp))
+    return graphicsLayer {
+        translationY = offset
+        scaleX = scale
+        scaleY = scale
     }
 }
 
 @Composable
-private fun ParallaxCardItem(
+fun ParallaxCardItem(
     modifier: Modifier = Modifier,
     card: ParallaxCard
 ) {

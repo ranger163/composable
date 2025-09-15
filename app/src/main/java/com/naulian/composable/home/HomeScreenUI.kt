@@ -1,46 +1,48 @@
 package com.naulian.composable.home
 
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDpAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.R
-import com.naulian.composable.screens.background.gridBackground
-import com.naulian.composable.screens.box.CorneredBox
-import com.naulian.composable.screens.neumorphic.NeuMorphicDown
-import com.naulian.composable.screens.neumorphic.NeuMorphicUP
-import com.naulian.composable.screens.neumorphic.NeuMorphicUP2
-import com.naulian.composable.screens.rating.RatingStars
+import com.naulian.composable.neumorphism.NeumorphicDownHorizontalDivider
+import com.naulian.composable.neumorphism.NeumorphicIconButton
+import com.naulian.composable.neumorphism.NeumorphicSwitch
+import com.naulian.composable.neumorphism.neumorphicUp
 import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
-import com.naulian.modify.Gray
+import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
+import kotlinx.coroutines.delay
 
 sealed interface HomeUIEvent {
     data object Neumorphic : HomeUIEvent
@@ -48,13 +50,13 @@ sealed interface HomeUIEvent {
     data object CorneredBox : HomeUIEvent
     data object RatingStars : HomeUIEvent
     data object ParallaxCardStack : HomeUIEvent
-    data object CarouselCard: HomeUIEvent
-    data object Progress: HomeUIEvent
+    data object CarouselCard : HomeUIEvent
+    data object Progress : HomeUIEvent
 
-    data object BottomBar: HomeUIEvent
-    data object CalenderTopBar: HomeUIEvent
-    data object AnimatedInteractionScreen: HomeUIEvent
-    data object GlassDashboardScreen: HomeUIEvent
+    data object BottomBar : HomeUIEvent
+    data object CalenderTopBar : HomeUIEvent
+    data object AnimatedInteractionScreen : HomeUIEvent
+    data object GlassDashboardScreen : HomeUIEvent
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -63,6 +65,8 @@ fun HomeScreenUI(
     uiState: HomeUIState = HomeUIState(),
     uiEvent: (HomeUIEvent) -> Unit = {}
 ) {
+    val listState = rememberLazyListState()
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -72,299 +76,126 @@ fun HomeScreenUI(
                 )
             )
         }
-    ) { screenPadding ->
+    ) { scaffoldPadding ->
         LazyColumn(
-            modifier = Modifier.padding(screenPadding)
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(scaffoldPadding),
+            state = listState,
+            verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            columnItem(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(2f / 1f)
-                    .clickable {
-                        uiEvent(HomeUIEvent.Neumorphic)
+
+            columnItem {
+                NeumorphicDownHorizontalDivider()
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(20.dp)
+                ) {
+                    Text(
+                        text = "Static Composable\nComponents",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        overflow = TextOverflow.Ellipsis
+                    )
+
+                    NeumorphicIconButton(
+                        onClick = {},
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .background(
+                                color = MaterialTheme.colorScheme.background,
+                                shape = CircleShape
+                            )
+                    ) {
+                        Icon(
+                            painter = painterResource(HugeIcons.Favourite),
+                            contentDescription = "Fav"
+                        )
                     }
-                    .padding(20.dp),
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 10.dp,
-                    alignment = Alignment.CenterVertically
-                ),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    NeuMorphicUP(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .aspectRatio(1f),
-                        contentAlignment = Alignment.Center,
-                        contentPadding = 6.dp,
-                        lightColor = MaterialTheme.colorScheme.surfaceBright,
-                        shadowColor = MaterialTheme.colorScheme.surfaceDim
-                    )
-
-                    NeuMorphicDown(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .aspectRatio(1f),
-                        contentPadding = 10.dp,
-                        contentAlignment = Alignment.Center,
-                        lightColor = MaterialTheme.colorScheme.surfaceBright,
-                        shadowColor = MaterialTheme.colorScheme.surfaceDim
-                    )
-
-                    NeuMorphicUP2(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .aspectRatio(1f),
-                        contentPadding = 6.dp,
-                        shape = CircleShape,
-                        contentAlignment = Alignment.Center,
-                        lightColor = MaterialTheme.colorScheme.surfaceBright,
-                        shadowColor = MaterialTheme.colorScheme.surfaceDim
-                    )
-
-                    NeuMorphicDown(
-                        modifier = Modifier
-                            .weight(1f)
-                            .fillMaxWidth()
-                            .aspectRatio(1f),
-                        contentPadding = 10.dp,
-                        shape = CircleShape,
-                        contentAlignment = Alignment.Center,
-                        lightColor = MaterialTheme.colorScheme.surfaceBright,
-                        shadowColor = MaterialTheme.colorScheme.surfaceDim
-                    )
                 }
 
-                ListItemText(title = "Neumorphism", createdBy = "Naulian")
-            }
-            item {
-                HorizontalDivider()
-            }
-            item {
+                NeumorphicDownHorizontalDivider()
+
                 Box(
                     modifier = Modifier
-                        .padding(20.dp)
                         .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .gridBackground(
-                            color = MaterialTheme.colorScheme.tertiary,
-                            lineColor = MaterialTheme.colorScheme.surfaceDim,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.GridBackground)
-                        }
+                        .background(color = MaterialTheme.colorScheme.background)
                         .padding(20.dp),
-                    contentAlignment = Alignment.Center
                 ) {
-                    ListItemText(title = "Grid Background", createdBy = "Naulian")
-                }
-            }
+                    Text(
+                        text = "Interactive Composable\nComponents",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        overflow = TextOverflow.Ellipsis
+                    )
 
-            item {
-                CorneredBox(
-                    modifier = Modifier
-                        .background(MaterialTheme.colorScheme.surface)
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .padding(20.dp)
-                        .fillMaxWidth(),
-                    cornerColor = Gray,
-                    contentPadding = PaddingValues(12.dp),
-                    onClick = {
-                        uiEvent(HomeUIEvent.CorneredBox)
-                    },
-                    contentAlignment = Alignment.Center
-                ) {
-                    ListItemText(title = "Cornered Box", createdBy = "Naulian")
-                }
-            }
+                    var checked by remember { mutableStateOf(false) }
 
-            columnItem(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(2f/1f)
-                    .clickable {
-                        uiEvent(HomeUIEvent.RatingStars)
+                    LaunchedEffect(Unit) {
+                        while (true) {
+                            delay(1000)
+                            checked = !checked
+                        }
                     }
-                    .padding(20.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(
-                    space = 10.dp,
-                    alignment = Alignment.CenterVertically
-                ),
-            ) {
-                var ratingValue by remember { mutableIntStateOf(2) }
 
-                RatingStars(
-                    rating = ratingValue,
-                    ratedStarIcon = painterResource(R.drawable.ic_star_filled),
-                    unRatedStarIcon = painterResource(R.drawable.ic_star_outlined),
-                    onRatingChange = {
-                        ratingValue = it
-                    },
-                    iconSize = 48.dp
-                )
-
-                ListItemText(title = "Rating Stars", createdBy = "Naulian")
-            }
-
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .background(
-                            color = MaterialTheme.colorScheme.surface,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.ParallaxCardStack)
-                        }
-                        .padding(20.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    ListItemText(title = "Parallax Card Stack", createdBy = "Aryan Jaiswal")
-                }
-            }
-
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .background(
-                            color = MaterialTheme.colorScheme.surface,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.CarouselCard)
-                        }
-                        .padding(20.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    ListItemText(title = "Carousel Card", createdBy = "Aryan Jaiswal")
-                }
-            }
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .background(
-                            color = MaterialTheme.colorScheme.surface,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.BottomBar)
-                        }
-                        .padding(20.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    ListItemText(title = "Bottom Navigation Bar", createdBy = "Zain ul Abdin")
-                }
-            }
-
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .background(
-                            color = MaterialTheme.colorScheme.surface,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.Progress)
-                        }
-                        .padding(20.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    ListItemText(title = "Progress", createdBy = "Aryan Singh")
-                }
-            }
-
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .background(
-                            color = MaterialTheme.colorScheme.surface,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.CalenderTopBar)
-                        }
-                        .padding(20.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    ListItemText(title = "Calender Top Bar", createdBy = "Zain ul Abdin")
-                }
-            }
-            item {
-                Box(
-                    modifier = Modifier
-                        .padding(20.dp)
-                        .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .background(
-                            color = MaterialTheme.colorScheme.surface,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.AnimatedInteractionScreen)
-                        }
-                        .padding(20.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    ListItemText(
-                        title = "Animations & Interactions",
-                        createdBy = "Shree Bhargav R K"
+                    NeumorphicSwitch(
+                        modifier = Modifier.align(Alignment.TopEnd),
+                        checked = checked,
+                        onCheckedChange = { checked = it }
                     )
                 }
-            }
 
-            item {
+                NeumorphicDownHorizontalDivider()
+
                 Box(
                     modifier = Modifier
-                        .padding(20.dp)
                         .fillMaxWidth()
-                        .aspectRatio(2f / 1f)
-                        .background(
-                            color = MaterialTheme.colorScheme.surface,
-                            shape = RoundedCornerShape(20.dp)
-                        )
-                        .clickable {
-                            uiEvent(HomeUIEvent.GlassDashboardScreen)
-                        }
+                        .background(color = MaterialTheme.colorScheme.background)
                         .padding(20.dp),
-                    contentAlignment = Alignment.Center
                 ) {
-                    ListItemText(
-                        title = "Dashboard",
-                        createdBy = "Shree Bhargav R K"
+                    Text(
+                        text = "Animated Composable\nComponents",
+                        style = MaterialTheme.typography.headlineMedium,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        overflow = TextOverflow.Ellipsis
                     )
+
+                    var checked by remember { mutableStateOf(false) }
+
+                    LaunchedEffect(Unit) {
+                        while (true) {
+                            delay(1000)
+                            checked = !checked
+                        }
+                    }
+
+                    val shadowPadding by animateDpAsState(
+                        targetValue = if (checked) 4.dp else 10.dp,
+                        animationSpec = spring(
+                            dampingRatio = Spring.DampingRatioMediumBouncy,
+                            stiffness = Spring.StiffnessLow
+                        )
+                    )
+
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                            .size(48.dp)
+                            .neumorphicUp(
+                                shape = RoundedCornerShape(10.dp),
+                                shadowPadding = shadowPadding
+                            )
+                    ) {}
                 }
+
+                NeumorphicDownHorizontalDivider()
             }
-
-
-
         }
     }
 }
+
 
 @Composable
 fun ListItemText(

@@ -145,7 +145,7 @@ private fun Showcase() {
             }
         }
 
-        NeumorphicHorizontalDivider()
+        NeumorphicUpHorizontalDivider()
 
         Row(
             modifier = Modifier.fillMaxWidth(),

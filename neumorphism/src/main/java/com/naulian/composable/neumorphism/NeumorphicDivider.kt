@@ -1,35 +1,43 @@
 package com.naulian.composable.neumorphism
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun NeumorphicHorizontalDivider(modifier: Modifier = Modifier, thickness: Dp = 4.dp) {
+fun NeumorphicUpHorizontalDivider(
+    modifier: Modifier = Modifier,
+    thickness: Dp = 4.dp,
+    shape: Shape = RectangleShape
+) {
 
     Box(
         modifier = modifier
             .fillMaxWidth()
             .height(thickness)
             .neumorphicUp(
-                shape = CircleShape,
+                shape = shape,
                 shadowPadding = if (thickness >= 4.dp) thickness / 4 else 1.dp
             )
     )
 }
 
 @Composable
-fun NeumorphicVerticalDivider(
+fun NeumorphicUpVerticalDivider(
     modifier: Modifier = Modifier,
-    thickness: Dp = 4.dp
+    thickness: Dp = 4.dp,
+    shape: Shape = RectangleShape
 ) {
 
     Box(
@@ -37,7 +45,42 @@ fun NeumorphicVerticalDivider(
             .fillMaxHeight()
             .width(thickness)
             .neumorphicUp(
-                shape = CircleShape,
+                shape = shape,
+                shadowPadding = if (thickness >= 4.dp) thickness / 4 else 1.dp
+            )
+    )
+}
+
+@Composable
+fun NeumorphicDownHorizontalDivider(
+    modifier: Modifier = Modifier,
+    thickness: Dp = 4.dp,
+    shape: Shape = RectangleShape
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(thickness)
+            .neumorphicDown(
+                shape = shape,
+                shadowPadding = if (thickness >= 4.dp) thickness / 4 else 1.dp
+            )
+    )
+}
+
+@Composable
+fun NeumorphicDownVerticalDivider(
+    modifier: Modifier = Modifier,
+    thickness: Dp = 4.dp,
+    shape: Shape = RectangleShape
+) {
+
+    Box(
+        modifier = modifier
+            .fillMaxHeight()
+            .width(thickness)
+            .neumorphicDown(
+                shape = shape,
                 shadowPadding = if (thickness >= 4.dp) thickness / 4 else 1.dp
             )
     )
@@ -47,7 +90,12 @@ fun NeumorphicVerticalDivider(
 @Composable
 private fun NeumorphicDividerPreview() {
     NeumorphicPreviewSquare {
-        NeumorphicHorizontalDivider(thickness = 8.dp)
-        NeumorphicVerticalDivider(thickness = 8.dp)
+        NeumorphicUpHorizontalDivider(thickness = 8.dp)
+        NeumorphicDownHorizontalDivider(thickness = 8.dp)
+        Row {
+            NeumorphicUpVerticalDivider(thickness = 8.dp)
+            Spacer(modifier = Modifier.width(10.dp))
+            NeumorphicDownVerticalDivider(thickness = 8.dp)
+        }
     }
 }

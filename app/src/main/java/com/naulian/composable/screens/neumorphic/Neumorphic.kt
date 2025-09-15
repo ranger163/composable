@@ -30,7 +30,7 @@ import com.naulian.composable.theme.ComposableTheme
 fun NeuMorphicUP(
     modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(20),
-    contentPadding: Dp = 6.dp,
+    bumpElevation: Dp = 6.dp,
     lightColor: Color = Color.White,
     shadowColor: Color = Color.LightGray,
     contentAlignment: Alignment = Alignment.TopStart,
@@ -39,7 +39,7 @@ fun NeuMorphicUP(
     Box(
         modifier = modifier.neumorphicUp(
             shape = shape,
-            shadowPadding = contentPadding,
+            shadowPadding = bumpElevation,
             light = lightColor,
             shadow = shadowColor
         ),
