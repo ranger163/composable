@@ -42,4 +42,7 @@ sealed interface Screen {
 
     @Serializable
     data object GlassDashboardScreen : Screen
+
+    @Serializable
+    data object CardsScreen : Screen
 }
