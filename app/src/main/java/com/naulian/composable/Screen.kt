@@ -47,11 +47,11 @@ sealed interface Screen {
     data object CalenderTopBar : Screen
 
     @Serializable
-    data object AnimatedInteractionScreen : Screen
+    data object AnimatedInteraction : Screen
 
     @Serializable
-    data object GlassDashboardScreen : Screen
+    data object GlassDashboard : Screen
 
     @Serializable
-    data object CardsScreen : Screen
+    data object Cards : Screen
 }

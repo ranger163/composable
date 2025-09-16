@@ -115,15 +115,15 @@ fun AppNavHost() {
             }
 
 
-            composable<Screen.AnimatedInteractionScreen> {
+            composable<Screen.AnimatedInteraction> {
                 AnimationsInteractionsScreenUI()
             }
 
-            composable<Screen.GlassDashboardScreen> {
+            composable<Screen.GlassDashboard> {
                 GlassDashboardScreen()
             }
 
-            composable<Screen.CardsScreen> {
+            composable<Screen.Cards> {
                 SwipeableCardsScreen()
             }
         }
