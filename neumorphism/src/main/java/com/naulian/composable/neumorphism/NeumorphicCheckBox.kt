@@ -80,11 +80,16 @@ fun NeumorphicCheckBox(
                     .background(MaterialTheme.colorScheme.background, RoundedCornerShape(20))
                     .neumorphicUp(
                         shape = RoundedCornerShape(20),
+                        color = MaterialTheme.colorScheme.primary,
                         shadowPadding = shadowPadding
                     ),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(painter = painterResource(HugeIcons.Done), contentDescription = "Check Icon")
+                Icon(
+                    painter = painterResource(HugeIcons.Done),
+                    contentDescription = "Check Icon",
+                    tint = MaterialTheme.colorScheme.onPrimary
+                )
             }
         }
     }

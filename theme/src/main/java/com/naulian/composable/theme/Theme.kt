@@ -16,6 +16,7 @@ import com.naulian.modify.White
 
 private val DarkColorScheme = darkColorScheme(
     primary = DarkGreen,
+    onPrimary = White,
     onPrimaryContainer = White,
 
     background = DarkBackground,
@@ -33,6 +34,7 @@ private val DarkColorScheme = darkColorScheme(
 
 private val LightColorScheme = lightColorScheme(
     primary = Green,
+    onPrimary = White,
     onPrimaryContainer = Black,
 
     background = LightBackground,

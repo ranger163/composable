@@ -80,6 +80,7 @@ fun NeumorphicRadioButton(
                     .size(32.dp - (thumbPadding * 2))
                     .neumorphicUp(
                         shape = CircleShape,
+                        color = MaterialTheme.colorScheme.primary,
                         shadowPadding = shadowPadding
                     ),
                 contentAlignment = Alignment.Center
