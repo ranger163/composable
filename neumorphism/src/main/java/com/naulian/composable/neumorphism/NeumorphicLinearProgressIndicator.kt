@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -58,21 +59,30 @@ fun NeumorphicLinearProgressIndicator(
                 .width(indicatorWidth * animatedProgress)
                 .height(indicatorHeight)
                 .neumorphicUp(
+                    color = MaterialTheme.colorScheme.primary,
                     shape = RoundedCornerShape(cornerRadiusDp - indicatorPadding),
                     shadowPadding = 2.dp
-                ),
-            contentAlignment = Alignment.Center
-        ){}
+                )
+        )
     }
 }
 
 @Preview
 @Composable
 private fun NeumorphicLinearProgressIndicatorPreview() {
-    NeumorphicPreviewSquare {
+    NeumorphicPreviewColumn {
+        NeumorphicLinearProgressIndicator(
+            modifier = Modifier.fillMaxWidth(),
+            progress = { 0f }
+        )
+
         NeumorphicLinearProgressIndicator(
             modifier = Modifier.fillMaxWidth(),
             progress = { 0.5f }
+        )
+        NeumorphicLinearProgressIndicator(
+            modifier = Modifier.fillMaxWidth(),
+            progress = { 1f }
         )
     }
 }

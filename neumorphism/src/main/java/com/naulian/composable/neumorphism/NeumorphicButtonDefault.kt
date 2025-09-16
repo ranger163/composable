@@ -45,7 +45,7 @@ object NeumorphicButtonDefaults {
 
     @Composable
     fun buttonColors() = ButtonColors(
-        containerColor = MaterialTheme.colorScheme.surfaceContainer,
+        containerColor = MaterialTheme.colorScheme.primary,
         contentColor = MaterialTheme.colorScheme.onSurface,
         disabledContainerColor = MaterialTheme.colorScheme.surfaceContainer.copy(alpha = 0.12f),
         disabledContentColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)

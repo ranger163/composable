@@ -56,6 +56,7 @@ fun NeumorphicButton(
     )
 
     val contentColor = if (enabled) colors.contentColor else colors.disabledContentColor
+    val containerColor = if (enabled) colors.containerColor else colors.disabledContainerColor
 
     val mergedStyle = LocalTextStyle.current.merge(MaterialTheme.typography.labelLarge)
     CompositionLocalProvider(
@@ -67,9 +68,8 @@ fun NeumorphicButton(
                 .semantics { role = Role.Button }
                 .neumorphicUp(
                     shape = shape,
-                    shadowPadding = shadowPadding,
-                    light = MaterialTheme.colorScheme.surfaceBright,
-                    shadow = MaterialTheme.colorScheme.surfaceDim
+                    color = containerColor,
+                    shadowPadding = shadowPadding
                 )
                 .defaultMinSize(
                     minWidth = NeumorphicButtonDefaults.MinWidth,

@@ -18,23 +18,31 @@ import androidx.compose.ui.unit.DpOffset
 fun Modifier.neumorphicUp(
     shape: Shape,
     shadowPadding: Dp,
+    color: Color = MaterialTheme.colorScheme.background,
     light: Color = MaterialTheme.colorScheme.surfaceBright,
     shadow: Color = MaterialTheme.colorScheme.surfaceDim
-) = innerShadow(
-    shape = shape,
-    shadow = Shadow(
-        radius = shadowPadding,
-        color = light,
-        offset = DpOffset(x = shadowPadding, y = shadowPadding)
+): Modifier {
+    return background(
+        color = color,
+        shape = shape
     )
-).innerShadow(
-    shape = shape,
-    shadow = Shadow(
-        radius = shadowPadding,
-        color = shadow,
-        offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
-    )
-)
+        .innerShadow(
+            shape = shape,
+            shadow = Shadow(
+                radius = shadowPadding,
+                color = light,
+                offset = DpOffset(x = shadowPadding, y = shadowPadding)
+            )
+        )
+        .innerShadow(
+            shape = shape,
+            shadow = Shadow(
+                radius = shadowPadding,
+                color = shadow,
+                offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
+            )
+        )
+}
 
 @Composable
 fun Modifier.neumorphicDown(

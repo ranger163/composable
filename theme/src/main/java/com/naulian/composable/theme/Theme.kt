@@ -15,7 +15,7 @@ import com.naulian.modify.LightGray
 import com.naulian.modify.White
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Green,
+    primary = DarkGreen,
     onPrimaryContainer = White,
 
     background = DarkBackground,
@@ -26,8 +26,9 @@ private val DarkColorScheme = darkColorScheme(
     surface = DarkGray,
     onSurface = LightGray,
     surfaceContainer = DarkContainer,
+
     surfaceBright = DarkLight,
-    surfaceDim = Black
+    surfaceDim = Shadow
 )
 
 private val LightColorScheme = lightColorScheme(
@@ -42,8 +43,9 @@ private val LightColorScheme = lightColorScheme(
     surface = White,
     onSurface = DarkGray,
     surfaceContainer = LightContainer,
+
     surfaceBright = Light,
-    surfaceDim = LightShadow,
+    surfaceDim = Shadow,
 )
 
 @Composable
