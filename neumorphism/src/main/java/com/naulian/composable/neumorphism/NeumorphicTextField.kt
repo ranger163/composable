@@ -64,9 +64,9 @@ fun NeumorphicTextField(
                         shape = shape,
                         shadowPadding = 4.dp,
                     )
-                    .heightIn(min = 56.dp)
+                    .heightIn(min = 48.dp)
                     .If(onFocus) {
-                        border(1.dp, accentColor, shape = shape)
+                        border(2.dp, accentColor, shape = shape)
                     }
                     .padding(horizontal = 16.dp),
                 contentAlignment = Alignment.CenterStart

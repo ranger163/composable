@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import com.naulian.modify.HugeIcons
 import com.naulian.modify.field.setText
 import kotlinx.coroutines.delay
+import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -170,7 +171,7 @@ private fun Showcase() {
             )
         )
 
-        Text("Linear Progress Indicator at ${(progress * 100).toInt()}%", color = MaterialTheme.colorScheme.onBackground)
+        Text("Linear Progress Indicator at ${(progress * 100).roundToInt()}%", color = MaterialTheme.colorScheme.onBackground)
         NeumorphicLinearProgressIndicator(
             modifier = Modifier.fillMaxWidth(),
             progress = { progress }
