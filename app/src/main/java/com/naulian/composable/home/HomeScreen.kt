@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.naulian.composable.LocalNavController
 import com.naulian.composable.Screen
 
@@ -26,18 +26,9 @@ fun HomeScreen() {
 
     HomeScreenUI(uiState = state) {
         when (it) {
-            HomeUIEvent.Neumorphic -> navController.navigate(Screen.Neumorphic)
-            HomeUIEvent.GridBackground -> navController.navigate(Screen.GridBackground)
-            HomeUIEvent.CorneredBox -> navController.navigate(Screen.CorneredBox)
-            HomeUIEvent.ParallaxCardStack -> navController.navigate(Screen.ParallaxCardStack)
-            HomeUIEvent.RatingStars -> navController.navigate(Screen.RatingStars)
-            HomeUIEvent.CarouselCard -> navController.navigate(Screen.Carousel3DStack)
-            HomeUIEvent.Progress->navController.navigate(Screen.Progress)
-            HomeUIEvent.BottomBar -> navController.navigate(Screen.BottomBar)
-            HomeUIEvent.CalenderTopBar -> navController.navigate(Screen.CalenderTopBar)
-            HomeUIEvent.AnimatedInteractionScreen -> navController.navigate(Screen.AnimatedInteractionScreen)
-            HomeUIEvent.GlassDashboardScreen -> navController.navigate(Screen.GlassDashboardScreen)
-
+            HomeUIEvent.AnimatedCC -> navController.navigate(Screen.AnimatedCC)
+            HomeUIEvent.InteractiveCC ->  navController.navigate(Screen.InteractiveCC)
+            HomeUIEvent.StaticCC -> navController.navigate(Screen.StaticCC)
         }
     }
 }

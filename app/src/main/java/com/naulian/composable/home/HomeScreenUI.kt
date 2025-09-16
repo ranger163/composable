@@ -4,6 +4,7 @@ import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -45,18 +46,9 @@ import com.naulian.modify.columnItem
 import kotlinx.coroutines.delay
 
 sealed interface HomeUIEvent {
-    data object Neumorphic : HomeUIEvent
-    data object GridBackground : HomeUIEvent
-    data object CorneredBox : HomeUIEvent
-    data object RatingStars : HomeUIEvent
-    data object ParallaxCardStack : HomeUIEvent
-    data object CarouselCard : HomeUIEvent
-    data object Progress : HomeUIEvent
-
-    data object BottomBar : HomeUIEvent
-    data object CalenderTopBar : HomeUIEvent
-    data object AnimatedInteractionScreen : HomeUIEvent
-    data object GlassDashboardScreen : HomeUIEvent
+    data object StaticCC : HomeUIEvent
+    data object InteractiveCC : HomeUIEvent
+    data object AnimatedCC : HomeUIEvent
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
@@ -91,6 +83,7 @@ fun HomeScreenUI(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .clickable{ uiEvent(HomeUIEvent.StaticCC) }
                         .padding(20.dp)
                 ) {
                     Text(
@@ -121,7 +114,7 @@ fun HomeScreenUI(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(color = MaterialTheme.colorScheme.background)
+                        .clickable{ uiEvent(HomeUIEvent.InteractiveCC) }
                         .padding(20.dp),
                 ) {
                     Text(
@@ -152,7 +145,7 @@ fun HomeScreenUI(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(color = MaterialTheme.colorScheme.background)
+                        .clickable{ uiEvent(HomeUIEvent.AnimatedCC) }
                         .padding(20.dp),
                 ) {
                     Text(
@@ -196,26 +189,6 @@ fun HomeScreenUI(
     }
 }
 
-
-@Composable
-fun ListItemText(
-    title: String,
-    createdBy: String,
-    modifier: Modifier = Modifier
-) {
-    Column(modifier) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-        Text(
-            text = "Created by $createdBy",
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onBackground
-        )
-    }
-}
 
 @Preview
 @Composable

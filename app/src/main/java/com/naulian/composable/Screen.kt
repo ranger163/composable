@@ -8,7 +8,16 @@ sealed interface Screen {
     data object Home : Screen
 
     @Serializable
-    data object Neumorphic : Screen
+    data object StaticCC : Screen
+
+    @Serializable
+    data object InteractiveCC : Screen
+
+    @Serializable
+    data object AnimatedCC : Screen
+
+    @Serializable
+    data object Neumorphism : Screen
 
     @Serializable
     data object GridBackground : Screen
