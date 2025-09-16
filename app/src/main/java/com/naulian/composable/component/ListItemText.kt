@@ -9,7 +9,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun ListItemText(
     title: String,
-    createdBy: String,
+    contributor: String,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -19,7 +19,7 @@ fun ListItemText(
             color = MaterialTheme.colorScheme.onBackground
         )
         Text(
-            text = "Created by $createdBy",
+            text = "Contributed by $contributor",
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onBackground
         )

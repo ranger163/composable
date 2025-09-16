@@ -70,7 +70,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.RatingStars) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Rating Stars", createdBy = "Naulian")
+                    ListItemText(title = "Rating Stars", contributor = "Naulian")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -80,7 +80,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.ParallaxCardStack) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Parallax Card Stack", createdBy = "Aryan Jaiswal")
+                    ListItemText(title = "Parallax Card Stack", contributor = "Aryan Jaiswal")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -90,7 +90,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.CarouselCard) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Corousel Card", createdBy = "Aryan Jaiswal")
+                    ListItemText(title = "Corousel Card", contributor = "Aryan Jaiswal")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -100,7 +100,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.Progress) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Progress Steps", createdBy = "Aryan Singh")
+                    ListItemText(title = "Progress Steps", contributor = "Aryan Singh")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -110,7 +110,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.BottomBar) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Neumorphic Bottom Bar", createdBy = "Zain ul Abdin")
+                    ListItemText(title = "Neumorphic Bottom Bar", contributor = "Zain ul Abdin")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -120,7 +120,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.CalenderTopBar) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Calender Top Bar", createdBy = "Zain ul Abdin ")
+                    ListItemText(title = "Calender Top Bar", contributor = "Zain ul Abdin ")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -130,7 +130,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.AnimatedInteractionScreen) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Animated Interactions", createdBy = "Shree Bhargav R K")
+                    ListItemText(title = "Animated Interactions", contributor = "Shree Bhargav R K")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -140,7 +140,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.GlassDashboardScreen) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Glass DashBoard", createdBy = "Shree Bhargav R K")
+                    ListItemText(title = "Glass Card", contributor = "Shree Bhargav R K")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -150,7 +150,7 @@ fun InteractiveCCScreenUI(
                         .clickable { uiEvent(IccUIEvent.Cards) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Cards", createdBy = "Aryan Jaiswal")
+                    ListItemText(title = "Cards", contributor = "Aryan Jaiswal")
                 }
                 NeumorphicDownHorizontalDivider()
             }

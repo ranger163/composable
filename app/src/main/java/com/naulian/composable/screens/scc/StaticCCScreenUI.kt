@@ -19,7 +19,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.component.ListItemText
 import com.naulian.composable.neumorphism.NeumorphicDownHorizontalDivider
-import com.naulian.composable.screens.acc.AccUIEvent
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
@@ -65,7 +64,7 @@ fun StaticCCScreenUI(
                         .clickable { uiEvent(SccUIEvent.Neumorphism) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Neumorphism", createdBy = "Naulian")
+                    ListItemText(title = "Neumorphism", contributor = "Naulian")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -75,7 +74,7 @@ fun StaticCCScreenUI(
                         .clickable { uiEvent(SccUIEvent.GridBackground) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Grid Background", createdBy = "Naulian")
+                    ListItemText(title = "Grid Background", contributor = "Naulian")
                 }
                 NeumorphicDownHorizontalDivider()
 
@@ -85,7 +84,7 @@ fun StaticCCScreenUI(
                         .clickable { uiEvent(SccUIEvent.CorneredBox) }
                         .padding(20.dp)
                 ) {
-                    ListItemText(title = "Cornered Box", createdBy = "Naulian")
+                    ListItemText(title = "Cornered Box", contributor = "Naulian")
                 }
                 NeumorphicDownHorizontalDivider()
             }
