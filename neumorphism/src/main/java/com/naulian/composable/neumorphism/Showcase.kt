@@ -185,7 +185,7 @@ private fun Showcase() {
             )
         }
 
-        Text("Slider ${(sliderState.value * 100).toInt()}", color = MaterialTheme.colorScheme.onBackground)
+        Text("Slider ${(sliderState.value * 100).roundToInt()}", color = MaterialTheme.colorScheme.onBackground)
         NeumorphicSlider(
             modifier = Modifier.fillMaxWidth(),
             state = sliderState

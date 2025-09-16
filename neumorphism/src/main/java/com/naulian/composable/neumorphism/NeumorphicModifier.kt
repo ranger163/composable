@@ -48,9 +48,13 @@ fun Modifier.neumorphicUp(
 fun Modifier.neumorphicDown(
     shape: Shape,
     shadowPadding: Dp,
+    color: Color = MaterialTheme.colorScheme.background,
     light: Color = MaterialTheme.colorScheme.surfaceBright,
     shadow: Color = MaterialTheme.colorScheme.surfaceDim
-) = innerShadow(
+) = background(
+    color = color,
+    shape = shape
+).innerShadow(
     shape = shape,
     shadow = Shadow(
         radius = shadowPadding,

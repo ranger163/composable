@@ -100,24 +100,13 @@ fun NeumorphicSwitch(
             .width(64.dp)
             .height(32.dp)
     ) {
-
-        Box(
-            modifier = Modifier
-                .padding(neumorphicDepth)
-                .width(64.dp - (neumorphicDepth * 2))
-                .height(32.dp - (neumorphicDepth * 2))
-                .background(
-                    color = accent,
-                    shape = shape
-                )
-        )
-
         Box(
             modifier = Modifier
                 .width(64.dp)
                 .height(32.dp)
                 .neumorphicDown(
                     shape = shape,
+                    color = accent,
                     shadowPadding = neumorphicDepth,
                 )
         )
@@ -136,10 +125,6 @@ fun NeumorphicSwitch(
                         color = MaterialTheme.colorScheme.surfaceDim,
                         offset = DpOffset(x = neumorphicDepth, y = neumorphicDepth)
                     )
-                )
-                .background(
-                    color = MaterialTheme.colorScheme.background,
-                    shape = shape
                 )
                 .neumorphicUp(
                     shape = shape,
