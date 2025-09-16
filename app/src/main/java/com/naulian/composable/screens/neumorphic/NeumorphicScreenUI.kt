@@ -28,6 +28,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.component.CodeBlock
+import com.naulian.composable.neumorphism.NeumorphicButton
+import com.naulian.composable.neumorphism.NeumorphismComponentShowcase
 import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
@@ -123,16 +125,6 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                     shadowColor = MaterialTheme.colorScheme.surfaceDim
                 )
 
-                NeuMorphicUP2(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(56.dp),
-                    shape = CircleShape,
-                    contentAlignment = Alignment.Center,
-                    lightColor = MaterialTheme.colorScheme.surfaceBright,
-                    shadowColor = MaterialTheme.colorScheme.surfaceDim
-                )
-
                 NeuMorphicDown(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -163,6 +155,8 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                 ) {
                     Text(text = if (touch) "Touch" else "Not Touch")
                 }
+
+                NeumorphismComponentShowcase()
             }
         }
     }

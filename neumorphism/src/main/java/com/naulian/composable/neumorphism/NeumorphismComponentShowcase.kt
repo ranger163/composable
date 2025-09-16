@@ -39,7 +39,7 @@ import kotlin.math.roundToInt
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun Showcase() {
+fun NeumorphismComponentShowcase() {
 
     var checked by remember { mutableStateOf(false) }
 
@@ -198,7 +198,6 @@ private fun Showcase() {
         ) {
             Text("Check Boxes", color = MaterialTheme.colorScheme.onBackground)
 
-            NeumorphicCheckBox(checked = !checked, onCheckedChange = { checked = !it })
             NeumorphicCheckBox(checked = checked, onCheckedChange = { checked = it })
         }
 
@@ -209,7 +208,6 @@ private fun Showcase() {
         ) {
             Text("Radio Button", color = MaterialTheme.colorScheme.onBackground)
 
-            NeumorphicRadioButton(checked = !checked, onCheckedChange = { checked = !it })
             NeumorphicRadioButton(checked = checked, onCheckedChange = { checked = it })
         }
 
@@ -220,7 +218,7 @@ private fun Showcase() {
 @Composable
 private fun ShowcaseLightPreview() {
     NeumorphicPreviewScreen {
-        Showcase()
+        NeumorphismComponentShowcase()
     }
 }
 
@@ -228,6 +226,6 @@ private fun ShowcaseLightPreview() {
 @Composable
 private fun ShowcaseDarkPreview() {
     NeumorphicPreviewScreen(dark = true) {
-        Showcase()
+        NeumorphismComponentShowcase()
     }
 }
