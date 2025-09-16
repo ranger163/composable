@@ -1,27 +1,43 @@
 package com.naulian.composable.screens.cards
 
+import android.graphics.Paint
+import androidx.annotation.DrawableRes
+import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.DarkMode
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material.icons.filled.VolumeUp
-import androidx.compose.material.icons.filled.Wifi
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -35,8 +51,8 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.asAndroidPath
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -45,15 +61,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import android.graphics.Paint
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
 import com.naulian.composable.R
 import com.naulian.composable.component.CodeBlock
+import com.naulian.composable.neumorphism.NeumorphicButton
+import com.naulian.composable.neumorphism.NeumorphicIconButton
+import com.naulian.composable.neumorphism.NeumorphicSwitch
+import com.naulian.modify.HugeIcons
 
 // Theme Colors
 val LightNeumorphicBackground = Color(0xFFE0E0E0)
@@ -75,7 +88,7 @@ data class NeumorphicTheme(
 
 data class SettingItem(
     val title: String,
-    val icon: ImageVector,
+    @param:DrawableRes val icon: Int,
     var isToggled: Boolean
 )
 
@@ -308,11 +321,11 @@ private fun SettingsCardPage(
     var settingsItems by remember {
         mutableStateOf(
             listOf(
-                SettingItem("Dark Mode", Icons.Default.DarkMode, isDarkMode),
-                SettingItem("Notifications", Icons.Default.Notifications, true),
-                SettingItem("WiFi", Icons.Default.Wifi, false),
-                SettingItem("Sound", Icons.Default.VolumeUp, true),
-                SettingItem("Profile", Icons.Default.AccountCircle, false)
+                SettingItem("Dark Mode", HugeIcons.Settings, isDarkMode),
+                SettingItem("Notifications", HugeIcons.Notification, true),
+                SettingItem("WiFi", HugeIcons.Favourite, false),
+                SettingItem("Sound", HugeIcons.Share, true),
+                SettingItem("Profile", HugeIcons.Account, false)
             )
         )
     }
@@ -331,7 +344,7 @@ private fun SettingsCardPage(
             val item = settingsItems[index]
             NeumorphicSettingsCard(
                 title = item.title,
-                icon = item.icon,
+                painter = painterResource(item.icon),
                 theme = theme,
                 isToggled = if (item.title == "Dark Mode") isDarkMode else item.isToggled,
                 onToggle = { newValue ->
@@ -458,10 +471,12 @@ fun NeumorphicSocialProfileCard(
             )
 
             NeumorphicButton(
-                text = if (isFollowing) "Unfollow" else "Follow",
-                theme = theme,
-                onClick = { isFollowing = !isFollowing }
-            )
+                onClick = {
+                    { isFollowing = !isFollowing }
+                }
+            ) {
+                Text(if (isFollowing) "Unfollow" else "Follow")
+            }
         }
     }
 }
@@ -531,10 +546,13 @@ fun NeumorphicMusicCard(
             )
 
             NeumorphicIconButton(
-                icon = if (isPlaying) Icons.Default.Pause else Icons.Default.PlayArrow,
-                theme = theme,
                 onClick = { isPlaying = !isPlaying }
-            )
+            ) {
+                Icon(
+                    painter = painterResource(id = HugeIcons.Share),
+                    contentDescription = null
+                )
+            }
         }
     }
 }
@@ -543,7 +561,7 @@ fun NeumorphicMusicCard(
 fun NeumorphicSettingsCard(
     modifier: Modifier = Modifier,
     title: String,
-    icon: ImageVector,
+    painter: Painter,
     theme: NeumorphicTheme,
     isToggled: Boolean,
     onToggle: (Boolean) -> Unit
@@ -575,7 +593,7 @@ fun NeumorphicSettingsCard(
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Icon(
-                    imageVector = icon,
+                    painter = painter,
                     contentDescription = null,
                     tint = theme.textColor
                 )
@@ -586,144 +604,12 @@ fun NeumorphicSettingsCard(
                     color = theme.textColor
                 )
             }
-            NeumorphicToggleSwitch(
-                isToggled = isToggled,
-                onToggle = onToggle,
-                theme = theme
+
+            NeumorphicSwitch(
+                checked = isToggled,
+                onCheckedChange = { onToggle(it) }
             )
         }
-    }
-}
-
-@Composable
-fun NeumorphicButton(
-    text: String,
-    theme: NeumorphicTheme,
-    onClick: () -> Unit
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val elevation by animateDpAsState(
-        targetValue = if (isPressed) 2.dp else 4.dp,
-        label = "button_elevation"
-    )
-
-    Box(
-        modifier = Modifier
-            .width(120.dp)
-            .neumorphicShadow(
-                lightShadowColor = if (isPressed) theme.darkShadow else theme.lightShadow,
-                darkShadowColor = if (isPressed) theme.lightShadow else theme.darkShadow,
-                lightOffset = Offset(-4f, -4f),
-                darkOffset = Offset(4f, 4f),
-                elevation = elevation,
-                cornerRadius = 12.dp
-            )
-            .background(theme.background, RoundedCornerShape(12.dp))
-            .clip(RoundedCornerShape(12.dp))
-            .clickable(interactionSource = interactionSource, indication = null, onClick = onClick)
-            .padding(vertical = 12.dp, horizontal = 24.dp),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = text,
-            color = theme.textColor,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp
-        )
-    }
-}
-
-@Composable
-fun NeumorphicIconButton(
-    icon: ImageVector,
-    theme: NeumorphicTheme,
-    onClick: () -> Unit
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val elevation by animateDpAsState(
-        targetValue = if (isPressed) 2.dp else 4.dp,
-        label = "icon_button_elevation"
-    )
-
-    Box(
-        modifier = Modifier
-            .size(60.dp)
-            .neumorphicShadow(
-                lightShadowColor = if (isPressed) theme.darkShadow else theme.lightShadow,
-                darkShadowColor = if (isPressed) theme.lightShadow else theme.darkShadow,
-                lightOffset = Offset(-4f, -4f),
-                darkOffset = Offset(4f, 4f),
-                elevation = elevation,
-                cornerRadius = 30.dp
-            )
-            .background(theme.background, CircleShape)
-            .clip(CircleShape)
-            .clickable(interactionSource = interactionSource, indication = null, onClick = onClick),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = icon,
-            contentDescription = null,
-            tint = theme.textColor,
-            modifier = Modifier.size(36.dp)
-        )
-    }
-}
-
-@Composable
-fun NeumorphicToggleSwitch(
-    isToggled: Boolean,
-    onToggle: (Boolean) -> Unit,
-    theme: NeumorphicTheme
-) {
-    val toggleOffset by animateFloatAsState(
-        targetValue = if (isToggled) 1f else 0f,
-        animationSpec = tween(300),
-        label = "toggle_offset"
-    )
-
-    Box(
-        modifier = Modifier
-            .width(50.dp)
-            .height(30.dp)
-            .neumorphicShadow(
-                lightShadowColor = theme.lightShadow,
-                darkShadowColor = theme.darkShadow,
-                lightOffset = Offset(-2f, -2f),
-                darkOffset = Offset(2f, 2f),
-                elevation = 2.dp,
-                cornerRadius = 15.dp
-            )
-            .background(theme.background, RoundedCornerShape(15.dp))
-            .clip(RoundedCornerShape(15.dp))
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = null,
-                onClick = { onToggle(!isToggled) }
-            )
-    ) {
-        Box(
-            modifier = Modifier
-                .size(22.dp)
-                .offset(
-                    x = 4.dp + (18.dp * toggleOffset),
-                    y = 4.dp
-                )
-                .neumorphicShadow(
-                    lightShadowColor = if (isToggled) theme.darkShadow else theme.lightShadow,
-                    darkShadowColor = if (isToggled) theme.lightShadow else theme.darkShadow,
-                    lightOffset = Offset(-2f, -2f),
-                    darkOffset = Offset(2f, 2f),
-                    elevation = if (isToggled) 2.dp else 4.dp,
-                    cornerRadius = 11.dp
-                )
-                .background(
-                    color = if (isToggled) Color.DarkGray else theme.background,
-                    shape = CircleShape
-                )
-        )
     }
 }
 
@@ -1349,6 +1235,7 @@ fun SettingsCardExample() {
     )
 }
 """.trimIndent()
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewSwipeableNeumorphicCards() {

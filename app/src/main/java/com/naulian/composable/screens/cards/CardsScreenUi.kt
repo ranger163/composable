@@ -2,17 +2,35 @@ package com.naulian.composable.screens.cards
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.pager.HorizontalPager
-import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,10 +38,12 @@ import com.naulian.composable.component.CodeBlock
 import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class, ExperimentalModifyApi::class)
+@OptIn(
+    ExperimentalMaterial3Api::class,
+    ExperimentalFoundationApi::class,
+    ExperimentalModifyApi::class
+)
 @Composable
 fun SwipeableCardsScreenUI(onBack: () -> Unit = {}) {
     var isDarkMode by remember { mutableStateOf(false) }
@@ -210,14 +230,14 @@ private fun SettingsCardPage(
     var settingsItems by remember {
         mutableStateOf(
             listOf(
-                SettingItem("Dark Mode", Icons.Default.DarkMode, isDarkMode),
-                SettingItem("Notifications", Icons.Default.Notifications, true),
-                SettingItem("WiFi", Icons.Default.Wifi, false),
-                SettingItem("Sound", Icons.Default.VolumeUp, true),
-                SettingItem("Profile", Icons.Default.AccountCircle, false),
-                SettingItem("Bluetooth", Icons.Default.Bluetooth, true),
-                SettingItem("Location", Icons.Default.LocationOn, false),
-                SettingItem("Auto-rotate", Icons.Default.ScreenRotation, true)
+                SettingItem("Dark Mode", HugeIcons.Settings, isDarkMode),
+                SettingItem("Notifications", HugeIcons.Settings, true),
+                SettingItem("WiFi", HugeIcons.Settings, false),
+                SettingItem("Sound", HugeIcons.Settings, true),
+                SettingItem("Profile", HugeIcons.Settings, false),
+                SettingItem("Bluetooth", HugeIcons.Settings, true),
+                SettingItem("Location", HugeIcons.Settings, false),
+                SettingItem("Auto-rotate", HugeIcons.Settings, true)
             )
         )
     }
@@ -235,7 +255,7 @@ private fun SettingsCardPage(
             val item = settingsItems[index]
             NeumorphicSettingsCard(
                 title = item.title,
-                icon = item.icon,
+                painter = painterResource(item.icon),
                 theme = theme,
                 isToggled = if (item.title == "Dark Mode") isDarkMode else item.isToggled,
                 onToggle = { newValue ->
