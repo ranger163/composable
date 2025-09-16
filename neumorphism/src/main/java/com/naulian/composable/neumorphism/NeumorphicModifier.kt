@@ -9,6 +9,7 @@ import androidx.compose.ui.draw.innerShadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.shadow.Shadow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 
@@ -81,3 +82,10 @@ fun Modifier.neumorphicUp2(
         )
     )
     .background(backgroundColor, shape)
+
+
+@Preview
+@Composable
+private fun NeumorphicPreview() {
+
+}

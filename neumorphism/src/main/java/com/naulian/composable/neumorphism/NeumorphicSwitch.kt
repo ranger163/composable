@@ -1,10 +1,14 @@
 package com.naulian.composable.neumorphism
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -12,6 +16,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -21,11 +26,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.dropShadow
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.naulian.modify.Gray
 import kotlinx.coroutines.delay
 
 @Composable
@@ -35,7 +45,8 @@ fun NeumorphicSwitch(
     modifier: Modifier = Modifier,
     enabled: Boolean = true,
     interactionSource: MutableInteractionSource? = null,
-    thumbPadding : Dp = 0.dp
+    neumorphicDepth: Dp = 4.dp,
+    shape: Shape = CircleShape
 ) {
     val interactionSource = interactionSource ?: remember { MutableInteractionSource() }
 
@@ -51,9 +62,7 @@ fun NeumorphicSwitch(
                     interactionSource = interactionSource,
                     indication = null
                 )
-        } else {
-            Modifier
-        }
+        } else Modifier
 
     val thumbOffset by animateDpAsState(
         targetValue = if (checked) 32.dp else 0.dp,
@@ -64,45 +73,96 @@ fun NeumorphicSwitch(
         )
     )
 
+    val thumbPadding by animateDpAsState(
+        targetValue = if(checked) 2.dp else 4.dp,
+        label = "thumbPadding",
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioLowBouncy,
+            stiffness = Spring.StiffnessLow
+        )
+    )
+
+    val accent by animateColorAsState(
+        targetValue = if(checked) MaterialTheme.colorScheme.primary
+        else MaterialTheme.colorScheme.background,
+        label = "accent",
+        animationSpec = tween(
+            durationMillis = 200,
+            delayMillis = 150
+        )
+    )
+
     Box(
         modifier = modifier
             .then(toggleableModifier)
             .width(64.dp)
             .height(32.dp)
-            .neumorphicDown(
-                shape = CircleShape,
-                shadowPadding = 4.dp,
-            ).padding(thumbPadding)
     ) {
+
         Box(
             modifier = Modifier
+                .padding(neumorphicDepth)
+                .width(64.dp - (neumorphicDepth * 2))
+                .height(32.dp - (neumorphicDepth * 2))
+                .background(
+                    color = accent,
+                    shape = shape
+                )
+        )
+
+        Box(
+            modifier = Modifier
+                .width(64.dp)
+                .height(32.dp)
+                .neumorphicDown(
+                    shape = shape,
+                    shadowPadding = neumorphicDepth,
+                )
+        )
+
+        Box(
+            modifier = Modifier
+                .padding(thumbPadding)
                 .size(32.dp - (thumbPadding * 2))
                 .offset {
                     IntOffset(x = thumbOffset.toPx().toInt(), y = 0)
                 }
+                .dropShadow(
+                    shape = shape,
+                    shadow = Shadow(
+                        radius = neumorphicDepth,
+                        color = MaterialTheme.colorScheme.surfaceDim,
+                        offset = DpOffset(x = neumorphicDepth, y = neumorphicDepth)
+                    )
+                )
+                .background(
+                    color = MaterialTheme.colorScheme.background,
+                    shape = shape
+                )
                 .neumorphicUp(
-                    shape = CircleShape,
+                    shape = shape,
                     shadowPadding = 4.dp
-                ),
-            contentAlignment = Alignment.Center
-        ) {}
+                )
+        )
     }
 }
 
 @Preview
 @Composable
 private fun NeumorphicSwitchPreview() {
-    NeumorphicPreviewSquare {
+    NeumorphicPreviewColumn(
+        modifier = Modifier
+    ) {
 
         var checked by remember { mutableStateOf(false) }
 
         LaunchedEffect(Unit) {
             while (true) {
-                delay(1000)
+                delay(2000)
                 checked = !checked
             }
         }
-
+        
         NeumorphicSwitch(
             checked = checked,
             onCheckedChange = { checked = it }

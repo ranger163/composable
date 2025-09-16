@@ -38,6 +38,36 @@ internal fun NeumorphicPreviewSquare(
 }
 
 @Composable
+internal fun NeumorphicPreviewBox(
+    modifier: Modifier = Modifier,
+    content: @Composable BoxScope.() -> Unit
+) {
+    NeumorphicPreview(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+        content = content
+    )
+}
+
+@Composable
+internal fun NeumorphicPreviewColumn(
+    modifier: Modifier = Modifier,
+    content: @Composable ColumnScope.() -> Unit
+) {
+    NeumorphicPreview(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(20.dp, Alignment.CenterVertically),
+            content = content
+        )
+    }
+}
+
+
+@Composable
 internal fun NeumorphicPreviewScreen(
     modifier: Modifier = Modifier,
     dark : Boolean = false,
