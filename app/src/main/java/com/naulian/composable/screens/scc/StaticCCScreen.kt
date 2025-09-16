@@ -13,6 +13,7 @@ fun StaticCCScreen() {
             SccUIEvent.CorneredBox -> navController.navigate(Screen.CorneredBox)
             SccUIEvent.GridBackground -> navController.navigate(Screen.GridBackground)
             SccUIEvent.Neumorphism -> navController.navigate(Screen.Neumorphism)
+            SccUIEvent.Back -> navController.navigateUp()
         }
     }
 }

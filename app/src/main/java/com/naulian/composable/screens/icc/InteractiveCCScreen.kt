@@ -18,6 +18,7 @@ fun InteractiveCCScreen() {
             IccUIEvent.CalenderTopBar -> navController.navigate(Screen.CalenderTopBar)
             IccUIEvent.AnimatedInteractionScreen -> navController.navigate(Screen.AnimatedInteractionScreen)
             IccUIEvent.GlassDashboardScreen -> navController.navigate(Screen.GlassDashboardScreen)
+            IccUIEvent.Back -> navController.navigateUp()
         }
     }
 }

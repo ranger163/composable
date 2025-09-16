@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.DarkGray
 import com.naulian.modify.Gray
-import com.naulian.modify.Yellow
 
 @Composable
 fun CorneredBox(
@@ -77,7 +76,7 @@ fun CorneredBox(
 
                     //top
                     drawLine(
-                        color = Yellow,
+                        color = Color.Yellow,
                         start = Offset(
                             x = centerX - horLineSize / 2,
                             y = startY
@@ -92,7 +91,7 @@ fun CorneredBox(
 
                     //bottom
                     drawLine(
-                        color = Yellow,
+                        color =  Color.Yellow,
                         start = Offset(
                             x = centerX - horLineSize / 2,
                             y = endY
@@ -107,7 +106,7 @@ fun CorneredBox(
 
                     //left
                     drawLine(
-                        color = Yellow,
+                        color =  Color.Yellow,
                         start = Offset(
                             x = startX,
                             y = centerY - verLineSize / 2
@@ -122,7 +121,7 @@ fun CorneredBox(
 
                     //right
                     drawLine(
-                        color = Yellow,
+                        color =  Color.Yellow,
                         start = Offset(
                             x = endX,
                             y = centerY - verLineSize / 2

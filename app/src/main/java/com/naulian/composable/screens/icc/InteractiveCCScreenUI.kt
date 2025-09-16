@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -13,13 +15,16 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.component.ListItemText
 import com.naulian.composable.neumorphism.NeumorphicDownHorizontalDivider
 import com.naulian.modify.ExperimentalModifyApi
+import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
 
 sealed interface IccUIEvent {
+    data object Back : IccUIEvent
     data object RatingStars : IccUIEvent
     data object ParallaxCardStack : IccUIEvent
     data object CarouselCard : IccUIEvent
@@ -38,7 +43,15 @@ fun InteractiveCCScreenUI(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Interactive Composable Components") },
+                navigationIcon = {
+                    IconButton(onClick = { uiEvent(IccUIEvent.Back) }) {
+                        Icon(
+                            painter = painterResource(HugeIcons.Back),
+                            contentDescription = "Back Icon"
+                        )
+                    }
+                },
+                title = { Text(text = "Interactive Components") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.background
                 )
