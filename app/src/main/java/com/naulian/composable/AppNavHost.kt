@@ -22,7 +22,6 @@ import com.naulian.composable.screens.bottomBar.BottomBarScreen
 import com.naulian.composable.screens.box.CorneredBoxScreen
 import com.naulian.composable.screens.calenderTopBar.CalenderTopBarScreen
 import com.naulian.composable.screens.cardCrousel.CarouselCard3DScreen
-import com.naulian.composable.screens.cards.SwipeableCardsScreen
 import com.naulian.composable.screens.glass.GlassDashboardScreen
 import com.naulian.composable.screens.icc.InteractiveCCScreen
 import com.naulian.composable.screens.neumorphic.NeumorphicScreen
@@ -122,10 +121,6 @@ fun AppNavHost() {
 
             composable<Screen.GlassDashboard> {
                 GlassDashboardScreen()
-            }
-
-            composable<Screen.Cards> {
-                SwipeableCardsScreen()
             }
 
             composable<Screen.MovieTicket> {
