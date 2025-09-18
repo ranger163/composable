@@ -15,13 +15,66 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.innerShadow
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.theme.ComposableTheme
-import com.naulian.neumorphic.neumorphicDown
-import com.naulian.neumorphic.neumorphicUp
+
+@Composable
+fun Modifier.neumorphicUp(
+    shape: Shape,
+    shadowPadding: Dp,
+): Modifier {
+    return background(
+        color = MaterialTheme.colorScheme.background,
+        shape = shape
+    )
+        .innerShadow(
+            shape = shape,
+            shadow = Shadow(
+                radius = shadowPadding,
+                color = MaterialTheme.colorScheme.surfaceBright,
+                offset = DpOffset(x = shadowPadding, y = shadowPadding)
+            )
+        )
+        .innerShadow(
+            shape = shape,
+            shadow = Shadow(
+                radius = shadowPadding,
+                color = MaterialTheme.colorScheme.surfaceDim,
+                offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
+            )
+        )
+}
+
+@Composable
+fun Modifier.neumorphicDown(
+    shape: Shape,
+    shadowPadding: Dp,
+) = background(
+    color = MaterialTheme.colorScheme.background,
+    shape = shape
+)
+    .innerShadow(
+        shape = shape,
+        shadow = Shadow(
+            radius = shadowPadding,
+            color = MaterialTheme.colorScheme.surfaceBright,
+            offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
+        )
+    )
+    .innerShadow(
+        shape = shape,
+        shadow = Shadow(
+            radius = shadowPadding,
+            color = MaterialTheme.colorScheme.surfaceDim,
+            offset = DpOffset(x = shadowPadding, y = shadowPadding)
+        )
+    )
 
 
 @Composable
@@ -41,6 +94,7 @@ fun NeuMorphicUP(
         contentAlignment = contentAlignment
     )
 }
+
 
 @Composable
 fun NeuMorphicDown(
@@ -85,115 +139,77 @@ private fun NeumorphicBoxPreview() {
 
 val neumorphicCode by lazy {
     """
-        fun Modifier.neumorphicUp2(
-            shape: Shape,
-            shadowPadding: Dp,
-            light: Color = NeumorphicLight,
-            shadow: Color = NeumorphicDark
-        ) = innerShadow(
-            shape = shape,
-            shadow = Shadow(
-                radius = shadowPadding,
-                color = light,
-                offset = DpOffset(x = shadowPadding, y = shadowPadding)
-            )
-        ).innerShadow(
-            shape = shape,
-            shadow = Shadow(
-                radius = shadowPadding,
-                color = shadow,
-                offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
-            )
-        )
-        
-        fun Modifier.neumorphicDown(
-            shape: Shape,
-            shadowPadding: Dp,
-            light: Color = NeumorphicLight,
-            shadow: Color = NeumorphicDark
-        ) = innerShadow(
-            shape = shape,
-            shadow = Shadow(
-                radius = shadowPadding,
-                color = light,
-                offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
-            )
-        ).innerShadow(
-            shape = shape,
-            shadow = Shadow(
-                radius = shadowPadding,
-                color = shadow,
-                offset = DpOffset(x = shadowPadding, y = shadowPadding)
-            )
-        )
-        
+        @Composable
         fun Modifier.neumorphicUp(
             shape: Shape,
             shadowPadding: Dp,
-            light: Color = NeumorphicLight,
-            shadow: Color = NeumorphicDark,
-            backgroundColor: Color = NeumorphicContainer,
-        ) = dropShadow(
-            shape = shape,
-            shadow = Shadow(
-                radius = shadowPadding,
-                color = light,
-                offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
+        ): Modifier {
+            return background(
+                color = MaterialTheme.colorScheme.background,
+                shape = shape
             )
+                .innerShadow(
+                    shape = shape,
+                    shadow = Shadow(
+                        radius = shadowPadding,
+                        color = MaterialTheme.colorScheme.surfaceBright,
+                        offset = DpOffset(x = shadowPadding, y = shadowPadding)
+                    )
+                )
+                .innerShadow(
+                    shape = shape,
+                    shadow = Shadow(
+                        radius = shadowPadding,
+                        color = MaterialTheme.colorScheme.surfaceDim,
+                        offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
+                    )
+                )
+        }
+        
+        @Composable
+        fun Modifier.neumorphicDown(
+            shape: Shape,
+            shadowPadding: Dp,
+        ) = background(
+            color = MaterialTheme.colorScheme.background,
+            shape = shape
         )
-            .dropShadow(
+            .innerShadow(
                 shape = shape,
                 shadow = Shadow(
                     radius = shadowPadding,
-                    color = shadow,
+                    color = MaterialTheme.colorScheme.surfaceBright,
+                    offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
+                )
+            )
+            .innerShadow(
+                shape = shape,
+                shadow = Shadow(
+                    radius = shadowPadding,
+                    color = MaterialTheme.colorScheme.surfaceDim,
                     offset = DpOffset(x = shadowPadding, y = shadowPadding)
                 )
             )
-            .background(backgroundColor, shape)
-    
+        
+        
         @Composable
         fun NeuMorphicUP(
             modifier: Modifier = Modifier,
             shape: Shape = RoundedCornerShape(20),
-            contentPadding: Dp = 6.dp,
-            lightColor: Color = Color.White,
-            shadowColor: Color = Color.LightGray,
+            bumpElevation: Dp = 6.dp,
             contentAlignment: Alignment = Alignment.TopStart,
             content: @Composable BoxScope.() -> Unit = {},
         ) {
             Box(
                 modifier = modifier.neumorphicUp(
                     shape = shape,
-                    shadowPadding = contentPadding,
-                    light = lightColor,
-                    shadow = shadowColor
+                    shadowPadding = bumpElevation,
                 ),
                 content = content,
                 contentAlignment = contentAlignment
             )
         }
         
-        @Composable
-        fun NeuMorphicUP2(
-            modifier: Modifier = Modifier,
-            shape: Shape = RoundedCornerShape(20),
-            contentPadding: Dp = 12.dp,
-            lightColor: Color = Color.White,
-            shadowColor: Color = Color.LightGray,
-            contentAlignment: Alignment = Alignment.TopStart,
-            content: @Composable BoxScope.() -> Unit = {},
-        ) {
-            Box(
-                modifier = modifier.neumorphicUp2(
-                    shape = shape,
-                    shadowPadding = contentPadding,
-                    light = lightColor,
-                    shadow = shadowColor
-                ),
-                content = content,
-                contentAlignment = contentAlignment
-            )
-        }
         
         @Composable
         fun NeuMorphicDown(
@@ -201,16 +217,12 @@ val neumorphicCode by lazy {
             shape: Shape = RoundedCornerShape(20),
             contentPadding: Dp = 20.dp,
             contentAlignment: Alignment = Alignment.TopStart,
-            lightColor: Color = Color.White,
-            shadowColor: Color = Color.LightGray,
             content: @Composable BoxScope.() -> Unit = {},
         ) {
             Box(
                 modifier = modifier.neumorphicDown(
                     shape = shape,
                     shadowPadding = contentPadding,
-                    light = lightColor,
-                    shadow = shadowColor
                 ),
                 content = content,
                 contentAlignment = contentAlignment

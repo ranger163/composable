@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.component.ListItemText
+import com.naulian.composable.screens.icc.IccUIEvent
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
@@ -28,6 +29,7 @@ sealed interface SccUIEvent {
     data object Neumorphism : SccUIEvent
     data object GridBackground : SccUIEvent
     data object CorneredBox : SccUIEvent
+    data object MovieTicket: SccUIEvent
 }
 
 @OptIn(ExperimentalModifyApi::class, ExperimentalMaterial3Api::class)
@@ -85,6 +87,16 @@ fun StaticCCScreenUI(
                         .padding(20.dp)
                 ) {
                     ListItemText(title = "Cornered Box", contributor = "Naulian")
+                }
+                NeumorphicDownHorizontalDivider()
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { uiEvent(SccUIEvent.MovieTicket) }
+                        .padding(20.dp)
+                ) {
+                    ListItemText(title = "Movie Ticket", contributor = "Prashant Panwar")
                 }
                 NeumorphicDownHorizontalDivider()
             }

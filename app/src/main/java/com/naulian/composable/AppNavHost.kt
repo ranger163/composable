@@ -29,7 +29,7 @@ import com.naulian.composable.screens.neumorphic.NeumorphicScreen
 import com.naulian.composable.screens.parallaxCards.ParallaxCardStackScreen
 import com.naulian.composable.screens.rating.RatingStarsScreen
 import com.naulian.composable.screens.scc.StaticCCScreen
-import com.naulian.composable.screens.shapes.ShapesScreen
+import com.naulian.composable.screens.shapes.MovieTicketScreen
 
 val LocalNavController = compositionLocalOf<NavController> {
     error("NavController not present")
@@ -128,8 +128,8 @@ fun AppNavHost() {
                 SwipeableCardsScreen()
             }
 
-            composable<Screen.Shapes> {
-                ShapesScreen()
+            composable<Screen.MovieTicket> {
+                MovieTicketScreen()
             }
         }
     }

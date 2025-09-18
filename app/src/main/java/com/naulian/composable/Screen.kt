@@ -56,5 +56,5 @@ sealed interface Screen {
     data object Cards : Screen
 
     @Serializable
-    data object Shapes : Screen
+    data object MovieTicket : Screen
 }

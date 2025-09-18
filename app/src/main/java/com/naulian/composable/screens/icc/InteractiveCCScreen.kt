@@ -20,7 +20,6 @@ fun InteractiveCCScreen() {
             IccUIEvent.GlassDashboardScreen -> navController.navigate(Screen.GlassDashboard)
             IccUIEvent.Back -> navController.navigateUp()
             IccUIEvent.Cards -> navController.navigate(Screen.Cards)
-            IccUIEvent.Shapes -> navController.navigate(Screen.Shapes)
         }
     }
 }

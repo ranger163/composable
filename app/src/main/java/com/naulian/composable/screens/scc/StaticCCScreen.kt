@@ -14,6 +14,7 @@ fun StaticCCScreen() {
             SccUIEvent.GridBackground -> navController.navigate(Screen.GridBackground)
             SccUIEvent.Neumorphism -> navController.navigate(Screen.Neumorphism)
             SccUIEvent.Back -> navController.navigateUp()
+            SccUIEvent.MovieTicket -> navController.navigate(Screen.MovieTicket)
         }
     }
 }
