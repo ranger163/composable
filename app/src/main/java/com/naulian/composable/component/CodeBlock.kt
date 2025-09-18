@@ -5,18 +5,18 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
@@ -25,6 +25,8 @@ import com.naulian.glow.Code
 import com.naulian.glow.theme.GlowTheme
 import com.naulian.glow.theme.Theme
 import com.naulian.modify.HugeIcons
+import com.naulian.modify.White
+import com.naulian.neumorphic.ComposableTheme
 
 @Composable
 fun CodeBlock(
@@ -34,20 +36,20 @@ fun CodeBlock(
     codeName: String = "",
     codeTheme: Theme = if (isSystemInDarkTheme()) GlowTheme.defaultDark else GlowTheme.defaultLight,
 ) {
-
     val context = LocalContext.current
 
-    Card(
-        modifier = modifier
-            .fillMaxWidth(),
-        shape = RoundedCornerShape(12.dp),
+    Surface(
+        modifier = modifier,
+        shape = MaterialTheme.shapes.medium,
+        color = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface
     ) {
         ConstraintLayout(modifier = Modifier.fillMaxWidth()) {
             val (name, action, code) = createRefs()
 
             Box(
                 modifier = Modifier
-                    .background(MaterialTheme.colorScheme.tertiary)
+                    .background(MaterialTheme.colorScheme.primaryContainer)
                     .constrainAs(name) {
                         start.linkTo(parent.start)
                         end.linkTo(parent.end)
@@ -89,6 +91,40 @@ fun CodeBlock(
                     theme = codeTheme
                 )
             }
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun CodeBlockPreview() {
+    ComposableTheme {
+        Box(
+            modifier = Modifier.background(MaterialTheme.colorScheme.background)
+                .padding(20.dp)
+        ) {
+            CodeBlock(
+                source = """
+                    Box(
+                        modifier = Modifier
+                            .background(MaterialTheme.colorScheme.primaryContainer)
+                            .constrainAs(name) {
+                                start.linkTo(parent.start)
+                                end.linkTo(parent.end)
+                                width = Dimension.fillToConstraints
+                            },
+                        contentAlignment = Alignment.CenterStart
+                    ) {
+                        Text(
+                            modifier = Modifier.padding(12.dp),
+                            text = codeName.ifEmpty { language },
+                            color = MaterialTheme.colorScheme.onPrimaryContainer,
+                        )
+                    }
+                """.trimIndent(),
+                language = "kt",
+                codeName = "Preview"
+            )
         }
     }
 }
