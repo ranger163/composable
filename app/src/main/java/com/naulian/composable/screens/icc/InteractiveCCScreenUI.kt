@@ -18,10 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.component.ListItemText
-import com.naulian.composable.neumorphism.NeumorphicDownHorizontalDivider
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
+import com.naulian.neumorphic.NeumorphicDownHorizontalDivider
 
 sealed interface IccUIEvent {
     data object Back : IccUIEvent

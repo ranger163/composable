@@ -34,14 +34,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.neumorphism.NeumorphicDownHorizontalDivider
-import com.naulian.composable.neumorphism.NeumorphicIconButton
-import com.naulian.composable.neumorphism.NeumorphicSwitch
-import com.naulian.composable.neumorphism.neumorphicUp
 import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
+import com.naulian.neumorphic.NeumorphicDownHorizontalDivider
+import com.naulian.neumorphic.NeumorphicIconButton
+import com.naulian.neumorphic.NeumorphicSwitch
+import com.naulian.neumorphic.neumorphicUp
 import kotlinx.coroutines.delay
 
 sealed interface HomeUIEvent {

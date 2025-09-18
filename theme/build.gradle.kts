@@ -78,4 +78,5 @@ dependencies {
     //naulian
     implementation(libs.naulian.anhance) //android kt extension
     implementation(libs.naulian.modify) //compose utils and extension
+    implementation(libs.naulian.neumorphic)
 }

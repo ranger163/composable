@@ -63,10 +63,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.naulian.composable.R
 import com.naulian.composable.component.CodeBlock
-import com.naulian.composable.neumorphism.NeumorphicButton
-import com.naulian.composable.neumorphism.NeumorphicIconButton
-import com.naulian.composable.neumorphism.NeumorphicSwitch
 import com.naulian.modify.HugeIcons
+import com.naulian.neumorphic.NeumorphicButton
+import com.naulian.neumorphic.NeumorphicIconButton
+import com.naulian.neumorphic.NeumorphicSwitch
 
 // Theme Colors
 val LightNeumorphicBackground = Color(0xFFE0E0E0)

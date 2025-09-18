@@ -27,14 +27,13 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.Transparent
+import com.naulian.neumorphic.neumorphicUp
 
 @Composable
 fun NeumorphicTouch(
     modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(20),
     contentPadding: Dp = 20.dp,
-    firstColor: Color = Color.White,
-    secondColor: Color = Color.LightGray,
     contentAlignment: Alignment = Alignment.TopStart,
     onTouch: (Boolean) -> Unit = {},
     content: @Composable BoxScope.() -> Unit,
@@ -47,7 +46,6 @@ fun NeumorphicTouch(
 
     Box(
         modifier = modifier
-            .background(Transparent, shape)
             .pointerInput(Unit) {
                 awaitPointerEventScope {
                     while (true) {
@@ -58,21 +56,9 @@ fun NeumorphicTouch(
                     }
                 }
             }
-            .innerShadow(
+            .neumorphicUp(
                 shape = shape,
-                shadow = Shadow(
-                    radius = shadowPadding,
-                    color = firstColor,
-                    offset = DpOffset(x = shadowPadding, y = shadowPadding)
-                )
-            )
-            .innerShadow(
-                shape = shape,
-                shadow = Shadow(
-                    radius = shadowPadding,
-                    color = secondColor,
-                    offset = DpOffset(x = -shadowPadding, y = -shadowPadding)
-                )
+                shadowPadding = shadowPadding
             ),
         content = content,
         contentAlignment = contentAlignment

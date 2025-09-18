@@ -15,15 +15,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.naulian.composable.neumorphism.neumorphicDown
-import com.naulian.composable.neumorphism.neumorphicUp
-import com.naulian.composable.neumorphism.neumorphicUp2
 import com.naulian.composable.theme.ComposableTheme
+import com.naulian.neumorphic.neumorphicDown
+import com.naulian.neumorphic.neumorphicUp
 
 
 @Composable
@@ -31,8 +29,6 @@ fun NeuMorphicUP(
     modifier: Modifier = Modifier,
     shape: Shape = RoundedCornerShape(20),
     bumpElevation: Dp = 6.dp,
-    lightColor: Color = Color.White,
-    shadowColor: Color = Color.LightGray,
     contentAlignment: Alignment = Alignment.TopStart,
     content: @Composable BoxScope.() -> Unit = {},
 ) {
@@ -40,30 +36,6 @@ fun NeuMorphicUP(
         modifier = modifier.neumorphicUp(
             shape = shape,
             shadowPadding = bumpElevation,
-            light = lightColor,
-            shadow = shadowColor
-        ),
-        content = content,
-        contentAlignment = contentAlignment
-    )
-}
-
-@Composable
-fun NeuMorphicUP2(
-    modifier: Modifier = Modifier,
-    shape: Shape = RoundedCornerShape(20),
-    contentPadding: Dp = 12.dp,
-    lightColor: Color = Color.White,
-    shadowColor: Color = Color.LightGray,
-    contentAlignment: Alignment = Alignment.TopStart,
-    content: @Composable BoxScope.() -> Unit = {},
-) {
-    Box(
-        modifier = modifier.neumorphicUp2(
-            shape = shape,
-            shadowPadding = contentPadding,
-            light = lightColor,
-            shadow = shadowColor
         ),
         content = content,
         contentAlignment = contentAlignment
@@ -76,16 +48,12 @@ fun NeuMorphicDown(
     shape: Shape = RoundedCornerShape(20),
     contentPadding: Dp = 20.dp,
     contentAlignment: Alignment = Alignment.TopStart,
-    lightColor: Color = Color.White,
-    shadowColor: Color = Color.LightGray,
     content: @Composable BoxScope.() -> Unit = {},
 ) {
     Box(
         modifier = modifier.neumorphicDown(
             shape = shape,
             shadowPadding = contentPadding,
-            light = lightColor,
-            shadow = shadowColor
         ),
         content = content,
         contentAlignment = contentAlignment
@@ -105,14 +73,6 @@ private fun NeumorphicBoxPreview() {
             verticalArrangement = Arrangement.spacedBy(24.dp, Alignment.CenterVertically)
         ) {
             NeuMorphicUP(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp),
-                shape = CircleShape,
-                contentAlignment = Alignment.Center
-            )
-
-            NeuMorphicUP2(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp),

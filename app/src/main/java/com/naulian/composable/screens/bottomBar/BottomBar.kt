@@ -92,8 +92,6 @@ fun BottomBar(
                 .clip(RoundedCornerShape(bottomBarProperties.cornerRadius))
                 .align(Alignment.CenterStart),
             contentAlignment = Alignment.CenterStart,
-            lightColor = MaterialTheme.colorScheme.surfaceBright,
-            shadowColor = MaterialTheme.colorScheme.surfaceDim
         )
 
         Row(

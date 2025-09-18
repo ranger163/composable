@@ -13,6 +13,9 @@ import com.naulian.modify.Black
 import com.naulian.modify.DarkGray
 import com.naulian.modify.LightGray
 import com.naulian.modify.White
+import com.naulian.neumorphic.NeumorphicTheme
+import com.naulian.neumorphic.darkNeumorphicColorScheme
+import com.naulian.neumorphic.lightNeumorphicColorScheme
 
 private val DarkColorScheme = darkColorScheme(
     primary = DarkGreen,
@@ -60,6 +63,11 @@ fun ComposableTheme(
         else -> LightColorScheme
     }
 
+    val neumorphicColorScheme = when {
+        darkTheme -> darkNeumorphicColorScheme()
+        else -> lightNeumorphicColorScheme()
+    }
+
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
@@ -68,7 +76,8 @@ fun ComposableTheme(
         }
     }
 
-    MaterialTheme(
+    NeumorphicTheme(
+        neumorphicColorScheme = neumorphicColorScheme,
         colorScheme = colorScheme,
         typography = Typography,
         content = content

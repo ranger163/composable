@@ -28,12 +28,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.component.CodeBlock
-import com.naulian.composable.neumorphism.NeumorphicButton
-import com.naulian.composable.neumorphism.NeumorphismComponentShowcase
 import com.naulian.composable.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
+import com.naulian.neumorphic.NeumorphismComponentShowcase
 
 @OptIn(ExperimentalModifyApi::class, ExperimentalMaterial3Api::class)
 @Composable
@@ -76,8 +75,6 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                             .fillMaxWidth()
                             .aspectRatio(1f),
                         contentAlignment = Alignment.Center,
-                        lightColor = MaterialTheme.colorScheme.surfaceBright,
-                        shadowColor = MaterialTheme.colorScheme.surfaceDim
                     )
 
                     NeuMorphicDown(
@@ -87,8 +84,6 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                             .aspectRatio(1f),
                         contentPadding = 10.dp,
                         contentAlignment = Alignment.Center,
-                        lightColor = MaterialTheme.colorScheme.surfaceBright,
-                        shadowColor = MaterialTheme.colorScheme.surfaceDim
                     )
 
                     NeuMorphicUP(
@@ -98,8 +93,6 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                             .aspectRatio(1f),
                         shape = CircleShape,
                         contentAlignment = Alignment.Center,
-                        lightColor = MaterialTheme.colorScheme.surfaceBright,
-                        shadowColor = MaterialTheme.colorScheme.surfaceDim
                     )
 
                     NeuMorphicDown(
@@ -110,8 +103,6 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                         shape = CircleShape,
                         contentPadding = 10.dp,
                         contentAlignment = Alignment.Center,
-                        lightColor = MaterialTheme.colorScheme.surfaceBright,
-                        shadowColor = MaterialTheme.colorScheme.surfaceDim
                     )
                 }
 
@@ -121,8 +112,6 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                         .height(56.dp),
                     shape = CircleShape,
                     contentAlignment = Alignment.Center,
-                    lightColor = MaterialTheme.colorScheme.surfaceBright,
-                    shadowColor = MaterialTheme.colorScheme.surfaceDim
                 )
 
                 NeuMorphicDown(
@@ -132,8 +121,6 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                     shape = CircleShape,
                     contentPadding = 8.dp,
                     contentAlignment = Alignment.Center,
-                    lightColor = MaterialTheme.colorScheme.surfaceBright,
-                    shadowColor = MaterialTheme.colorScheme.surfaceDim
                 )
 
                 CodeBlock(
@@ -150,8 +137,6 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
                         .aspectRatio(1f),
                     onTouch = { touch = it },
                     contentAlignment = Alignment.Center,
-                    firstColor = MaterialTheme.colorScheme.surfaceBright,
-                    secondColor = MaterialTheme.colorScheme.surfaceDim
                 ) {
                     Text(text = if (touch) "Touch" else "Not Touch")
                 }
