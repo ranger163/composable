@@ -58,4 +58,7 @@ sealed interface Screen {
 
     @Serializable
     data object TypingText : Screen
+
+    @Serializable
+    data object PulseHeart : Screen
 }
