@@ -2,7 +2,6 @@ package com.naulian.composable.icc
 
 import androidx.compose.runtime.Composable
 import com.naulian.composable.core.LocalNavController
-import com.naulian.composable.core.Screen
 
 @Composable
 fun InteractiveCCScreen() {
@@ -10,14 +9,8 @@ fun InteractiveCCScreen() {
 
     InteractiveCCScreenUI {
         when (it) {
-            IccUIEvent.ParallaxCardStack -> navController.navigate(Screen.ParallaxCardStack)
-            IccUIEvent.RatingStars -> navController.navigate(Screen.RatingStars)
-            IccUIEvent.CarouselCard -> navController.navigate(Screen.Carousel3DStack)
-            IccUIEvent.Progress -> navController.navigate(Screen.Progress)
-            IccUIEvent.BottomBar -> navController.navigate(Screen.BottomBar)
-            IccUIEvent.CalenderTopBar -> navController.navigate(Screen.CalenderTopBar)
-            IccUIEvent.AnimatedInteractionScreen -> navController.navigate(Screen.AnimatedInteraction)
             IccUIEvent.Back -> navController.navigateUp()
+            is IccUIEvent.Navigate -> navController.navigate(it.route)
         }
     }
 }

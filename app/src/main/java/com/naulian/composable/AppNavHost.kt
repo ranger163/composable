@@ -90,11 +90,11 @@ fun AppNavHost() {
                 ParallaxCardStackScreen()
             }
 
-            composable<Screen.Carousel3DStack> {
+            composable<Screen.BetterCarousel> {
                 BetterCarouselScreen()
             }
 
-            composable<Screen.Progress> {
+            composable<Screen.StepsProgress> {
                 ProgressScreen()
             }
 

@@ -35,10 +35,10 @@ sealed interface Screen {
     data object ParallaxCardStack : Screen
 
     @Serializable
-    data object Carousel3DStack : Screen
+    data object BetterCarousel : Screen
 
     @Serializable
-    data object Progress : Screen
+    data object StepsProgress : Screen
 
     @Serializable
     data object BottomBar : Screen
