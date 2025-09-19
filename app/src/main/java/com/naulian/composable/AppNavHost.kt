@@ -7,32 +7,27 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.compositionLocalOf
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.naulian.composable.acc.AnimatedCCScreen
+import com.naulian.composable.core.LocalNavController
+import com.naulian.composable.core.Screen
 import com.naulian.composable.home.HomeScreen
-import com.naulian.composable.screens.acc.AnimatedCCScreen
-import com.naulian.composable.screens.animations.AnimationsInteractionsScreenUI
-import com.naulian.composable.screens.progress.ProgressScreen
-import com.naulian.composable.screens.background.GridBackgroundScreen
-import com.naulian.composable.screens.bottomBar.BottomBarScreen
-import com.naulian.composable.screens.box.CorneredBoxScreen
-import com.naulian.composable.screens.calenderTopBar.CalenderTopBarScreen
-import com.naulian.composable.screens.cardCrousel.CarouselCard3DScreen
-import com.naulian.composable.screens.glass.GlassDashboardScreen
-import com.naulian.composable.screens.icc.InteractiveCCScreen
-import com.naulian.composable.screens.neumorphic.NeumorphicScreen
-import com.naulian.composable.screens.parallaxCards.ParallaxCardStackScreen
-import com.naulian.composable.screens.rating.RatingStarsScreen
-import com.naulian.composable.screens.scc.StaticCCScreen
-import com.naulian.composable.screens.shapes.MovieTicketScreen
-
-val LocalNavController = compositionLocalOf<NavController> {
-    error("NavController not present")
-}
+import com.naulian.composable.icc.InteractiveCCScreen
+import com.naulian.composable.icc.animations.AnimationsInteractionsScreenUI
+import com.naulian.composable.icc.box.CorneredBoxScreen
+import com.naulian.composable.icc.calenderTopBar.CalenderTopBarScreen
+import com.naulian.composable.icc.cardCrousel.CarouselCard3DScreen
+import com.naulian.composable.icc.parallaxCards.ParallaxCardStackScreen
+import com.naulian.composable.icc.progress.ProgressScreen
+import com.naulian.composable.icc.rating.RatingStarsScreen
+import com.naulian.composable.scc.StaticCCScreen
+import com.naulian.composable.scc.background.GridBackgroundScreen
+import com.naulian.composable.scc.glass.GlassDashboardScreen
+import com.naulian.composable.scc.neumorphic.NeumorphicScreen
+import com.naulian.composable.scc.shapes.MovieTicketScreen
 
 @Composable
 fun AppNavHost() {
@@ -94,10 +89,6 @@ fun AppNavHost() {
                 ParallaxCardStackScreen()
             }
 
-            composable<Screen.Second> {
-                SecondScreen()
-            }
-
             composable<Screen.Carousel3DStack> {
                 CarouselCard3DScreen()
             }
@@ -128,4 +119,9 @@ fun AppNavHost() {
             }
         }
     }
+}
+
+@Composable
+fun BottomBarScreen() {
+    TODO("Not yet implemented")
 }

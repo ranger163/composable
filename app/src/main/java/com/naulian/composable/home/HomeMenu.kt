@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.naulian.composable.theme.ComposableTheme
+import com.naulian.composable.core.theme.ComposableTheme
 import com.naulian.modify.White
 
 @Composable

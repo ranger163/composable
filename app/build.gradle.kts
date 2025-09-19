@@ -105,5 +105,8 @@ dependencies {
     //threeTenABP
     implementation(libs.threetenabp)
 
-    implementation(project(":theme"))
+    implementation(project(":core"))
+    implementation(project(":scc"))
+    implementation(project(":icc"))
+    implementation(project(":acc"))
 }

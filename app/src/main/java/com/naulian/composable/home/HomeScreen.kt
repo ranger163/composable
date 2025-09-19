@@ -5,8 +5,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.naulian.composable.LocalNavController
-import com.naulian.composable.Screen
+import com.naulian.composable.core.LocalNavController
+import com.naulian.composable.core.Screen
 
 @Composable
 fun HomeScreen() {

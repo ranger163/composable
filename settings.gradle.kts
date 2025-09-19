@@ -1,6 +1,15 @@
 @file:Suppress("UnstableApiUsage")
 
-include(":theme")
+include(":acc")
+
+
+include(":icc")
+
+
+include(":core")
+
+
+include(":scc")
 
 
 pluginManagement {
