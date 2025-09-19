@@ -28,7 +28,7 @@ fun HomeScreen() {
         when (it) {
             HomeUIEvent.AnimatedCC -> navController.navigate(Screen.AnimatedCC)
             HomeUIEvent.InteractiveCC ->  navController.navigate(Screen.InteractiveCC)
-            HomeUIEvent.StaticCC -> navController.navigate(Screen.StaticCC)
+            HomeUIEvent.Continue -> navController.navigate(Screen.StaticCC)
         }
     }
 }
