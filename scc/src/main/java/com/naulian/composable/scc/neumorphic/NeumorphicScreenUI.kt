@@ -10,13 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,14 +19,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.core.LocalNavController
 import com.naulian.composable.core.component.CodeBlock
+import com.naulian.composable.core.component.ComposableTopAppBar
 import com.naulian.composable.core.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
-import com.naulian.modify.HugeIcons
 import com.naulian.modify.columnItem
 import com.naulian.neumorphic.NeumorphismComponentShowcase
 
@@ -50,19 +44,9 @@ fun NeumorphicScreenUI(onBack : () -> Unit = {}){
     val code = remember { neumorphicCode }
     Scaffold(
         topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            painter = painterResource(HugeIcons.Back),
-                            contentDescription = "Back icon"
-                        )
-                    }
-                },
-                title = { Text(text = "Neumorphism") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
-                )
+            ComposableTopAppBar(
+                title = "Neumorphism",
+                onBack = onBack
             )
         }
     ) { scaffoldPadding ->

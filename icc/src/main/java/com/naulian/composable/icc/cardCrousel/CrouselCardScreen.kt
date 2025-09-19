@@ -5,13 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -21,13 +15,13 @@ import androidx.compose.ui.unit.dp
 import com.naulian.composable.core.LocalNavController
 import com.naulian.composable.core.R
 import com.naulian.composable.core.component.CodeBlock
-import com.naulian.modify.HugeIcons
+import com.naulian.composable.core.component.ComposableTopAppBar
 
 @Composable
-fun CarouselCard3DScreen() {
+fun BetterCarouselScreen() {
     val navController = LocalNavController.current
 
-    CarouselCard3DScreenUI(
+    BetterCarouselScreenUI(
         onBack = { navController.navigateUp() }
     )
 }
@@ -35,24 +29,14 @@ fun CarouselCard3DScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CarouselCard3DScreenUI(onBack: () -> Unit = {}) {
+private fun BetterCarouselScreenUI(onBack: () -> Unit = {}) {
     val code = remember { carouselCardCode }
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = onBack) {
-                        Icon(
-                            painter = painterResource(id = HugeIcons.Back),
-                            contentDescription = "Back icon"
-                        )
-                    }
-                },
-                title = { Text(text = "Carousel Card") },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
-                )
+            ComposableTopAppBar(
+                title = "Better Carousel",
+                onBack = onBack
             )
         }
     ) { scaffoldPadding ->

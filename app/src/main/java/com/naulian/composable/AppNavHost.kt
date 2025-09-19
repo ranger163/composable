@@ -19,7 +19,7 @@ import com.naulian.composable.home.HomeScreen
 import com.naulian.composable.icc.InteractiveCCScreen
 import com.naulian.composable.icc.animations.AnimationsInteractionsScreenUI
 import com.naulian.composable.icc.calenderTopBar.CalenderTopBarScreen
-import com.naulian.composable.icc.cardCrousel.CarouselCard3DScreen
+import com.naulian.composable.icc.cardCrousel.BetterCarouselScreen
 import com.naulian.composable.icc.parallaxCards.ParallaxCardStackScreen
 import com.naulian.composable.icc.rating.RatingStarsScreen
 import com.naulian.composable.icc.step_progress.ProgressScreen
@@ -91,7 +91,7 @@ fun AppNavHost() {
             }
 
             composable<Screen.Carousel3DStack> {
-                CarouselCard3DScreen()
+                BetterCarouselScreen()
             }
 
             composable<Screen.Progress> {
