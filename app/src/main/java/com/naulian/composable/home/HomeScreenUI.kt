@@ -46,9 +46,7 @@ import com.naulian.neumorphic.neumorphicUp
 import kotlinx.coroutines.delay
 
 sealed interface HomeUIEvent {
-    data object Continue : HomeUIEvent
-    data object InteractiveCC : HomeUIEvent
-    data object AnimatedCC : HomeUIEvent
+    data class Navigate(val route: Screen) : HomeUIEvent
 }
 
 private val homeScreenList = listOf(
@@ -157,7 +155,7 @@ fun HomeScreenUI(
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable { uiEvent(HomeUIEvent.Continue) }
+                        .clickable { uiEvent(HomeUIEvent.Navigate(it.route)) }
                         .padding(20.dp)
                 ) {
                     Text(
