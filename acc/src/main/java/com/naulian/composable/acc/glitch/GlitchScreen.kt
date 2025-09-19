@@ -29,7 +29,7 @@ fun GlitchScreen() {
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
-fun GlitchScreenUI(onBack: () -> Unit = {}) {
+private fun GlitchScreenUI(onBack: () -> Unit = {}) {
     val code = remember { animationCode }
 
     Scaffold(

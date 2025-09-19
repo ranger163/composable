@@ -1,7 +1,5 @@
 package com.naulian.composable
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
@@ -12,13 +10,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.naulian.composable.acc.AnimatedCCScreen
+import com.naulian.composable.acc.glitch.GlitchScreen
 import com.naulian.composable.acc.pulse.PulseScreen
 import com.naulian.composable.acc.typing.TypingTextScreen
 import com.naulian.composable.core.LocalNavController
 import com.naulian.composable.core.Screen
 import com.naulian.composable.home.HomeScreen
 import com.naulian.composable.icc.InteractiveCCScreen
-import com.naulian.composable.acc.glitch.GlitchScreenUI
 import com.naulian.composable.icc.calenderTopBar.CalenderTopBarScreen
 import com.naulian.composable.icc.cardCrousel.BetterCarouselScreen
 import com.naulian.composable.icc.parallaxCards.ParallaxCardStackScreen
@@ -46,8 +44,18 @@ fun AppNavHost() {
                     animationSpec = tween(400)
                 )
             },
-            exitTransition = { ExitTransition.None },
-            popEnterTransition = { EnterTransition.None },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it },
+                    animationSpec = tween(400)
+                )
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it },
+                    animationSpec = tween(400)
+                )
+            },
             popExitTransition = {
                 slideOutHorizontally(
                     targetOffsetX = { it },
@@ -126,7 +134,7 @@ fun AppNavHost() {
             }
 
             composable<Screen.GlitchEffect> {
-                GlitchScreenUI()
+                GlitchScreen()
             }
         }
     }
