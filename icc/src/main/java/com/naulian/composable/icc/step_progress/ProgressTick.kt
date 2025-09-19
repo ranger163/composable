@@ -1,4 +1,4 @@
-package com.naulian.composable.icc.progress
+package com.naulian.composable.icc.step_progress
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.animateDpAsState

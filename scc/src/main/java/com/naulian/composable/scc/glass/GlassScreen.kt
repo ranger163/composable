@@ -54,6 +54,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.naulian.composable.core.LocalNavController
 import com.naulian.composable.core.component.CodeBlock
 import com.naulian.composable.core.theme.ComposableTheme
 import com.naulian.modify.HugeIcons
@@ -64,9 +65,18 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.random.Random
 
+@Composable
+fun GlassCardScreen() {
+    val navController = LocalNavController.current
+
+    GlassCardScreenUI(
+        onBack = { navController.navigateUp() }
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun GlassDashboardScreen(onBack: () -> Unit = {}) {
+private fun GlassCardScreenUI(onBack: () -> Unit = {}) {
     val code = remember { GlassDashboard }
 
     val infiniteTransition = rememberInfiniteTransition()
@@ -126,7 +136,7 @@ fun GlassDashboardScreen(onBack: () -> Unit = {}) {
 
                     AnimatedParticles(particleCount = 15)
 
-                    LiquidGlassCard(width = 340.dp, height = 140.dp) {
+                    GlassCard(width = 340.dp, height = 140.dp) {
                         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Text(
                                 "Upcoming Events",
@@ -164,7 +174,7 @@ fun GlassDashboardScreen(onBack: () -> Unit = {}) {
 }
 
 @Composable
-fun LiquidGlassCard(
+fun GlassCard(
     title: String? = null,
     value: String? = null,
     width: Dp,
@@ -425,7 +435,7 @@ data class Particle(
 @Composable
 private fun GlassDashboardScreenPreview() {
     ComposableTheme {
-        GlassDashboardScreen()
+        GlassCardScreen()
     }
 }
 

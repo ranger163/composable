@@ -1,4 +1,4 @@
-package com.naulian.composable.scc.background
+package com.naulian.composable.scc.grid_background
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

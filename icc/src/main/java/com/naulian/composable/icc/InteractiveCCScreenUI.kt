@@ -32,7 +32,6 @@ sealed interface IccUIEvent {
     data object BottomBar : IccUIEvent
     data object CalenderTopBar : IccUIEvent
     data object AnimatedInteractionScreen : IccUIEvent
-    data object GlassDashboardScreen : IccUIEvent
 }
 
 @OptIn(ExperimentalModifyApi::class, ExperimentalMaterial3Api::class)
@@ -120,16 +119,6 @@ fun InteractiveCCScreenUI(
                         .padding(20.dp)
                 ) {
                     ListItemText(title = "Animated Interactions", contributor = "Shree Bhargav R K")
-                }
-                NeumorphicDownHorizontalDivider()
-
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .clickable { uiEvent(IccUIEvent.GlassDashboardScreen) }
-                        .padding(20.dp)
-                ) {
-                    ListItemText(title = "Glass Card", contributor = "Shree Bhargav R K")
                 }
                 NeumorphicDownHorizontalDivider()
             }

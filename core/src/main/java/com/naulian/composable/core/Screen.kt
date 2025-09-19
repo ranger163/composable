@@ -50,7 +50,7 @@ sealed interface Screen {
     data object AnimatedInteraction : Screen
 
     @Serializable
-    data object GlassDashboard : Screen
+    data object GlassCard : Screen
 
     @Serializable
     data object MovieTicket : Screen

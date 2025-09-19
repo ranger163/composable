@@ -1,6 +1,5 @@
 package com.naulian.composable.icc.calenderTopBar
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -31,11 +30,6 @@ fun CalenderTopBarScreen() {
 @OptIn(ExperimentalModifyApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun CalenderTopBarUi(onBack: () -> Unit = {}) {
-
-    BackHandler {
-        onBack()
-    }
-
     Scaffold(
         modifier = Modifier.navigationBarsPadding(),
         topBar = {

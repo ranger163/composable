@@ -15,6 +15,7 @@ fun StaticCCScreen() {
             SccUIEvent.Neumorphism -> navController.navigate(Screen.Neumorphism)
             SccUIEvent.Back -> navController.navigateUp()
             SccUIEvent.MovieTicket -> navController.navigate(Screen.MovieTicket)
+            SccUIEvent.GlassCard -> navController.navigate(Screen.GlassCard)
         }
     }
 }

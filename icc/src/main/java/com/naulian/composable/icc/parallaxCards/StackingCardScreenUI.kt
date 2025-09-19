@@ -26,14 +26,25 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.naulian.composable.core.LocalNavController
 import com.naulian.composable.core.component.CodeBlock
 import com.naulian.composable.core.theme.ComposableTheme
 import com.naulian.modify.ExperimentalModifyApi
 import com.naulian.modify.HugeIcons
 
+@Composable
+fun ParallaxCardStackScreen() {
+    val navController = LocalNavController.current
+
+    StackingCardScreenUI(
+        onBack = { navController.navigateUp() }
+    )
+}
+
+
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalModifyApi::class)
 @Composable
-fun ParallaxCardStackScreenUI(onBack: () -> Unit = {}) {
+fun StackingCardScreenUI(onBack: () -> Unit = {}) {
     val code = remember { parallaxCardStackCode }
     val scrollState = rememberLazyListState()
 
@@ -89,6 +100,6 @@ fun ParallaxCardStackScreenUI(onBack: () -> Unit = {}) {
 @Composable
 private fun ParallaxCardStackScreenUIPreview() {
     ComposableTheme {
-        ParallaxCardStackScreenUI()
+        StackingCardScreenUI()
     }
 }

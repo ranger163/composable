@@ -1,4 +1,4 @@
-package com.naulian.composable.icc.box
+package com.naulian.composable.scc.cornered_box
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

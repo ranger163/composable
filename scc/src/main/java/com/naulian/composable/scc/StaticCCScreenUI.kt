@@ -29,6 +29,7 @@ sealed interface SccUIEvent {
     data object GridBackground : SccUIEvent
     data object CorneredBox : SccUIEvent
     data object MovieTicket: SccUIEvent
+    data object GlassCard: SccUIEvent
 }
 
 @OptIn(ExperimentalModifyApi::class, ExperimentalMaterial3Api::class)
@@ -96,6 +97,16 @@ fun StaticCCScreenUI(
                         .padding(20.dp)
                 ) {
                     ListItemText(title = "Movie Ticket", contributor = "Prashant Panwar")
+                }
+                NeumorphicDownHorizontalDivider()
+
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { uiEvent(SccUIEvent.GlassCard) }
+                        .padding(20.dp)
+                ) {
+                    ListItemText(title = "Glass Card", contributor = "Shree Bhargav R K")
                 }
                 NeumorphicDownHorizontalDivider()
             }

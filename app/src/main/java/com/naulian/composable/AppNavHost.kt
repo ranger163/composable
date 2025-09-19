@@ -17,15 +17,15 @@ import com.naulian.composable.core.Screen
 import com.naulian.composable.home.HomeScreen
 import com.naulian.composable.icc.InteractiveCCScreen
 import com.naulian.composable.icc.animations.AnimationsInteractionsScreenUI
-import com.naulian.composable.icc.box.CorneredBoxScreen
 import com.naulian.composable.icc.calenderTopBar.CalenderTopBarScreen
 import com.naulian.composable.icc.cardCrousel.CarouselCard3DScreen
 import com.naulian.composable.icc.parallaxCards.ParallaxCardStackScreen
-import com.naulian.composable.icc.progress.ProgressScreen
 import com.naulian.composable.icc.rating.RatingStarsScreen
+import com.naulian.composable.icc.step_progress.ProgressScreen
 import com.naulian.composable.scc.StaticCCScreen
-import com.naulian.composable.scc.background.GridBackgroundScreen
-import com.naulian.composable.scc.glass.GlassDashboardScreen
+import com.naulian.composable.scc.cornered_box.CorneredBoxScreen
+import com.naulian.composable.scc.glass.GlassCardScreen
+import com.naulian.composable.scc.grid_background.GridBackgroundScreen
 import com.naulian.composable.scc.neumorphic.NeumorphicScreen
 import com.naulian.composable.scc.shapes.MovieTicketScreen
 
@@ -110,8 +110,8 @@ fun AppNavHost() {
                 AnimationsInteractionsScreenUI()
             }
 
-            composable<Screen.GlassDashboard> {
-                GlassDashboardScreen()
+            composable<Screen.GlassCard> {
+                GlassCardScreen()
             }
 
             composable<Screen.MovieTicket> {
