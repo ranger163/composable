@@ -109,22 +109,6 @@ fun AnimationsInteractionsScreenUI(onBack: () -> Unit = {}) {
         ) {
 
             item {
-                var textIndex by remember { mutableIntStateOf(0) }
-                val message = "This is a typing animation demo!"
-                LaunchedEffect(Unit) {
-                    while (true) {
-                        textIndex++
-                        delay(80)
-                    }
-                }
-                Text(
-                    message.take(textIndex % message.length),
-                    fontSize = 20.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            }
-
-            item {
                 var expanded by remember { mutableStateOf(false) }
                 val rotation by animateFloatAsState(
                     targetValue = if (expanded) 45f else 0f,

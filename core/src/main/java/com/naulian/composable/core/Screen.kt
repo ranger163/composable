@@ -54,4 +54,8 @@ sealed interface Screen {
 
     @Serializable
     data object MovieTicket : Screen
+
+
+    @Serializable
+    data object TypingText : Screen
 }

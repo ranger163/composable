@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.naulian.composable.acc.AnimatedCCScreen
+import com.naulian.composable.acc.typing.TypingTextScreen
 import com.naulian.composable.core.LocalNavController
 import com.naulian.composable.core.Screen
 import com.naulian.composable.home.HomeScreen
@@ -116,6 +117,11 @@ fun AppNavHost() {
 
             composable<Screen.MovieTicket> {
                 MovieTicketScreen()
+            }
+
+            //Animated Composable Components
+            composable<Screen.TypingText> {
+                TypingTextScreen()
             }
         }
     }
