@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.naulian.composable.core.LocalNavController
@@ -40,11 +41,12 @@ private fun PulseScreenUI(onBack: () -> Unit = {}) {
                 .padding(20.dp)
         ) {
             columnItem {
-                PulseAnimation()
+                PulseAnimation(modifier = Modifier.align(Alignment.CenterHorizontally))
                 Spacer(modifier = Modifier.height(20.dp))
 
                 CodeBlock(
                     source = """
+                        @OptIn(ExperimentalMaterial3ExpressiveApi::class)
                         @Composable
                         fun PulseAnimation(modifier: Modifier = Modifier) {
                             val infiniteTransition = rememberInfiniteTransition()
@@ -62,17 +64,18 @@ private fun PulseScreenUI(onBack: () -> Unit = {}) {
                                 )
                             )
                         
-                            Icon(
-                                imageVector = Icons.Filled.Favorite,
-                                contentDescription = "Heart",
-                                tint = Color(0xFFFF0000),
+                            Box(
                                 modifier = modifier
-                                    .size(64.dp)
+                                    .size(100.dp)
                                     .scale(pulse)
+                                    .background(
+                                        shape = MaterialShapes.Heart.toShape(),
+                                        color = Color(0xFFEF002F),
+                                    )
                             )
                         }
                     """.trimIndent(),
-                    codeName = "TypingText",
+                    codeName = "Pulsing Heart",
                     language = "kotlin"
                 )
             }

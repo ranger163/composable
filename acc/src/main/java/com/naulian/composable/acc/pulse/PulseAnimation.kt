@@ -6,17 +6,23 @@ import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material3.Icon
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialShapes
+import androidx.compose.material3.toShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.naulian.modify.White
+import com.naulian.neumorphic.ComposableTheme
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun PulseAnimation(modifier: Modifier = Modifier) {
     val infiniteTransition = rememberInfiniteTransition()
@@ -34,12 +40,27 @@ fun PulseAnimation(modifier: Modifier = Modifier) {
         )
     )
 
-    Icon(
-        imageVector = Icons.Filled.Favorite,
-        contentDescription = "Heart",
-        tint = Color(0xFFFF0000),
+    Box(
         modifier = modifier
-            .size(64.dp)
+            .size(100.dp)
             .scale(pulse)
+            .background(
+                shape = MaterialShapes.Heart.toShape(),
+                color = Color(0xFFEF002F),
+            )
     )
+}
+
+@Preview
+@Composable
+private fun PulsingHeartPreview() {
+    ComposableTheme {
+        Box(
+            modifier = Modifier
+                .size(300.dp)
+                .background(White)
+        ) {
+            PulseAnimation()
+        }
+    }
 }
