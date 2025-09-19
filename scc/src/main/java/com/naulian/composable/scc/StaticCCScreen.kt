@@ -10,12 +10,8 @@ fun StaticCCScreen() {
 
     StaticCCScreenUI{
         when(it){
-            SccUIEvent.CorneredBox -> navController.navigate(Screen.CorneredBox)
-            SccUIEvent.GridBackground -> navController.navigate(Screen.GridBackground)
-            SccUIEvent.Neumorphism -> navController.navigate(Screen.Neumorphism)
             SccUIEvent.Back -> navController.navigateUp()
-            SccUIEvent.MovieTicket -> navController.navigate(Screen.MovieTicket)
-            SccUIEvent.GlassCard -> navController.navigate(Screen.GlassCard)
+            is SccUIEvent.Navigate -> navController.navigate(it.route)
         }
     }
 }
