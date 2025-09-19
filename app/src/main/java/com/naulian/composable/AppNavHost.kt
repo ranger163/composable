@@ -18,7 +18,7 @@ import com.naulian.composable.core.LocalNavController
 import com.naulian.composable.core.Screen
 import com.naulian.composable.home.HomeScreen
 import com.naulian.composable.icc.InteractiveCCScreen
-import com.naulian.composable.icc.animations.AnimationsInteractionsScreenUI
+import com.naulian.composable.acc.glitch.GlitchScreenUI
 import com.naulian.composable.icc.calenderTopBar.CalenderTopBarScreen
 import com.naulian.composable.icc.cardCrousel.BetterCarouselScreen
 import com.naulian.composable.icc.parallaxCards.ParallaxCardStackScreen
@@ -108,10 +108,6 @@ fun AppNavHost() {
             }
 
 
-            composable<Screen.AnimatedInteraction> {
-                AnimationsInteractionsScreenUI()
-            }
-
             composable<Screen.GlassCard> {
                 GlassCardScreen()
             }
@@ -127,6 +123,10 @@ fun AppNavHost() {
 
             composable<Screen.PulseHeart> {
                 PulseScreen()
+            }
+
+            composable<Screen.GlitchEffect> {
+                GlitchScreenUI()
             }
         }
     }

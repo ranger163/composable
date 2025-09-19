@@ -15,7 +15,6 @@ import com.naulian.composable.core.Screen
 import com.naulian.composable.core.component.ComposableTopAppBar
 import com.naulian.composable.core.component.ListItemText
 import com.naulian.modify.ExperimentalModifyApi
-import com.naulian.modify.columnItem
 import com.naulian.neumorphic.NeumorphicDownHorizontalDivider
 
 sealed interface IccUIEvent {
@@ -48,11 +47,6 @@ private val iccItemList = listOf(
         name = "Calender Top Bar",
         contributor = "Zain ul Abdin",
         route = Screen.CalenderTopBar
-    ),
-    InteractiveCCItem(
-        name = "Animated Interactions",
-        contributor = "Shree Bhargav R K",
-        route = Screen.AnimatedInteraction
     )
 )
 

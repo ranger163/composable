@@ -31,6 +31,11 @@ private val animatedCCItems = listOf(
         name = "Pulse Heart",
         contributor = "Shree Bhargav R K",
         route = Screen.PulseHeart
+    ),
+    AnimatedCCItem(
+        name = "Glitch Effect",
+        contributor = "Shree Bhargav R K",
+        route = Screen.GlitchEffect
     )
 )
 
