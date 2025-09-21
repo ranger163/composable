@@ -1,19 +1,16 @@
 package com.naulian.composable.icc.calenderTopBar
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,7 +18,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -31,14 +27,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.naulian.composable.core.component.ComposableTopAppBar
 import com.naulian.composable.core.util.toFriendlyDateString
+import com.naulian.modify.If
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -49,15 +45,9 @@ import java.util.stream.Stream
 @Composable
 fun CalenderTopBar(
     modifier: Modifier = Modifier,
-    enabled: Boolean = true,
     onDateSelected: (LocalDate) -> Unit = {},
-    gradient: Brush = Brush.verticalGradient(
-        colors = listOf(
-            Color.Gray.copy(alpha = 0.60f),
-            Color.Gray.copy(alpha = 0.40f),
-            Color.Gray.copy(alpha = 0.06f),
-        )
-    ),
+    onBack: () -> Unit,
+    enabled: Boolean = true,
 ) {
     val dataSource = remember { CalendarDataSource() }
     var selectedDate by remember { mutableStateOf(dataSource.today) }
@@ -69,7 +59,6 @@ fun CalenderTopBar(
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .background(gradient)
     ) {
         Column(
             modifier = Modifier
@@ -78,8 +67,8 @@ fun CalenderTopBar(
                 .padding(horizontal = 7.dp, vertical = 7.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Header(data = calendarUiModel)
-            Spacer(modifier = Modifier.height(10.dp))
+            Header(data = calendarUiModel, onBack = onBack)
+
             WeekPager(
                 calendarUiModel = calendarUiModel,
                 onDateSelected = { newDate ->
@@ -104,18 +93,14 @@ fun CalenderTopBar(
 
 
 @Composable
-fun Header(data: CalendarUiModel) {
+fun Header(data: CalendarUiModel, onBack: () -> Unit = {}) {
     Column(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(7.dp)
     ) {
-        Text(
-            text = data.selectedDate.date.toFriendlyDateString(),
-            fontSize = 18.sp,
-            fontWeight = FontWeight.Bold,
-            color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center
+        ComposableTopAppBar(
+            title = data.selectedDate.date.toFriendlyDateString(),
+            onBack = onBack
         )
     }
 }
@@ -134,7 +119,7 @@ private fun WeekPager(
 
     val pageCount = 10000 // Simulate infinite pages
     val initialIndex = pageCount / 2
-    val pagerState = rememberPagerState(initialPage = initialIndex){
+    val pagerState = rememberPagerState(initialPage = initialIndex) {
         pageCount
     }
 
@@ -184,7 +169,6 @@ fun WeekRow(
     selectedContainerColor: Color = Color.Gray,
     enabled: Boolean = true,
     selectedItemWidth: Dp = 40.dp,
-    unselectedItemWidth: Dp = 35.dp,
     horizontalPadding: Dp = 8.dp,
     onDateSelected: (LocalDate) -> Unit
 ) {
@@ -211,8 +195,7 @@ fun WeekRow(
                 unselectedTextColor = unselectedColor,
                 borderColor = borderColor,
                 selectedContainerColor = selectedContainerColor,
-                selectedItemWidth = selectedItemWidth,
-                unselectedItemWidth = unselectedItemWidth
+                itemWidth = selectedItemWidth,
             )
         }
     }
@@ -228,83 +211,49 @@ fun ContentItem(
     unselectedTextColor: Color = Color.LightGray,
     selectedTextColor: Color = Color.White,
     borderColor: Color = Color.LightGray,
-    selectedItemWidth: Dp = 40.dp,
-    unselectedItemWidth: Dp = 35.dp
+    itemWidth: Dp = 40.dp,
 ) {
     Card(
         modifier = Modifier
             .padding(vertical = 8.dp, horizontal = 6.dp)
-            .clip(if (date.isSelected) RoundedCornerShape(24.dp) else RoundedCornerShape(34.dp))
-            .let {
-                if (date.isSelected.not()) {
-                    it.border(
-                        width = Dp.Hairline,
-                        color = borderColor,
-                        shape = if (date.isSelected) RoundedCornerShape(24.dp) else RoundedCornerShape(
-                            34.dp
-                        )
-                    )
-                } else {
-                    it
-                }
+            .clip(RoundedCornerShape(24.dp))
+            .If(!date.isSelected) {
+                border(
+                    width = Dp.Hairline,
+                    color = borderColor,
+                    shape = RoundedCornerShape(24.dp)
+                )
             }
-            .then(
-                if (enabled) {
-                    Modifier.clickable(
-                        onClick = onClick,
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = ripple())
-                } else {
-                    Modifier
-                }
-            ),
+            .clickable(enabled = enabled, onClick = onClick),
         colors = CardDefaults.cardColors(
-            containerColor = if (date.isSelected) {
-                selectedContainerColor
-            } else
-                Color.Transparent
+            containerColor = if (date.isSelected) selectedContainerColor else Color.Transparent
         ),
     ) {
         Column(
             modifier = Modifier
-                .width(if (date.isSelected) selectedItemWidth else unselectedItemWidth)
+                .widthIn(itemWidth)
                 .height(48.dp)
-                .clip(if (date.isSelected) RoundedCornerShape(24.dp) else RoundedCornerShape(34.dp))
+                .clip(RoundedCornerShape(24.dp))
                 .padding(6.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            if (date.isSelected) {
-                Text(
-                    text = date.day, // day "Mon", "Tue"
-                    color = selectedTextColor,
-                    fontSize = 10.sp,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                )
+            Text(
+                text = date.day, // day "Mon", "Tue"
+                color = selectedTextColor,
+                fontSize = 10.sp,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+            )
 
-                Text(
-                    text = date.date.dayOfMonth.toString(),
-                    color = selectedTextColor,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 12.sp,
-                    modifier = Modifier
-                        .align(Alignment.CenterHorizontally)
-                        .padding(bottom = 2.dp),
-                )
-            } else {
-                Text(
-                    text = date.day, // day "Mon", "Tue"
-                    color = unselectedTextColor,
-                    fontSize = 10.sp,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                )
-                Text(
-                    text = date.date.dayOfMonth.toString(), // date "15", "16"
-                    color = unselectedTextColor,
-                    fontSize = 12.sp,
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                )
-            }
+            Text(
+                text = date.date.dayOfMonth.toString(),
+                color = if (date.isSelected) selectedTextColor else unselectedTextColor,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 12.sp,
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(bottom = 2.dp),
+            )
         }
     }
 }
