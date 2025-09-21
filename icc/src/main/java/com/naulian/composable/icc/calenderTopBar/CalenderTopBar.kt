@@ -34,7 +34,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.naulian.composable.core.component.ComposableTopAppBar
 import com.naulian.composable.core.util.toFriendlyDateString
-import com.naulian.modify.If
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -163,10 +162,10 @@ fun WeekRow(
     startDate: LocalDate,
     selectedDates: List<LocalDate> = emptyList(),
     selectedDate: LocalDate,
-    selectedTextColor: Color = Color.White,
+    selectedTextColor: Color = MaterialTheme.colorScheme.onPrimary,
     unselectedColor: Color = MaterialTheme.colorScheme.onBackground,
     borderColor: Color = MaterialTheme.colorScheme.onBackground,
-    selectedContainerColor: Color = Color.Gray,
+    selectedContainerColor: Color = MaterialTheme.colorScheme.primary,
     enabled: Boolean = true,
     selectedItemWidth: Dp = 40.dp,
     horizontalPadding: Dp = 8.dp,
@@ -185,7 +184,7 @@ fun WeekRow(
 
         weekDays.forEach { date ->
             ContentItem(
-                date = CalendarUiModel.Date(
+                date = CalendarUiModel.CalendarDate(
                     date = date,
                     isSelected = if (selectedDates.isEmpty()) date == selectedDate else date in selectedDates,
                 ),
@@ -204,27 +203,24 @@ fun WeekRow(
 
 @Composable
 fun ContentItem(
-    selectedContainerColor: Color = Color.Cyan,
-    date: CalendarUiModel.Date,
+    selectedContainerColor: Color,
+    date: CalendarUiModel.CalendarDate,
     onClick: () -> Unit,
     enabled: Boolean = true,
-    unselectedTextColor: Color = Color.LightGray,
-    selectedTextColor: Color = Color.White,
-    borderColor: Color = Color.LightGray,
+    unselectedTextColor: Color,
+    selectedTextColor: Color,
+    borderColor: Color,
     itemWidth: Dp = 40.dp,
 ) {
     Card(
         modifier = Modifier
             .padding(vertical = 8.dp, horizontal = 6.dp)
             .clip(RoundedCornerShape(24.dp))
-            .If(!date.isSelected) {
-                border(
-                    width = Dp.Hairline,
-                    color = borderColor,
-                    shape = RoundedCornerShape(24.dp)
-                )
-            }
-            .clickable(enabled = enabled, onClick = onClick),
+            .border(
+                width = 1.dp,
+                color = if(date.isSelected) selectedContainerColor else borderColor,
+                shape = RoundedCornerShape(24.dp)
+            ).clickable(enabled = enabled, onClick = onClick),
         colors = CardDefaults.cardColors(
             containerColor = if (date.isSelected) selectedContainerColor else Color.Transparent
         ),
@@ -239,7 +235,7 @@ fun ContentItem(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = date.day, // day "Mon", "Tue"
+                text = date.formattedDate, // day "Mon", "Tue"
                 color = selectedTextColor,
                 fontSize = 10.sp,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
@@ -261,10 +257,7 @@ fun ContentItem(
 
 class CalendarDataSource {
 
-    val today: LocalDate
-        get() {
-            return LocalDate.now()
-        }
+    val today: LocalDate get() = LocalDate.now()
 
     fun getData(startDate: LocalDate = today, lastSelectedDate: LocalDate): CalendarUiModel {
         val firstDayOfWeek = startDate.with(DayOfWeek.MONDAY)
@@ -294,24 +287,25 @@ class CalendarDataSource {
         )
     }
 
-    private fun toItemUiModel(date: LocalDate, isSelectedDate: Boolean) = CalendarUiModel.Date(
-        isSelected = isSelectedDate,
-        isToday = date.isEqual(today),
-        date = date,
-    )
+    private fun toItemUiModel(date: LocalDate, isSelectedDate: Boolean) =
+        CalendarUiModel.CalendarDate(
+            isSelected = isSelectedDate,
+            isToday = date.isEqual(today),
+            date = date,
+        )
 }
 
 
 data class CalendarUiModel(
-    val selectedDate: Date,
-    val visibleDates: List<Date>
+    val selectedDate: CalendarDate,
+    val visibleDates: List<CalendarDate>
 ) {
-    data class Date(
+    data class CalendarDate(
         val date: LocalDate,
         val isSelected: Boolean,
         val isToday: Boolean = date == LocalDate.now()
     ) {
-        val day: String = date.format(DateTimeFormatter.ofPattern("E"))
+        val formattedDate: String = date.format(DateTimeFormatter.ofPattern("E"))
     }
 }
 
