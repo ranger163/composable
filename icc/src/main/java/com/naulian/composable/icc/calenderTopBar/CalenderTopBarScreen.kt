@@ -22,25 +22,25 @@ import com.naulian.modify.columnItem
 fun CalenderTopBarScreen() {
     val navController = LocalNavController.current
 
-    CalenderTopBarUi(
+    CalenderTopBarScreenUI(
         onBack = { navController.navigateUp() }
     )
 }
 
 @OptIn(ExperimentalModifyApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun CalenderTopBarUi(onBack: () -> Unit = {}) {
+fun CalenderTopBarScreenUI(onBack: () -> Unit = {}) {
     Scaffold(
         modifier = Modifier.navigationBarsPadding(),
         topBar = {
             CalenderTopBar(
                 onDateSelected = { selectedDate ->
                     // do opp like filtering etc
-                }
+                },
+                onBack = onBack
             )
         },
     ) { scaffoldPadding ->
-
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
@@ -65,6 +65,6 @@ fun CalenderTopBarUi(onBack: () -> Unit = {}) {
 @Composable
 private fun BottomBarUiPreview() {
     ComposableTheme {
-        CalenderTopBar()
+        CalenderTopBar(onBack = {})
     }
 }
