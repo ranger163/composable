@@ -47,18 +47,22 @@ sealed interface Screen {
     data object CalenderTopBar : Screen
 
     @Serializable
-    data object GlitchEffect : Screen
-
-    @Serializable
     data object GlassCard : Screen
 
     @Serializable
     data object MovieTicket : Screen
 
 
+    //Animated
     @Serializable
     data object TypingText : Screen
 
     @Serializable
     data object PulseHeart : Screen
+
+    @Serializable
+    data object GlitchEffect : Screen
+
+    @Serializable
+    data object Clock : Screen
 }
