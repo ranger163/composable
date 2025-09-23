@@ -10,6 +10,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.naulian.composable.acc.AnimatedCCScreen
+import com.naulian.composable.acc.clock.ClockScreen
 import com.naulian.composable.acc.glitch.GlitchScreen
 import com.naulian.composable.acc.pulse.PulseScreen
 import com.naulian.composable.acc.typing.TypingTextScreen
@@ -124,6 +125,7 @@ fun AppNavHost() {
                 MovieTicketScreen()
             }
 
+
             //Animated Composable Components
             composable<Screen.TypingText> {
                 TypingTextScreen()
@@ -135,6 +137,10 @@ fun AppNavHost() {
 
             composable<Screen.GlitchEffect> {
                 GlitchScreen()
+            }
+
+            composable<Screen.Clock> {
+                ClockScreen()
             }
         }
     }

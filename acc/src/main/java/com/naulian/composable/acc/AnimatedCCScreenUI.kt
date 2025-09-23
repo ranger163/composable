@@ -36,6 +36,11 @@ private val animatedCCItems = listOf(
         name = "Glitch Effect",
         contributor = "Shree Bhargav R K",
         route = Screen.GlitchEffect
+    ),
+    AnimatedCCItem(
+        name = "Analog Clock",
+        contributor = "Naulian",
+        route = Screen.Clock
     )
 )
 
@@ -75,7 +80,7 @@ fun AnimatedCCScreenUI(
 }
 
 private data class AnimatedCCItem(
-    val name : String,
-    val contributor : String,
-    val route : Screen
+    val name: String,
+    val contributor: String,
+    val route: Screen
 )
