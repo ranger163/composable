@@ -29,7 +29,7 @@ fun CylindricalButtonsScreenUI(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             ComposableTopAppBar(
-                title = "Depth Card",
+                title = "3D Button",
                 onBack = onBack
             )
         }

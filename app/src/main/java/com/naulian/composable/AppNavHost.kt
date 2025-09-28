@@ -94,9 +94,11 @@ fun AppNavHost() {
             composable<Screen.DepthCard> {
                 DepthCardScreen()
             }
-//            composable<Screen.CafeReceipt> {
-//                CafeReceiptScreen()
-//            }
+
+            composable<Screen.CafeReceipt> {
+                CafeReceiptScreen()
+            }
+
 
             // Interactive Components
             composable<Screen.InteractiveCC> {
@@ -128,11 +130,6 @@ fun AppNavHost() {
             composable<Screen.AnimatedCC> {
                 AnimatedCCScreen()
             }
-
-            composable<Screen.CafeReceipt> {
-                CafeReceiptScreen()
-            }
-
 
             //Animated Composable Components
             composable<Screen.TypingText> {
