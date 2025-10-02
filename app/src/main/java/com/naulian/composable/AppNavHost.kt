@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.naulian.composable.acc.AnimatedCCScreen
 import com.naulian.composable.acc.clock.ClockScreen
+import com.naulian.composable.acc.counter.CounterScreen
 import com.naulian.composable.acc.glitch.GlitchScreen
 import com.naulian.composable.acc.pulse.PulseScreen
 import com.naulian.composable.acc.typing.TypingTextScreen
@@ -18,20 +19,22 @@ import com.naulian.composable.core.LocalNavController
 import com.naulian.composable.core.Screen
 import com.naulian.composable.home.HomeScreen
 import com.naulian.composable.icc.InteractiveCCScreen
-import com.naulian.composable.icc.calenderTopBar.CalenderTopBarScreen
-import com.naulian.composable.icc.cardCrousel.BetterCarouselScreen
-import com.naulian.composable.icc.cylindricalButton.CylindricalButtonsScreen
-import com.naulian.composable.icc.parallaxCards.ParallaxCardStackScreen
+import com.naulian.composable.icc.calender_topbar.CalenderTopBarScreen
+import com.naulian.composable.icc.better_carousel.BetterCarouselScreen
+import com.naulian.composable.icc.raised_button.RaisedButtonScreen
+import com.naulian.composable.icc.stackable_item.StackableItemScreen
+import com.naulian.composable.icc.physicsbutton.PhysicsButtonScreen
 import com.naulian.composable.icc.rating.RatingStarsScreen
 import com.naulian.composable.icc.step_progress.ProgressScreen
 import com.naulian.composable.scc.StaticCCScreen
-import com.naulian.composable.scc.cafeReceipt.CafeReceiptScreen
+import com.naulian.composable.icc.audio_player.AudioPlayerScreen
+import com.naulian.composable.scc.cafe_receipt.CafeReceiptScreen
 import com.naulian.composable.scc.cornered_box.CorneredBoxScreen
-import com.naulian.composable.scc.depthCards.DepthCardScreen
+import com.naulian.composable.scc.depth_card.DepthCardScreen
 import com.naulian.composable.scc.glass.GlassCardScreen
 import com.naulian.composable.scc.grid_background.GridBackgroundScreen
 import com.naulian.composable.scc.neumorphic.NeumorphicScreen
-import com.naulian.composable.scc.shapes.MovieTicketScreen
+import com.naulian.composable.scc.ticket.MovieTicketScreen
 
 @Composable
 fun AppNavHost() {
@@ -99,6 +102,10 @@ fun AppNavHost() {
                 CafeReceiptScreen()
             }
 
+            composable<Screen.AudioPlayer> {
+                AudioPlayerScreen()
+            }
+
 
             // Interactive Components
             composable<Screen.InteractiveCC> {
@@ -108,7 +115,7 @@ fun AppNavHost() {
                 RatingStarsScreen()
             }
             composable<Screen.ParallaxCardStack> {
-                ParallaxCardStackScreen()
+                StackableItemScreen()
             }
             composable<Screen.BetterCarousel> {
                 BetterCarouselScreen()
@@ -123,7 +130,10 @@ fun AppNavHost() {
                 CalenderTopBarScreen()
             }
             composable<Screen.CylindricalButtons> {
-                CylindricalButtonsScreen()
+                RaisedButtonScreen()
+            }
+            composable<Screen.PhysicsButton> {
+                PhysicsButtonScreen()
             }
 
             // Animated Components
@@ -143,6 +153,9 @@ fun AppNavHost() {
             }
             composable<Screen.Clock> {
                 ClockScreen()
+            }
+            composable<Screen.Counter> {
+                CounterScreen()
             }
         }
     }
